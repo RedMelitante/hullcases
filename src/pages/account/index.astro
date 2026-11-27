@@ -1,0 +1,71 @@
+---
+// AuthTabs: sign in / create account (design/source/Account.dc.html)
+// Accounts need the commerce backend (Medusa customer auth). Until it is connected, both forms lead to the order list
+// for orders placed in this browser.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ROUTES } from '../../data/site';
+---
+<BaseLayout title="My account | Hull Cases" description="Sign in to your Hull Cases account or create one." noindex>
+  <main id="main" class="wrap" style="padding-bottom: 96px">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href={ROUTES.home}>Home</a><span aria-hidden="true">/</span><span aria-current="page">Account</span></nav>
+    <div class="g2" style="gap: 64px; align-items: start; padding-top: 16px">
+      <div class="stack" style="gap: 24px; max-width: 30rem" data-auth>
+        <h1 class="h1">My account</h1>
+        <div class="row" style="gap: 8px" role="tablist" aria-label="Account">
+          <button type="button" class="btn btn-sm btn-secondary" role="tab" id="tab-in" aria-selected="true" aria-controls="panel-in" data-tab="in">Sign in</button>
+          <button type="button" class="btn btn-sm btn-ghost" role="tab" id="tab-reg" aria-selected="false" aria-controls="panel-reg" tabindex="-1" data-tab="reg">Create account</button>
+        </div>
+        <form class="stack" style="gap: 16px" id="panel-in" role="tabpanel" aria-labelledby="tab-in" action={ROUTES.accountOrders} method="get" data-panel="in">
+          <div class="field"><label class="label" for="si-email">Email address</label><input id="si-email" class="input" type="email" autocomplete="email" required /></div>
+          <div class="field"><label class="label" for="si-pass">Password</label><input id="si-pass" class="input" type="password" autocomplete="current-password" required /></div>
+          <a class="link" href={ROUTES.contact} style="font-size: 15px; align-self: flex-start">Forgot your password?</a>
+          <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+        <form class="stack" style="gap: 16px" id="panel-reg" role="tabpanel" aria-labelledby="tab-reg" action={ROUTES.accountOrders} method="get" data-panel="reg" hidden>
+          <div class="g2" style="gap: 16px">
+            <div class="field"><label class="label" for="rg-first">First name</label><input id="rg-first" class="input" autocomplete="given-name" required /></div>
+            <div class="field"><label class="label" for="rg-last">Last name</label><input id="rg-last" class="input" autocomplete="family-name" required /></div>
+          </div>
+          <div class="field"><label class="label" for="rg-email">Email address</label><input id="rg-email" class="input" type="email" autocomplete="email" required /></div>
+          <div class="field"><label class="label" for="rg-pass">Password</label><input id="rg-pass" class="input" type="password" autocomplete="new-password" minlength="8" required /></div>
+          <label class="check"><input type="checkbox" />Email me restock alerts and new cases</label>
+          <button class="btn btn-primary btn-block" type="submit">Create account</button>
+          <p class="t-sm muted" style="margin: 0">By creating an account you agree to our <a class="link" href={ROUTES.terms}>Terms and Conditions</a> and <a class="link" href={ROUTES.privacy}>Privacy Policy</a>.</p>
+        </form>
+      </div>
+      <aside class="stack tex-plate" style="color: #FFFFFF; gap: 16px; padding: 40px; border-radius: 8px">
+        <p class="eyebrow">Why create an account</p>
+        <h2 class="h2">Track orders and reorder in a click</h2>
+        <ul class="stack" style="margin: 0; padding-left: 20px; gap: 8px; color: #B8BEC6">
+          <li>See order status and tracking in one place</li>
+          <li>Save your shipping address for faster checkout</li>
+          <li>Start returns with your order number ready</li>
+        </ul>
+        <a class="btn btn-ghost-light" href={ROUTES.shop} style="align-self: flex-start; margin-top: 8px">Shop cases</a>
+      </aside>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-auth]');
+  if (root) {
+    const tabs = [...root.querySelectorAll<HTMLButtonElement>('[data-tab]')];
+    const select = (key: string, focus = false) =>
+      tabs.forEach((t) => {
+        const on = t.dataset.tab === key;
+        t.classList.toggle('btn-secondary', on);
+        t.classList.toggle('btn-ghost', !on);
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        root.querySelector<HTMLElement>(`[data-panel="${t.dataset.tab}"]`)!.hidden = !on;
+        if (on && focus) t.focus();
+      });
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(t.dataset.tab!));
+      t.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') select(tabs[(i + 1) % tabs.length].dataset.tab!, true);
+      });
+    });
+  }
+</script>

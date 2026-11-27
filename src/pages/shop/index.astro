@@ -1,0 +1,12 @@
+---
+// Shop (all cases). Filter views /shop/?length=… and /shop/?use=travel canonicalise to /shop/.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShopView from '../../components/ShopView.astro';
+---
+<BaseLayout
+  title="Shop Waterproof Hard Cases | Hull Cases"
+  description="Browse every Hull case. IP67 waterproof, lifetime warranty. Filter by size and price, and compare internal dimensions before you buy."
+  active="shop"
+>
+  <ShopView filter="all" />
+</BaseLayout>

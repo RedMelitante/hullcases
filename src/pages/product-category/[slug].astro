@@ -1,0 +1,19 @@
+---
+// Category pages at the live URLs: /product-category/small-box/, /medium-sized-box/, /a-large-box/, /pull-rod-box/
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ShopView from '../../components/ShopView.astro';
+import { CATEGORY_FILTERS, SHOP_FILTERS, type ShopFilterKey } from '../../data/site';
+
+export const getStaticPaths = (() =>
+  CATEGORY_FILTERS.map((key) => ({
+    params: { slug: SHOP_FILTERS[key].href.split('/').filter(Boolean).pop()! },
+    props: { filter: key },
+  }))) satisfies GetStaticPaths;
+
+const { filter } = Astro.props as { filter: ShopFilterKey };
+const f = SHOP_FILTERS[filter];
+---
+<BaseLayout title={f.seoTitle!} description={f.meta!} active="shop">
+  <ShopView filter={filter} />
+</BaseLayout>

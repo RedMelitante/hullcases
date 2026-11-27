@@ -1,0 +1,80 @@
+---
+import '@fontsource/barlow-condensed/600.css';
+import '@fontsource/barlow-condensed/700.css';
+import '@fontsource/barlow-condensed/800.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/500.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-sans/700.css';
+import '../styles/hull.css';
+import '../styles/site.css';
+import SiteHeader, { type NavKey } from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import CartDrawer from '../components/CartDrawer.astro';
+import { ROUTES, SITE } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  active?: NavKey;
+  noindex?: boolean;
+  image?: string;
+  ogType?: 'website' | 'article' | 'product';
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  /** Checkout uses a stripped header (logo + back to cart) */
+  checkout?: boolean;
+}
+
+const { title, description, active = 'none', noindex = false, image = '/images/hero-wheeled-case.jpg', ogType = 'website', jsonLd, checkout = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+const ld = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#16181B" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:type" content={ogType === 'product' ? 'product' : ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {ld.map((obj) => <script type="application/ld+json" set:html={JSON.stringify(obj)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="hc-page">
+      {checkout ? (
+        <header style="border-bottom: 1px solid #DDE0E4">
+          <div class="wrap row" style="justify-content: space-between; gap: 16px; height: 76px">
+            <a class="logo" href={ROUTES.home}><img class="logo-img" src="/images/logo-dark.png" alt="Hull Cases home" width="170" height="40" /></a>
+            <div class="row" style="gap: 16px"><span class="t-sm muted only-d">Secure checkout</span><a class="link" href={ROUTES.cart} style="font-size: 15px">Back to cart</a></div>
+          </div>
+        </header>
+      ) : (
+        <SiteHeader active={active} />
+      )}
+      <slot />
+      <SiteFooter />
+      <slot name="after" />
+      <CartDrawer />
+    </div>
+    <script>
+      import '../scripts/ui';
+    </script>
+  </body>
+</html>

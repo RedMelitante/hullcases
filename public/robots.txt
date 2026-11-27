@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /cart/
+Disallow: /checkout/
+Disallow: /order/
+Disallow: /account/
+
+Sitemap: https://hullcases.com/sitemap-index.xml

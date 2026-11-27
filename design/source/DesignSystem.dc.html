@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Design system</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page" style="width: 1440px">
+
+<section class="tex-plate" style="color: #FFFFFF; padding: 72px 80px 64px">
+<div class="stack" style="gap: 16px; max-width: 900px">
+<p class="eyebrow">Hull Cases · Design system v1</p>
+<h1 class="display" style="font-size: 88px">Road-case industrial</h1>
+<p class="lead" style="font-size: 20px">Graphite and brushed-steel neutrals, one safety-orange accent, condensed all-caps headings and a corner-bracket motif borrowed from case hardware. Every token below maps to a Tailwind theme key, and the same tokens restyle Medusa's cart, checkout and account pages.</p>
+</div>
+</section>
+
+<div class="stack" style="gap: 72px; padding: 72px 80px 96px">
+
+<!-- COLOR -->
+<section class="stack" style="gap: 24px">
+<div class="row" style="gap: 16px; align-items: baseline"><h2 class="h2">01 Color</h2><span class="muted">Contrast measured against the background each color is used on. All text pairs pass WCAG AA.</span></div>
+<div class="g5" style="gap: 20px">
+<sc-for list="{{colors}}" as="c" hint-placeholder-count="10">
+<div class="stack" style="border: 1px solid #DDE0E4; border-radius: 8px; overflow: hidden">
+<div style="height: 96px; background: {{c.hex}}; display: flex; align-items: flex-end; padding: 10px 12px; color: {{c.fg}}; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: .04em">Aa {{c.contrast}}</div>
+<div class="stack" style="gap: 2px; padding: 12px 14px 14px">
+<strong style="font-size: 16px">{{c.name}}</strong>
+<code style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5159">{{c.hex}} · {{c.tw}}</code>
+<span class="t-sm muted">{{c.use}}</span>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<!-- TYPE -->
+<section class="stack" style="gap: 24px">
+<div class="row" style="gap: 16px; align-items: baseline"><h2 class="h2">02 Typography</h2><span class="muted">Headings: Barlow Condensed 600/700/800. Body: IBM Plex Sans 400/500/600. Both on Google Fonts.</span></div>
+<table class="table">
+<thead><tr><th style="width: 160px">Token</th><th>Sample</th><th style="width: 150px">Desktop</th><th style="width: 150px">Mobile</th><th style="width: 200px">Tailwind</th></tr></thead>
+<tbody>
+<tr><td><code>display</code></td><td><span class="display" style="font-size: 64px">Built for the road</span></td><td class="num">80 / 0.92 · 700 caps</td><td class="num">46 / 0.92</td><td><code>text-display</code></td></tr>
+<tr><td><code>h1</code></td><td><span class="h1">Shop all cases</span></td><td class="num">56 / 1.0 · 700 caps</td><td class="num">38 / 1.0</td><td><code>text-h1</code></td></tr>
+<tr><td><code>h2</code></td><td><span class="h2">Featured cases</span></td><td class="num">40 / 1.05 · 700 caps</td><td class="num">30 / 1.05</td><td><code>text-h2</code></td></tr>
+<tr><td><code>h3</code></td><td><span class="h3">Foam that fits your gear</span></td><td class="num">28 / 1.1 · 700</td><td class="num">24 / 1.1</td><td><code>text-h3</code></td></tr>
+<tr><td><code>h4</code></td><td><span class="h4">Shipping and returns</span></td><td class="num">20 / 1.25 · 600</td><td class="num">20 / 1.25</td><td><code>text-h4</code></td></tr>
+<tr><td><code>eyebrow</code></td><td><span class="eyebrow">Categories</span></td><td class="num">16 · 700 caps · +0.14em</td><td class="num">16</td><td><code>text-eyebrow</code></td></tr>
+<tr><td><code>lead</code></td><td><span class="lead">Hard cases shipped from Mira Loma, California.</span></td><td class="num">18 / 1.6</td><td class="num">17 / 1.6</td><td><code>text-lg</code></td></tr>
+<tr><td><code>body</code></td><td><span class="body">Measure your gear, then compare it with the interior dimensions.</span></td><td class="num">16 / 1.6</td><td class="num">16 / 1.6</td><td><code>text-base</code></td></tr>
+<tr><td><code>small</code></td><td><span class="t-sm muted">Unsubscribe anytime. Prices in USD.</span></td><td class="num">14 / 1.5</td><td class="num">16 (never below 16 on mobile)</td><td><code>text-sm md:text-sm</code></td></tr>
+<tr><td><code>price</code></td><td><span class="row" style="gap: 10px; align-items: baseline"><span class="price">$12.90</span><span class="price-was">$14.90</span></span></td><td class="num">24 · 700</td><td class="num">22</td><td><code>text-price</code></td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- TOKENS -->
+<section class="g2" style="gap: 48px; align-items: start">
+<div class="stack" style="gap: 20px">
+<h2 class="h2">03 Spacing, radius, elevation</h2>
+<p class="body muted">Spacing uses Tailwind's default 4px scale, so no custom spacing keys are needed. Section rhythm: <code>py-24</code> desktop / <code>py-14</code> mobile. Container: <code>max-w-7xl px-8</code> (mobile <code>px-4</code>). Grid gap: <code>gap-8</code> desktop, <code>gap-4</code> for 2-up product grids on mobile.</p>
+<div class="row" style="gap: 12px; align-items: flex-end; flex-wrap: wrap">
+<sc-for list="{{spaces}}" as="s" hint-placeholder-count="8">
+<div class="stack" style="gap: 6px; align-items: center"><div style="width: {{s.px}}px; height: {{s.px}}px; background: #F26B1D"></div><code style="font-size: 14px">{{s.tw}}</code><span class="t-sm muted">{{s.px}}px</span></div>
+</sc-for>
+</div>
+<table class="table">
+<thead><tr><th>Token</th><th>Value</th><th>Tailwind</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>radius-sm</td><td class="num">2px</td><td><code>rounded-sm</code></td><td>Badges, chips</td></tr>
+<tr><td>radius</td><td class="num">4px</td><td><code>rounded</code></td><td>Buttons, inputs, selects</td></tr>
+<tr><td>radius-lg</td><td class="num">8px</td><td><code>rounded-lg</code></td><td>Cards, images, drawers</td></tr>
+<tr><td>shadow-1</td><td>0 1 2 / 8%</td><td><code>shadow-sm</code></td><td>Resting cards</td></tr>
+<tr><td>shadow-2</td><td>0 8 24 / 12%</td><td><code>shadow-lg</code></td><td>Mega-menu, popovers</td></tr>
+<tr><td>shadow-drawer</td><td>0 16 48 / 28%</td><td><code>shadow-drawer</code></td><td>Cart and filter drawers</td></tr>
+<tr><td>tap target</td><td class="num">44px min</td><td><code>min-h-11 min-w-11</code></td><td>Every control</td></tr>
+</tbody>
+</table>
+</div>
+<div class="stack" style="gap: 12px">
+<h3 class="h4">tailwind.config — theme.extend</h3>
+<pre style="margin: 0; background: #16181B; color: #ECEEF0; padding: 24px; border-radius: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.6; white-space: pre-wrap">colors: {
+  hull:   { 950: '#16181B' },
+  steel:  { 800: '#23272C', 700: '#343A41', 600: '#4A5159',
+            500: '#5F6670', 400: '#8A919A', 300: '#C3C8CE',
+            200: '#DDE0E4', 100: '#ECEEF0', 50: '#F5F6F7' },
+  safety: { 500: '#F26B1D', 600: '#F4823A',
+            700: '#B4470E', 50: '#FEF1E8' },
+  success:{ DEFAULT: '#166534', 50: '#E8F5EC' },
+  warning:{ DEFAULT: '#A14A08', 50: '#FDF3E2' },
+  error:  { DEFAULT: '#B91C1C', 50: '#FDECEC' },
+},
+fontFamily: {
+  heading: ['"Barlow Condensed"', '"Arial Narrow"', 'sans-serif'],
+  sans:    ['"IBM Plex Sans"', 'system-ui', 'sans-serif'],
+},
+fontSize: {
+  display: ['5rem',   { lineHeight: '0.92', fontWeight: '700' }],
+  h1:      ['3.5rem', { lineHeight: '1',    fontWeight: '700' }],
+  h2:      ['2.5rem', { lineHeight: '1.05', fontWeight: '700' }],
+  h3:      ['1.75rem',{ lineHeight: '1.1',  fontWeight: '700' }],
+  h4:      ['1.25rem',{ lineHeight: '1.25', fontWeight: '600' }],
+  eyebrow: ['1rem',   { letterSpacing: '0.14em', fontWeight: '700' }],
+  price:   ['1.5rem', { lineHeight: '1',    fontWeight: '700' }],
+},
+borderRadius: { sm: '2px', DEFAULT: '4px', lg: '8px' },
+boxShadow: { drawer: '0 16px 48px rgba(22,24,27,.28)' },
+// mobile sizes: max-md:text-46 etc. (see table 02)</pre>
+</div>
+</section>
+
+<!-- BUTTONS + BADGES -->
+<section class="g2" style="gap: 48px; align-items: start">
+<div class="stack" style="gap: 20px">
+<h2 class="h2">04 Buttons</h2>
+<p class="body muted">Barlow Condensed 700 caps, 52px tall (44px small). One primary per view. Focus: 3px safety-orange ring, 2px offset.</p>
+<div class="row" style="gap: 12px; flex-wrap: wrap">
+<a class="btn btn-primary" href="CartDrawer.dc.html">Add to cart</a>
+<a class="btn btn-secondary" href="Checkout.dc.html">Checkout</a>
+<a class="btn btn-ghost" href="Cart.dc.html">View cart</a>
+<button class="btn" disabled="">Sold out</button>
+</div>
+<div class="row" style="gap: 12px; flex-wrap: wrap">
+<a class="btn btn-primary btn-sm" href="Shop.dc.html">Primary sm</a>
+<a class="btn btn-secondary btn-sm" href="Shop.dc.html">Secondary sm</a>
+<a class="btn btn-ghost btn-sm" href="CartDrawer.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Quick add</a>
+<button class="icon-btn" aria-label="Cart" style="border: 1.5px solid #8A919A"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 8h14l-1 13H6L5 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></button>
+</div>
+<div class="row tex-plate" style="gap: 12px; flex-wrap: wrap; padding: 24px; border-radius: 8px">
+<a class="btn btn-primary" href="Shop.dc.html">Shop cases</a>
+<a class="btn btn-ghost-light" href="CustomCases.dc.html">Ghost on dark</a>
+</div>
+<table class="table">
+<thead><tr><th>Variant</th><th>Rest</th><th>Hover</th><th>Text</th></tr></thead>
+<tbody>
+<tr><td>Primary</td><td><code>bg-safety-500</code></td><td><code>bg-safety-600</code> (lighter)</td><td>hull-950 (5.8:1 / 6.9:1)</td></tr>
+<tr><td>Secondary</td><td><code>bg-hull-950</code></td><td><code>bg-steel-700</code></td><td>white (17:1)</td></tr>
+<tr><td>Ghost</td><td><code>border-2 border-hull-950</code></td><td>fills hull-950</td><td>hull-950</td></tr>
+<tr><td>Disabled</td><td><code>bg-steel-200</code></td><td>none</td><td>steel-500</td></tr>
+</tbody>
+</table>
+</div>
+<div class="stack" style="gap: 20px">
+<h2 class="h2">05 Badges &amp; chips</h2>
+<p class="body muted">Condensed caps at 16px, so they stay legible on phones without crowding a product image.</p>
+<div class="row" style="gap: 10px; flex-wrap: wrap">
+<span class="badge badge-sale">Sale</span>
+<span class="badge badge-new">New</span>
+<span class="badge badge-stock"><span class="dot"></span>In stock</span>
+<span class="badge badge-low"><span class="dot"></span>Low stock · 3 left</span>
+<span class="badge badge-out">Sold out</span>
+</div>
+<div class="row" style="gap: 8px; flex-wrap: wrap">
+<button class="chip">Size: Medium<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+<button class="chip">Under $200<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+</div>
+<h3 class="h4" style="margin-top: 16px">Variant options</h3>
+<div class="opts">
+<button class="opt">Small</button>
+<button class="opt is-on" aria-pressed="true">Medium</button>
+<button class="opt">Large</button>
+<button class="opt is-na" disabled="">X-Large</button>
+</div>
+<div class="opts">
+<button class="opt is-on" aria-pressed="true"><span class="swatch" style="background: #16181B"></span>Black</button>
+<button class="opt"><span class="swatch" style="background: #F2C230"></span>Yellow</button>
+<button class="opt"><span class="swatch" style="background: #F26B1D"></span>Orange</button>
+</div>
+<h3 class="h4" style="margin-top: 16px">Quantity</h3>
+<div class="row" style="gap: 16px">
+<div class="qty"><button aria-label="Decrease quantity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14"/></svg></button><output>1</output><button aria-label="Increase quantity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+<div class="qty qty-sm"><button aria-label="Decrease quantity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14"/></svg></button><output>2</output><button aria-label="Increase quantity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+</div>
+</div>
+</section>
+
+<!-- FORMS -->
+<section class="stack" style="gap: 24px">
+<div class="row" style="gap: 16px; align-items: baseline"><h2 class="h2">06 Forms</h2><span class="muted">Used by contact, newsletter, Medusa checkout (address, shipping, payment) and account (login, register, addresses).</span></div>
+<div class="g4" style="gap: 24px">
+<div class="field"><label class="label" for="ds-1">Email</label><input id="ds-1" class="input" placeholder="you@example.com"><span class="help">Default · border steel-400 (3.2:1)</span></div>
+<div class="field"><label class="label" for="ds-2">First name</label><input id="ds-2" class="input is-focus" value="Jordan"><span class="help">Focus · hull-950 border + orange ring</span></div>
+<div class="field"><label class="label" for="ds-3">ZIP code</label><input id="ds-3" class="input is-error" value="917" aria-invalid="true"><span class="err">Enter a 5-digit ZIP code.</span></div>
+<div class="field"><label class="label" for="ds-4">Country</label><input id="ds-4" class="input" value="United States" disabled=""><span class="help">Disabled · US-only shipping</span></div>
+<div class="field"><label class="label" for="ds-5">State</label><select id="ds-5" class="input"><option>California</option><option>Nevada</option></select></div>
+<div class="field"><label class="label" for="ds-6">Order # <span class="opt">(optional)</span></label><input id="ds-6" class="input" placeholder="e.g. 1042"></div>
+<div class="stack" style="gap: 4px"><span class="label">Shipping method</span><label class="check"><input type="radio" name="ship" checked="">UPS Ground</label><label class="check"><input type="radio" name="ship">Local pickup, Mira Loma</label></div>
+<div class="stack" style="gap: 4px"><span class="label">Preferences</span><label class="check"><input type="checkbox" checked="">Billing same as shipping</label><label class="check"><input type="checkbox">Email me restock alerts</label></div>
+</div>
+<div class="g2" style="gap: 24px">
+<div class="field"><label class="label" for="ds-7">Message</label><textarea id="ds-7" class="input" placeholder="What gear do you need to protect?"></textarea></div>
+<div class="stack" style="gap: 12px">
+<div class="alert alert-ok" role="status"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>Thanks, we got your message. We’ll get back to you as soon as possible.</div>
+<div class="alert alert-err" role="alert"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.5"/></svg>Your card was declined. Try another payment method.</div>
+</div>
+</div>
+</section>
+
+<!-- CARDS + TABLES -->
+<section class="g2" style="gap: 48px; align-items: start; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr)">
+<div class="stack" style="gap: 20px">
+<h2 class="h2">07 Product card</h2>
+<p class="body muted">Image (1:1), badge, name, rating, price + compare-at, stock flag, Quick add. Whole image and name link to the product.</p>
+<div class="g2" style="gap: 24px">
+<dc-import name="ProductCard" hint-size="100%,470px"></dc-import>
+<dc-import name="ProductCard" product="{{saleCard}}" hint-size="100%,500px"></dc-import>
+</div>
+</div>
+<div class="stack" style="gap: 20px">
+<h2 class="h2">08 Tables</h2>
+<h3 class="h4">Order / cart table (cart page, checkout summary, account orders)</h3>
+<table class="table">
+<thead><tr><th>Item</th><th>Qty</th><th style="text-align: right">Total</th></tr></thead>
+<tbody>
+<tr><td><strong>D2812 Waterproof Hard Case</strong><br><span class="t-sm muted">Color: Black</span></td><td class="num">1</td><td class="num" style="text-align: right">$6.40</td></tr>
+<tr><td><strong>D3913 Waterproof Hard Case</strong><br><span class="t-sm muted">Color: Black</span></td><td class="num">2</td><td class="num" style="text-align: right">$25.80</td></tr>
+<tr><td colspan="2" class="muted">Subtotal</td><td class="num" style="text-align: right">$32.20</td></tr>
+<tr><td colspan="2" class="muted">Shipping</td><td class="num" style="text-align: right">Calculated at checkout</td></tr>
+<tr><td colspan="2" style="font-weight: 700; border-bottom: 2px solid #16181B">Total (USD)</td><td class="num price" style="text-align: right; border-bottom: 2px solid #16181B; font-size: 22px">$32.20</td></tr>
+</tbody>
+</table>
+<h3 class="h4" style="margin-top: 12px">Spec table (product page)</h3>
+<table class="table table-specs">
+<tbody>
+<tr><th scope="row">Interior (L × W × H)</th><td class="num">9.8 × 7.1 × 3.7 in</td></tr>
+<tr><th scope="row">Exterior (L × W × H)</th><td class="num">10.8 × 8.9 × 4.4 in</td></tr>
+<tr><th scope="row">Weight (empty)</th><td class="num">2.3 lb</td></tr>
+<tr><th scope="row">Shell material</th><td>Polypropylene alloy</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- PLACEHOLDER + MOTIF -->
+<section class="g3" style="gap: 32px; align-items: start">
+<div class="stack" style="gap: 12px">
+<h2 class="h3">Missing-photo placeholder</h2>
+<div class="ph" style="aspect-ratio: 4/3; border-radius: 8px"><span>Photo needed: describe the shot</span></div>
+<p class="t-sm muted">Use until real Hull Cases photography is supplied. Never fill with stock images of other brands' cases.</p>
+</div>
+<div class="stack" style="gap: 12px">
+<h2 class="h3">Corner-bracket motif</h2>
+<div class="corners" style="margin: 8px"><img src="/_blob/4bca51455f764947bad119201e7fe482" alt="Hull wheeled case" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: contain; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4"></div>
+<p class="t-sm muted">Two orange L-brackets, like case corner hardware. Hero and feature images only, once per view.</p>
+</div>
+<div class="stack" style="gap: 12px">
+<h2 class="h3">Tread-plate texture</h2>
+<div class="tex-plate" style="aspect-ratio: 4/3; border-radius: 8px; display: flex; align-items: flex-end; padding: 20px"><span class="eyebrow">Dark sections only</span></div>
+<p class="t-sm muted">3% white diagonal crosshatch on hull-950: hero, "who it's for", page headers.</p>
+</div>
+</section>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6100}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      colors: [
+        { name: 'Hull black', hex: '#16181B', tw: 'hull-950', fg: '#FFFFFF', contrast: '17.8:1', use: 'Text, dark sections, secondary button' },
+        { name: 'Steel 700', hex: '#343A41', tw: 'steel-700', fg: '#FFFFFF', contrast: '11.5:1', use: 'Secondary hover, strong UI text' },
+        { name: 'Steel 600', hex: '#4A5159', tw: 'steel-600', fg: '#FFFFFF', contrast: '8.0:1', use: 'Muted body text on white' },
+        { name: 'Steel 400', hex: '#8A919A', tw: 'steel-400', fg: '#16181B', contrast: '5.6:1', use: 'Input borders (3.2:1 on white), icons' },
+        { name: 'Steel 200', hex: '#DDE0E4', tw: 'steel-200', fg: '#16181B', contrast: '13.4:1', use: 'Dividers, table rules' },
+        { name: 'Steel 50', hex: '#F5F6F7', tw: 'steel-50', fg: '#16181B', contrast: '16.4:1', use: 'Alt section ground, zebra rows' },
+        { name: 'Safety orange', hex: '#F26B1D', tw: 'safety-500', fg: '#16181B', contrast: '5.8:1', use: 'Primary button, badges, accents. Ink text only' },
+        { name: 'Safety 700', hex: '#B4470E', tw: 'safety-700', fg: '#FFFFFF', contrast: '5.4:1', use: 'Orange text and links on white' },
+        { name: 'Success', hex: '#166534', tw: 'success', fg: '#FFFFFF', contrast: '7.1:1', use: 'In stock, confirmations. On bg #E8F5EC: 6.4:1' },
+        { name: 'Error', hex: '#B91C1C', tw: 'error', fg: '#FFFFFF', contrast: '6.5:1', use: 'Errors, declines. Bg #FDECEC. Warning/low stock #A14A08 on #FDF3E2 (5.5:1)' }
+      ],
+      spaces: [ { tw: '1', px: 4 }, { tw: '2', px: 8 }, { tw: '3', px: 12 }, { tw: '4', px: 16 }, { tw: '6', px: 24 }, { tw: '8', px: 32 }, { tw: '12', px: 48 }, { tw: '16', px: 64 }, { tw: '24', px: 96 } ],
+      saleCard: { title: 'D3913 Waterproof Hard Case', price: '$12.90', badge: 'New', badgeKind: 'new', stock: 'low', shot: 'D3913, front ¾ view' }
+    };
+  }
+}
+</script>
+</body>
+</html>

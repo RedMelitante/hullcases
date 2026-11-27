@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Blog</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page">
+<dc-import name="SiteHeader" cart-count="2" active="blog" hint-size="100%,124px"></dc-import>
+<main>
+<section class="bg-steel" style="border-bottom: 1px solid #DDE0E4">
+<div class="wrap" style="padding-bottom: 40px">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="Main.dc.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
+<div class="stack" style="gap: 12px; max-width: 46rem">
+<h1 class="h1">Hard case guides &amp; articles</h1>
+<p class="lead">How to choose, pack and travel with a protective case, from the team at Hull Cases in Mira Loma, California.</p>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap stack" style="gap: 56px">
+<!-- FEATURED -->
+<a href="BlogPost.dc.html" class="g2" style="gap: 40px; align-items: center; text-decoration: none">
+<div class="corners"><img src="/_blob/ae4c9cfe4c807c4fde9897395465501a" alt="Open hard case with foam interior, ready for a camera kit" style="display: block; width: 100%; aspect-ratio: 16/10; object-fit: contain; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4; padding: 4%; box-sizing: border-box"></div>
+<div class="stack" style="gap: 14px">
+<span class="badge badge-new" style="align-self: flex-start">Latest</span>
+<span class="t-sm muted">{{feat.date}} · Hull Cases</span>
+<h2 class="h2" style="text-transform: none; font-size: 40px">{{feat.title}}</h2>
+<p class="lead">{{feat.excerpt}}</p>
+<span class="btn btn-primary" style="align-self: flex-start">Read article</span>
+</div>
+</a>
+
+<!-- GRID -->
+<div class="stack" style="gap: 24px">
+<h2 class="h3" style="text-transform: uppercase">More articles</h2>
+<div class="g3" style="gap: 28px">
+<sc-for list="{{rest}}" as="b" hint-placeholder-count="2">
+<a href="{{b.href}}" class="stack" style="gap: 14px; text-decoration: none; border: 1px solid #DDE0E4; border-radius: 8px; overflow: hidden">
+<sc-if value="{{b.img}}" hint-placeholder-val="{{ false }}"><img src="{{b.img}}" alt="" style="display: block; width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #FFFFFF; border-bottom: 1px solid #DDE0E4"></sc-if>
+<sc-if value="{{b.noImg}}" hint-placeholder-val="{{ true }}"><div class="ph" style="aspect-ratio: 16/9; border: 0; border-bottom: 1.5px dashed #8A919A"><span>Photo needed: {{b.shot}}</span></div></sc-if>
+<div class="stack" style="gap: 10px; padding: 4px 24px 26px">
+<span class="t-sm muted">{{b.date}}</span>
+<h3 class="h4" style="font-size: 21px; line-height: 1.3">{{b.title}}</h3>
+<p class="body muted">{{b.excerpt}}</p>
+<span class="link" style="font-size: 16px">Read article</span>
+</div>
+</a>
+</sc-for>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section-sm tex-plate" style="color: #FFFFFF">
+<div class="wrap g2" style="gap: 40px; align-items: center">
+<div class="stack" style="gap: 10px">
+<h2 class="h2">New guides in your inbox</h2>
+<p class="lead">Packing tips, sizing help and new cases from Hull Cases.</p>
+</div>
+<form class="stack" style="gap: 10px">
+<label class="label" for="blog-email" style="color: #FFFFFF">Email address</label>
+<div class="row" style="gap: 10px; flex-wrap: wrap">
+<input id="blog-email" class="input" type="email" placeholder="you@example.com" autocomplete="email" style="flex: 1 1 240px">
+<button class="btn btn-primary" type="button" onClick="{{subscribe}}">Subscribe</button>
+</div>
+<sc-if value="{{subbed}}" hint-placeholder-val="{{ false }}"><p class="body" style="margin: 0; font-weight: 600; color: #FFFFFF">Thanks, you’re on the list.</p></sc-if>
+</form>
+</div>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { subbed: false }; }
+  renderVals() {
+    return {
+      subbed: this.state.subbed, subscribe: () => this.setState({ subbed: true }),
+      feat: { title: 'Why You Need a Hard Case for Camera Equipment in the U.S', date: 'December 2, 2025', excerpt: 'Hard cases are purpose-built to protect cameras, lenses and accessories, making transport simpler and stress-free.', shot: 'camera gear in a foam-lined Hull case' },
+      rest: [
+        { title: 'Why Tactical Equipment Cases Are Essential for Professionals in the Field', href: 'BlogPost-Tactical.dc.html', date: 'December 2, 2025', excerpt: 'The right protective case helps prevent costly damage, streamline operations and give professionals peace of mind.', img: '/_blob/acd1358e14ad3ea879957da803ae6f18' },
+        { title: 'Waterproof Hard Utility Cases in the U.S: Why They’re Worth the Investment', href: 'BlogPost-Utility.dc.html', date: 'December 2, 2025', excerpt: 'What makes a waterproof utility case worth the money, and how to pick one for your tools and gear.', img: '/_blob/e8cbfef15e59a4b07b10e4ecc9374943' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

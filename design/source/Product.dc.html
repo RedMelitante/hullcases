@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Product detail</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page">
+<dc-import name="SiteHeader" cart-count="2" active="shop" hint-size="100%,124px"></dc-import>
+<main>
+<div class="wrap">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="Main.dc.html">Home</a><span aria-hidden="true">/</span><a href="Shop.dc.html">Shop</a><span aria-hidden="true">/</span><a href="{{catHref}}">{{catName}}</a><span aria-hidden="true">/</span><span aria-current="page">{{p.m}}</span></nav>
+
+<section class="g2 g2-l" style="gap: 64px; align-items: start; padding-bottom: 72px">
+<!-- GALLERY -->
+<div class="stack sticky-d" style="gap: 12px">
+<div style="aspect-ratio: 1/1; border-radius: 8px; border: 1px solid #DDE0E4; background: #FFFFFF; display: flex; align-items: center; justify-content: center; position: relative">
+<img src="{{p.img}}" alt="{{title}}, front three-quarter view" style="width: 72%; height: auto; max-height: 80%; object-fit: contain; display: block">
+<span class="badge badge-out" style="position: absolute; left: 12px; bottom: 12px">Supplier photo · replace</span>
+</div>
+</div>
+
+<!-- BUY BOX -->
+<div class="stack" style="gap: 22px">
+<div class="stack" style="gap: 12px">
+<div class="row" style="gap: 8px; flex-wrap: wrap">
+<sc-if value="{{isBest}}" hint-placeholder-val="{{ false }}"><span class="badge badge-new">Best seller</span></sc-if>
+<sc-if value="{{p.wheels}}" hint-placeholder-val="{{ false }}"><span class="badge badge-new">Wheels + pull handle</span></sc-if>
+<span class="badge badge-stock"><span class="dot"></span>IP67</span>
+</div>
+<h1 class="h1">{{title}}</h1>
+<div class="row" style="gap: 12px; align-items: baseline"><span class="price" style="font-size: 34px">{{p.price}}</span></div>
+<p class="body muted" style="font-size: 17px">{{summary}}</p>
+<dl class="g3" style="gap: 10px; margin: 0">
+<div class="stack" style="gap: 2px; padding: 12px 14px; background: #F5F6F7; border-radius: 4px"><dt class="t-sm muted">Internal</dt><dd class="num" style="margin: 0; font-weight: 600">{{p.inside}}</dd></div>
+<div class="stack" style="gap: 2px; padding: 12px 14px; background: #F5F6F7; border-radius: 4px"><dt class="t-sm muted">Overall</dt><dd class="num" style="margin: 0; font-weight: 600">{{p.overall}}</dd></div>
+<div class="stack" style="gap: 2px; padding: 12px 14px; background: #F5F6F7; border-radius: 4px"><dt class="t-sm muted">Weight</dt><dd class="num" style="margin: 0; font-weight: 600">{{p.lb}} lb</dd></div>
+</dl>
+</div>
+
+<div class="stack" style="gap: 10px">
+<div class="row" style="justify-content: space-between"><span class="label">Similar sizes in {{catName}}</span><a class="link" href="Contact.dc.html" style="font-size: 15px">Sizing help</a></div>
+<div class="opts">
+<sc-for list="{{sizes}}" as="s" hint-placeholder-count="5">
+<a class="{{s.cls}}" href="{{s.href}}" aria-current="{{s.current}}">{{s.m}}</a>
+</sc-for>
+</div>
+<span class="help">Each size is its own model with its own internal dimensions.</span>
+</div>
+
+<div class="row" style="gap: 10px"><span class="badge badge-stock"><span class="dot"></span>In stock</span><span class="t-sm muted">Ships from Mira Loma, CA</span></div>
+
+<div class="row" style="gap: 12px">
+<div class="qty" role="group" aria-label="Quantity"><button aria-label="Decrease quantity" onClick="{{dec}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14"/></svg></button><output aria-live="polite">{{qty}}</output><button aria-label="Increase quantity" onClick="{{inc}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+<a class="btn btn-primary" href="CartDrawer.dc.html" style="flex: 1">Add to cart<span class="only-d">&nbsp;· {{p.price}}</span></a>
+</div>
+
+<ul class="stack" style="list-style: none; margin: 0; padding: 18px 20px; gap: 12px; background: #F5F6F7; border-radius: 8px">
+<li class="row" style="gap: 12px"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#B4470E" stroke-width="2" aria-hidden="true"><path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><span>In stock and ready to ship from Mira Loma, CA</span></li>
+<li class="row" style="gap: 12px"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#B4470E" stroke-width="2" aria-hidden="true"><path d="M4 10h11a5 5 0 0 1 0 10H9"/><path d="m8 6-4 4 4 4"/></svg><span>30-day returns with RMA · 100% secure checkout</span></li>
+<li class="row" style="gap: 12px"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="#B4470E" stroke-width="2" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6l-8-3z"/><path d="m9 12 2 2 4-4"/></svg><span>Lifetime warranty</span></li>
+</ul>
+
+<div class="stack">
+<details class="acc" open="">
+<summary>Shipping<svg class="acc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+<div class="acc-body">Ships from our Mira Loma, CA facility via UPS, FedEx or freight, or pick it up locally. We guarantee on-time dispatch; transit times are set by the carrier. Need insurance or a signature on delivery? Contact us before your order ships.</div>
+</details>
+<details class="acc">
+<summary>Returns and refunds<svg class="acc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+<div class="acc-body">Unused stock items can be returned within 30 days of purchase in original packaging, with an RMA number (email info@hullcases.com). Non-defective returns have a 25% restocking fee, and shipping isn’t refundable. Custom cases and foam are final sale. <a class="link" href="Policy.dc.html">Read the full Return and Refund Policy</a>.</div>
+</details>
+<details class="acc">
+<summary>Warranty<svg class="acc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+<div class="acc-body">Every Hull case comes with a lifetime warranty. For warranty questions, email <a class="link" href="mailto:info@hullcases.com">info@hullcases.com</a> with your order number.</div>
+</details>
+</div>
+</div>
+</section>
+</div>
+
+<!-- DETAILS + SPECS -->
+<section class="section bg-steel">
+<div class="wrap g2" style="gap: 64px; align-items: start">
+<div class="stack" style="gap: 16px">
+<p class="eyebrow">Details</p>
+<h2 class="h2">About this case</h2>
+<p class="body" style="font-size: 17px">{{about}}</p>
+<ul class="stack" style="margin: 0; padding-left: 20px; gap: 8px">
+<li>IP67 rated: dust-tight and protected against temporary immersion</li>
+<li>Polypropylene alloy shell, rated −40 °F to 210 °F</li>
+<sc-if value="{{p.wheels}}" hint-placeholder-val="{{ false }}"><li>Pull handle and wheels for moving heavy kit</li></sc-if>
+<li>{{airlineLine}}</li>
+<li>Custom foam, panel and logo printing available</li>
+</ul>
+</div>
+<div class="stack" style="gap: 16px">
+<p class="eyebrow">Key specs</p>
+<h2 class="h2">Dimensions &amp; build</h2>
+<table class="table table-specs" style="background: #FFFFFF">
+<tbody>
+<tr><th scope="row">Internal size (L × W × H)</th><td class="num">{{p.inside}}<br><span class="t-sm muted">{{p.insidemm}}</span></td></tr>
+<tr><th scope="row">Lid / base depth</th><td class="num">{{p.depth}}<br><span class="t-sm muted">{{p.depthmm}}</span></td></tr>
+<tr><th scope="row">Overall size (L × W × H)</th><td class="num">{{p.overall}}<br><span class="t-sm muted">{{p.overallmm}}</span></td></tr>
+<tr><th scope="row">Weight (empty)</th><td class="num">{{p.lb}} lb ({{p.kg}} kg)</td></tr>
+<tr><th scope="row">Material</th><td class="num">Polypropylene alloy</td></tr>
+<tr><th scope="row">Waterproof rating</th><td class="num">IP67</td></tr>
+<tr><th scope="row">Temperature range</th><td class="num">−40 °F to 210 °F (−40 °C to 99 °C)</td></tr>
+<tr><th scope="row">Wheels &amp; pull handle</th><td class="num">{{wheelsText}}</td></tr>
+<tr><th scope="row">Airline</th><td class="num">{{airlineSpec}}</td></tr>
+<tr><th scope="row">Warranty</th><td class="num">Lifetime</td></tr>
+</tbody>
+</table>
+<p class="t-sm muted" style="margin: 0">*Please check with your airline before travel.</p>
+</div>
+</div>
+</section>
+
+<!-- CUSTOM SERVICE -->
+<section class="section">
+<div class="wrap stack" style="gap: 32px">
+<div class="row" style="justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-end">
+<div class="stack" style="gap: 10px; max-width: 40rem">
+<p class="eyebrow">Custom service</p>
+<h2 class="h2">Make this case yours</h2>
+<p class="body muted">Order the {{p.m}} with custom foam, a custom panel or your logo.</p>
+</div>
+<a class="btn btn-ghost btn-sm" href="CustomCases.dc.html">Request a custom quote</a>
+</div>
+<div class="g3" style="gap: 24px">
+<div class="stack" style="gap: 12px"><img src="/_blob/8bbebc0769d55ffe8249643ef2e4c7c4" alt="Open case with custom-cut foam holding a tool set" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px"><h3 class="h4">Custom foam lining</h3><p class="body muted">Foam cut to the shape of your gear so nothing shifts.</p></div>
+<div class="stack" style="gap: 12px"><img src="/_blob/0e579e4a3704fef39c6e68660799889b" alt="Case fitted with a custom control panel" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; background: #FFFFFF"><h3 class="h4">Custom panel</h3><p class="body muted">A panel fitted inside the case to suit your equipment. Tell us what you need it for.</p></div>
+<div class="stack" style="gap: 12px"><img src="/_blob/92f1e5a4d8d64fc673690b124ec33961" alt="Black hard case with a printed logo (mockup)" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: contain; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4"><h3 class="h4">Custom logo</h3><p class="body muted">Have your company or team logo printed on the case.</p></div>
+</div>
+</div>
+</section>
+
+<!-- RELATED -->
+<section class="section bg-steel">
+<div class="wrap stack" style="gap: 32px">
+<h2 class="h2">More {{catName}}</h2>
+<div class="g4">
+<sc-for list="{{related}}" as="r" hint-placeholder-count="4">
+<dc-import name="ProductCard" product="{{r}}" hint-size="100%,430px"></dc-import>
+</sc-for>
+</div>
+</div>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+
+<div class="sticky-atc" role="region" aria-label="Add to cart">
+<div class="stack" style="gap: 2px; min-width: 0; flex: 1">
+<span style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{title}}</span>
+<span class="t-sm muted"><strong style="color: #16181B">{{p.price}}</strong></span>
+</div>
+<a class="btn btn-primary btn-sm" href="CartDrawer.dc.html" style="flex: none">Add to cart</a>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"model":{"editor":"enum","options":["D2812","D2816","D3213","D3214","D3215","D3510","D3608","D3617","D3708","D3913","D3915","D4211","D4215","D4218","D4223","D4817","D4821","D5222","D5524","D6125","D6530"],"default":"D2812"},"$preview":{"width":1440,"height":4400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { qty: 1 }; }
+  renderVals() {
+    const DATA = [{"m": "D2812", "cat": "small", "price": "$6.40", "wheels": false, "img": "/_blob/e4577bb53e99f0ac6d20a5e91280d797", "inside": "9.8 × 7.1 × 3.7 in", "insidemm": "250 × 180 × 95 mm", "overall": "10.8 × 8.9 × 4.4 in", "overallmm": "274 × 225 × 113 mm", "depth": "1.0 in / 2.8 in", "depthmm": "25 / 70 mm", "lid": "1.0", "base": "2.8", "lb": "2.3", "kg": "1.05", "carry": true, "vol": 257.446}, {"m": "D2816", "cat": "small", "price": "$7.70", "wheels": false, "img": "/_blob/41b4935b553a96233d46c1f63722e5c3", "inside": "9.8 × 7.1 × 5.7 in", "insidemm": "250 × 180 × 145 mm", "overall": "10.8 × 8.9 × 6.4 in", "overallmm": "274 × 225 × 163 mm", "depth": "1.0 in / 4.7 in", "depthmm": "25 / 120 mm", "lid": "1.0", "base": "4.7", "lb": "2.8", "kg": "1.25", "carry": true, "vol": 396.606}, {"m": "D3213", "cat": "small", "price": "$11.00", "wheels": false, "img": "/_blob/6a391c6be8533c217cfd29c131e136c8", "inside": "11.4 × 9.1 × 4.3 in", "insidemm": "290 × 230 × 108 mm", "overall": "12.5 × 11.0 × 5.2 in", "overallmm": "318 × 280 × 132 mm", "depth": "1.5 in / 2.8 in", "depthmm": "38 / 70 mm", "lid": "1.5", "base": "2.8", "lb": "3.3", "kg": "1.5", "carry": true, "vol": 446.08199999999994}, {"m": "D3214", "cat": "small", "price": "$12.60", "wheels": false, "img": "/_blob/5f7eaa6fe62bd37b252eddf268237cb4", "inside": "11.4 × 9.1 × 4.7 in", "insidemm": "290 × 230 × 120 mm", "overall": "12.5 × 11.0 × 5.5 in", "overallmm": "318 × 280 × 140 mm", "depth": "1.6 in / 3.1 in", "depthmm": "40 / 80 mm", "lid": "1.6", "base": "3.1", "lb": "4.4", "kg": "2", "carry": true, "vol": 487.578}, {"m": "D3215", "cat": "small", "price": "$11.22", "wheels": false, "img": "/_blob/809b421be5d6fe2aba1991a91a17815e", "inside": "11.4 × 9.1 × 5.0 in", "insidemm": "290 × 230 × 126 mm", "overall": "12.5 × 11.0 × 5.9 in", "overallmm": "318 × 280 × 150 mm", "depth": "1.5 in / 3.5 in", "depthmm": "38 / 88 mm", "lid": "1.5", "base": "3.5", "lb": "3.5", "kg": "1.6", "carry": true, "vol": 518.6999999999999}, {"m": "D3510", "cat": "small", "price": "$11.20", "wheels": false, "img": "/_blob/cde7fbe90f5a5e11187fdff258a00e9e", "inside": "12.9 × 8.9 × 3.5 in", "insidemm": "327 × 227 × 90 mm", "overall": "13.8 × 11.0 × 4.1 in", "overallmm": "350 × 280 × 104 mm", "depth": "1.0 in / 2.6 in", "depthmm": "25 / 65 mm", "lid": "1.0", "base": "2.6", "lb": "3.3", "kg": "1.5", "carry": true, "vol": 401.83500000000004}, {"m": "D3608", "cat": "small", "price": "$9.80", "wheels": false, "img": "/_blob/74c269975e2e72f0189a7332460a3b88", "inside": "13.3 × 8.1 × 2.6 in", "insidemm": "338.5 × 206.5 × 67 mm", "overall": "14.3 × 10.0 × 3.3 in", "overallmm": "362 × 254 × 85 mm", "depth": "0.9 in / 1.8 in", "depthmm": "22 / 45 mm", "lid": "0.9", "base": "1.8", "lb": "2.6", "kg": "1.2", "carry": true, "vol": 280.098}, {"m": "D3617", "cat": "small", "price": "$17.90", "wheels": false, "img": "/_blob/fb95effd2f6a41ef67ce8ff4b4988e29", "inside": "12.9 × 9.0 × 6.1 in", "insidemm": "327.5 × 228.6 × 155 mm", "overall": "14.1 × 11.2 × 6.6 in", "overallmm": "358 × 284 × 168 mm", "depth": "1.8 in / 4.3 in", "depthmm": "45 / 110 mm", "lid": "1.8", "base": "4.3", "lb": "4.4", "kg": "2", "carry": true, "vol": 708.21}, {"m": "D3708", "cat": "small", "price": "$8.20", "wheels": false, "img": "/_blob/936ffd52859cb726a0dc50d2b5860e20", "inside": "13.7 × 6.2 × 2.6 in", "insidemm": "348.5 × 156.5 × 67 mm", "overall": "14.6 × 8.0 × 3.3 in", "overallmm": "372 × 204 × 85 mm", "depth": "0.9 in / 1.8 in", "depthmm": "22 / 45 mm", "lid": "0.9", "base": "1.8", "lb": "2.2", "kg": "1", "carry": true, "vol": 220.844}, {"m": "D3913", "cat": "small", "price": "$12.90", "wheels": false, "img": "/_blob/601f20d5c4c8d8506c241a1420006fea", "inside": "14.3 × 9.5 × 4.3 in", "insidemm": "362 × 241.5 × 110 mm", "overall": "15.3 × 11.4 × 5.3 in", "overallmm": "388 × 290 × 134 mm", "depth": "1.5 in / 2.8 in", "depthmm": "38 / 72 mm", "lid": "1.5", "base": "2.8", "lb": "4.2", "kg": "1.9", "carry": true, "vol": 584.155}, {"m": "D3915", "cat": "small", "price": "$15.00", "wheels": false, "img": "/_blob/3b5acf5bd3628c26d9044a37c96a7ba6", "inside": "14.3 × 9.5 × 5.0 in", "insidemm": "362 × 241.5 × 126 mm", "overall": "15.3 × 11.4 × 5.9 in", "overallmm": "388 × 290 × 150 mm", "depth": "1.5 in / 3.5 in", "depthmm": "38 / 88 mm", "lid": "1.5", "base": "3.5", "lb": "4.2", "kg": "1.9", "carry": true, "vol": 679.25}, {"m": "D4211", "cat": "medium", "price": "$13.30", "wheels": false, "img": "/_blob/99176fb88a40db88cd470907c0dfebcc", "inside": "15.6 × 10.5 × 4.0 in", "insidemm": "396.5 × 267.6 × 101 mm", "overall": "16.7 × 12.8 × 4.6 in", "overallmm": "425 × 325 × 118 mm", "depth": "1.1 in / 2.9 in", "depthmm": "27.7 / 73.3 mm", "lid": "1.1", "base": "2.9", "lb": "4.6", "kg": "2.1", "carry": true, "vol": 655.1999999999999}, {"m": "D4215", "cat": "medium", "price": "$16.40", "wheels": false, "img": "/_blob/a6fb698536a2d88235a48d57c90b7bf4", "inside": "15.5 × 11.3 × 5.0 in", "insidemm": "394.5 × 287.5 × 127 mm", "overall": "16.9 × 13.8 × 6.0 in", "overallmm": "428 × 350 × 153 mm", "depth": "1.6 in / 3.4 in", "depthmm": "39.6 / 87.2 mm", "lid": "1.6", "base": "3.4", "lb": "5.7", "kg": "2.6", "carry": true, "vol": 875.75}, {"m": "D4218", "cat": "medium", "price": "$19.90", "wheels": false, "img": "/_blob/c9231339ba62f985b60ba9fdc0dddcd4", "inside": "15.5 × 11.3 × 6.5 in", "insidemm": "394 × 287 × 164 mm", "overall": "16.9 × 13.6 × 7.4 in", "overallmm": "430 × 345 × 188 mm", "depth": "1.8 in / 4.7 in", "depthmm": "45 / 119 mm", "lid": "1.8", "base": "4.7", "lb": "6.4", "kg": "2.9", "carry": true, "vol": 1138.4750000000001}, {"m": "D4223", "cat": "medium", "price": "$18.90", "wheels": false, "img": "/_blob/a9c2d25a3c7bf7724fc7c2c83bf39ffb", "inside": "15.5 × 11.3 × 8.0 in", "insidemm": "394.5 × 287.5 × 204 mm", "overall": "16.9 × 13.8 × 9.1 in", "overallmm": "428 × 350 × 230 mm", "depth": "1.6 in / 6.5 in", "depthmm": "39.6 / 164.5 mm", "lid": "1.6", "base": "6.5", "lb": "6.4", "kg": "2.9", "carry": false, "vol": 1401.2}, {"m": "D4817", "cat": "medium", "price": "$19.60", "wheels": false, "img": "/_blob/a82a5725b4c9fa13b39a70d1fe866f67", "inside": "17.3 × 12.6 × 5.5 in", "insidemm": "440 × 320 × 140 mm", "overall": "18.9 × 15.2 × 6.1 in", "overallmm": "479 × 387 × 155 mm", "depth": "1.6 in / 3.9 in", "depthmm": "40 / 100 mm", "lid": "1.6", "base": "3.9", "lb": "5.5", "kg": "2.5", "carry": false, "vol": 1198.8899999999999}, {"m": "D4821", "cat": "medium", "price": "$21.10", "wheels": false, "img": "/_blob/0f28c9b2a03c89ff00ab7e3b11b69bbf", "inside": "17.1 × 12.5 × 7.5 in", "insidemm": "433.5 × 318.5 × 190 mm", "overall": "18.9 × 15.2 × 8.3 in", "overallmm": "479 × 387 × 210 mm", "depth": "1.6 in / 5.9 in", "depthmm": "40 / 150 mm", "lid": "1.6", "base": "5.9", "lb": "6.8", "kg": "3.1", "carry": false, "vol": 1603.1250000000002}, {"m": "D5222", "cat": "medium", "price": "$23.40", "wheels": false, "img": "/_blob/842faa0aa927bac07a081ce6459119ea", "inside": "18.9 × 14.0 × 7.9 in", "insidemm": "480 × 355 × 200 mm", "overall": "20.5 × 16.3 × 8.8 in", "overallmm": "520 × 415 × 224 mm", "depth": "2.0 in / 5.9 in", "depthmm": "50 / 150 mm", "lid": "2.0", "base": "5.9", "lb": "8.8", "kg": "4", "carry": false, "vol": 2090.3399999999997}, {"m": "D5524", "cat": "large", "price": "$33.20", "wheels": true, "img": "/_blob/51b76031e519c879134356b253c3bb5e", "inside": "20.8 × 11.5 × 7.9 in", "insidemm": "528 × 293 × 200 mm", "overall": "21.9 × 13.8 × 9.4 in", "overallmm": "557 × 350 × 240 mm", "depth": "2.0 in / 5.9 in", "depthmm": "50 / 150 mm", "lid": "2.0", "base": "5.9", "lb": "12.6", "kg": "5.7", "carry": false, "vol": 1889.6800000000003}, {"m": "D6125", "cat": "large", "price": "$41.70", "wheels": true, "img": "/_blob/1125b1a5585b09a1a7494db998ac2f91", "inside": "21.2 × 15.0 × 8.3 in", "insidemm": "538 × 380 × 210 mm", "overall": "24.0 × 17.3 × 9.8 in", "overallmm": "610 × 440 × 250 mm", "depth": "2.0 in / 6.3 in", "depthmm": "50 / 160 mm", "lid": "2.0", "base": "6.3", "lb": "14.3", "kg": "6.5", "carry": false, "vol": 2639.4}, {"m": "D6530", "cat": "large", "price": "$55.20", "wheels": true, "img": "/_blob/b81c422094adc50c5f0a400e26cbbca1", "inside": "23.1 × 16.9 × 10.6 in", "insidemm": "588 × 428 × 270 mm", "overall": "25.5 × 19.5 × 12.3 in", "overallmm": "647 × 495 × 312 mm", "depth": "2.0 in / 8.7 in", "depthmm": "50 / 220 mm", "lid": "2.0", "base": "8.7", "lb": "22.0", "kg": "10", "carry": false, "vol": 4138.134}];
+    const CAT = { small: 'Small cases', medium: 'Medium cases', large: 'Large cases' };
+    const code = this.props.model ?? 'D2812';
+    const p = DATA.find((d) => d.m === code) || DATA[0];
+    const same = DATA.filter((d) => d.cat === p.cat);
+    const byClose = same.slice().sort((a, b) => Math.abs(a.vol - p.vol) - Math.abs(b.vol - p.vol));
+    const sizes = byClose.slice(0, 6).sort((a, b) => a.m < b.m ? -1 : 1).map((d) => ({ m: d.m, href: 'Product-' + d.m + '.dc.html', cls: 'opt' + (d.m === p.m ? ' is-on' : ''), current: d.m === p.m ? 'page' : 'false' }));
+    let rel = byClose.filter((d) => d.m !== p.m);
+    if (rel.length < 4) rel = rel.concat(DATA.filter((d) => d.cat !== p.cat).sort((a, b) => Math.abs(a.vol - p.vol) - Math.abs(b.vol - p.vol))).slice(0, 4);
+    const word = p.cat === 'small' ? 'compact' : (p.cat === 'medium' ? 'mid-size' : 'large');
+    const airline = p.carry ? 'Sized for airline check-in or carry-on (check your airline first)' : 'Suitable for airline check-in (check your airline first)';
+    const q = this.state.qty;
+    return {
+      qty: q, inc: () => this.setState({ qty: q + 1 }), dec: () => this.setState({ qty: Math.max(1, q - 1) }),
+      p: p,
+      title: p.m + ' Waterproof Hard Case',
+      catName: CAT[p.cat],
+      catHref: { small: 'Shop-Small.dc.html', medium: 'Shop-Medium.dc.html', large: 'Shop-Large.dc.html' }[p.cat] || 'Shop.dc.html',
+      isBest: p.m === 'D2812',
+      summary: 'A ' + word + ' waterproof case with a ' + p.inside + ' interior. Polypropylene alloy shell, IP67 rated and backed by a lifetime warranty' + (p.wheels ? ', with a pull handle and wheels.' : '.'),
+      about: 'The ' + p.m + ' gives you ' + p.inside + ' of interior space, split between a ' + p.base + ' in deep base and a ' + p.lid + ' in deep lid. It weighs ' + p.lb + ' lb empty' + (p.wheels ? ' and rolls on built-in wheels with a pull handle.' : '.'),
+      airlineLine: airline,
+      airlineSpec: p.carry ? 'Check-in: yes · Carry-on: fits 22 × 14 × 9 in*' : 'Check-in: yes · Carry-on: too large for most airlines*',
+      wheelsText: p.wheels ? 'Yes' : 'No',
+      sizes: sizes,
+      related: rel.slice(0, 4).map((d) => ({ title: d.m + ' Waterproof Hard Case', price: d.price, img: d.img, code: d.m, shot: d.m }))
+    };
+  }
+}
+</script>
+</body>
+</html>

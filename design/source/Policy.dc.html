@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Policy page template</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page">
+<dc-import name="SiteHeader" cart-count="2" active="none" hint-size="100%,124px"></dc-import>
+<main>
+<section class="bg-steel" style="border-bottom: 1px solid #DDE0E4">
+<div class="wrap" style="padding-bottom: 40px">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="Main.dc.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">{{title}}</span></nav>
+<div class="stack" style="gap: 10px">
+<h1 class="h1">{{title}}</h1>
+<p class="body muted">URL: <code>{{url}}</code></p>
+</div>
+</div>
+</section>
+
+<section class="wrap" style="padding-top: 56px; padding-bottom: 96px">
+<div class="policy-grid">
+<nav class="only-d" aria-label="On this page">
+<div class="toc">
+<span class="eyebrow" style="color: #4A5159; margin-bottom: 6px">On this page</span>
+<sc-for list="{{sections}}" as="s" hint-placeholder-count="7">
+<a href="#{{s.id}}" class="{{s.cls}}">{{s.h}}</a>
+</sc-for>
+</div>
+</nav>
+
+<div class="stack" style="gap: 24px">
+<details class="acc only-m" style="border-top: 1px solid #DDE0E4">
+<summary>On this page<svg class="acc-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></summary>
+<div class="stack acc-body">
+<sc-for list="{{sections}}" as="s" hint-placeholder-count="7">
+<a href="#{{s.id}}" style="display: flex; align-items: center; min-height: 44px; text-decoration: none">{{s.h}}</a>
+</sc-for>
+</div>
+</details>
+
+<sc-if value="{{hasFacts}}" hint-placeholder-val="{{ false }}">
+<aside class="stack" style="gap: 12px; padding: 24px 28px; border: 2px solid #16181B; border-radius: 8px; max-width: 72ch">
+<h2 class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; letter-spacing: .04em">{{factsTitle}}</h2>
+<ul class="stack" style="margin: 0; padding: 0; list-style: none; gap: 10px">
+<sc-for list="{{facts}}" as="f" hint-placeholder-count="6">
+<li class="row" style="gap: 12px; align-items: flex-start"><svg class="ico" style="width: 20px; height: 20px; margin-top: 3px" viewBox="0 0 24 24" fill="none" stroke="#B4470E" stroke-width="2.4" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg><span><strong>{{f.k}}:</strong> {{f.v}}</span></li>
+</sc-for>
+</ul>
+</aside>
+</sc-if>
+
+<article class="prose">
+<p class="lead" style="margin-bottom: 32px">{{intro}}</p>
+<sc-for list="{{sections}}" as="s" hint-placeholder-count="7">
+<h2 id="{{s.id}}">{{s.h}}</h2>
+<p>{{s.p}}</p>
+<sc-if value="{{s.hasItems}}" hint-placeholder-val="{{ false }}">
+<ul>
+<sc-for list="{{s.items}}" as="it" hint-placeholder-count="3">
+<li>{{it}}</li>
+</sc-for>
+</ul>
+</sc-if>
+</sc-for>
+</article>
+
+<div class="stack" style="gap: 10px; padding: 24px; background: #F5F6F7; border-radius: 8px; max-width: 72ch">
+<h2 class="h4">Questions about this policy?</h2>
+<p class="body">Call <a class="link" href="tel:+18332360699">(833) 236-0699</a>, email <a class="link" href="mailto:info@hullcases.com">info@hullcases.com</a>, or write to Hull Cases, 3827 Wacker Dr., Mira Loma, CA 91752.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"policy":{"editor":"enum","options":["returns","terms","privacy","disclaimer"],"default":"returns"},"$preview":{"width":1440,"height":3600}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const kind = this.props.policy ?? 'returns';
+    const ret = {
+      title: 'Return and Refund Policy', url: '/return-and-refund-policy/',
+      intro: 'Thank you for choosing Hull Cases. All returns, defective or not, need a Return Merchandise Authorization (RMA) number and a copy of the original invoice. To request an RMA, email info@hullcases.com.',
+      factsTitle: 'Quick return facts',
+      facts: [
+        { k: 'RMA required', v: 'Every return needs an RMA number. Email info@hullcases.com to start.' },
+        { k: '30-day window', v: 'Defective or stock items must be returned within 30 days of purchase, in original packaging.' },
+        { k: 'Final sale', v: 'Custom cases, foam inserts (including foam inside cases), modified or printed items, and flashlights.' },
+        { k: 'Restocking fee', v: 'Non-defective stock returns have a 25% restocking fee.' },
+        { k: 'Shipping', v: 'Shipping and handling fees are non-refundable. Once an order leaves our facility, the carrier is responsible for loss or damage.' },
+        { k: 'Fitment', v: 'We guarantee a perfect fit only when you send us your physical parts for custom foam fabrication.' }
+      ],
+      sections: [
+        ['defective', 'Defective merchandise', 'If a product is defective from the manufacturer (this does not include shipping damage), it may be returned for a replacement or refund within 30 days of purchase, provided that:', ['The product is returned in its original packaging.', 'Manufacturer warranty support: if the original manufacturer is unwilling or unable to repair or replace the item under their warranty, Hull Cases will issue a refund or replacement.', 'All shipping charges are non-refundable.']],
+        ['stock', 'Non-defective stock merchandise', 'Regular stock items may be returned for a refund within 30 days of purchase, subject to:', ['A 25% restocking fee.', 'The product must be unused, undamaged and in its original packaging.', 'All shipping and handling charges are non-refundable.']],
+        ['final-sale', 'Non-returnable and final sale items', 'These items are made-to-order, custom or hygiene-sensitive and cannot be returned or exchanged. Please verify all specifications before ordering:', ['Custom orders: all custom cases, modified cases (including printing) and cases with glued-in foam or material.', 'Foam products: all standalone foam inserts and foam sets included within cases.', 'Clearance and non-stock: all non-stocked cases, discounted items and flashlights.', 'Any product marked “Non-Returnable” at the time of purchase.']],
+        ['shipping', 'Shipping and carrier liability', 'Once a product leaves our facility (via UPS, FedEx, freight or customer pickup), the risk of loss or damage passes to the customer. Hull Cases is not responsible for missing, lost or damaged packages.', ['Insurance and signatures: if you have concerns about delivery security, contact us before shipping to buy shipping insurance or require a signature on delivery.', 'Shipping claims: if a carrier loses or damages your product, we will help you with the claims process, but we cannot guarantee the carrier’s final decision.', 'Delivery guarantees: transit times and delivery dates (Overnight, 2nd Day, etc.) are guaranteed by the carrier, not Hull Cases. We guarantee on-time dispatch from our facility but are not liable for carrier delays.', 'Returned to sender: if a package comes back after failed delivery attempts, the customer pays the shipping to resend it. If you choose a refund instead, a 25% restocking fee applies.']],
+        ['fitment', 'Fitment and recommendations', 'Our team works to give good product recommendations, but the final decision on fit and purchase lies with the customer.', ['Hull Cases is not liable for products that don’t fit or don’t suit you based on general recommendations.', 'Guaranteed fit: we only guarantee a proper fit if you send the physical parts to our facility to be fitted into a custom foam insert.']],
+        ['manufacturer', 'Manufacturer direct guarantees', 'Some manufacturers offer their own money-back guarantees. Please check the documentation included with your merchandise; you may be able to return or exchange directly through the manufacturer.', []]
+      ]
+    };
+    const T = (id, h, p) => [id, h, p, []];
+    const tc = {
+      title: 'Terms and Conditions', url: '/terms-and-conditions/',
+      intro: 'This website is operated by Hull Cases. By visiting our site or buying from us, you agree to these Terms of Service. Full text carried over from the current page; each section below shows its opening line.',
+      factsTitle: '', facts: [],
+      sections: [
+        T('overview', 'Overview', 'Hull Cases offers this website, including all information, tools and services, to you on the condition that you accept all terms, conditions, policies and notices stated here. …'),
+        T('s1', '1. Online store terms', 'By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence. …'),
+        T('s2', '2. General conditions', 'We reserve the right to refuse service to anyone for any reason at any time. Credit card information is always encrypted during transfer over networks. …'),
+        T('s3', '3. Accuracy, completeness and timeliness of information', 'We are not responsible if information made available on this site is not accurate, complete or current. …'),
+        T('s4', '4. Modifications to the service and prices', 'Prices for our products are subject to change without notice. …'),
+        T('s5', '5. Products or services', 'Certain products or services may be available exclusively online and may have limited quantities. They are subject to return or exchange only according to our Return and Refund Policy. …'),
+        T('s6', '6. Accuracy of billing and account information', 'We reserve the right to refuse any order you place with us, and may limit or cancel quantities purchased per person, household or order. …'),
+        T('s7', '7. Optional tools', 'We may provide access to third-party tools that we do not monitor or control. …'),
+        T('s8', '8. Third-party links', 'Some content, products and services on our site may include materials from third parties. …'),
+        T('s9', '9. User comments, feedback and other submissions', 'Ideas, suggestions or other materials you send us may be used by us without restriction. …'),
+        T('s10', '10. Personal information', 'Your submission of personal information through the store is governed by our Privacy Policy.'),
+        T('s11', '11. Errors, inaccuracies and omissions', 'Occasionally our site may contain typographical errors, inaccuracies or omissions relating to product descriptions, pricing, promotions, shipping charges, transit times or availability. …'),
+        T('s12', '12. Prohibited uses', 'You may not use the site or its content for any unlawful purpose or in breach of these Terms. …'),
+        T('s13', '13. Disclaimer of warranties; limitation of liability', 'We do not guarantee that your use of our service will be uninterrupted, timely, secure or error-free. …'),
+        T('s14', '14. Indemnification', 'You agree to indemnify and hold harmless Hull Cases and its affiliates from claims arising from your breach of these Terms. …'),
+        T('s15', '15. Severability', 'If any provision of these Terms is found unenforceable, the remaining provisions stay in effect. …'),
+        T('s16', '16. Termination', 'These Terms are effective unless and until terminated by you or us. …'),
+        T('s17', '17. Entire agreement', 'These Terms and any policies posted on this site make up the entire agreement between you and us. …'),
+                T('s19', '18. Changes to Terms of Service', 'You can review the most current version of the Terms at any time on this page. …'),
+        T('s20', '19. Contact information', 'Questions about the Terms of Service should be sent to support@hullcases.com.')
+      ]
+    };
+    const P = (id, h, p) => [id, h, p, []];
+    const pp = { title: 'Privacy Policy', url: '/privacy-policy/', intro: 'This Privacy Policy explains how Hull Cases, 3827 Wacker Dr., Mira Loma, CA 91752, collects, uses and shares personal information when you visit hullcases.com, contact us or buy from us.', factsTitle: '', facts: [], sections: [
+      P('collect', 'Information we collect', 'Contact details you give us (name, email, phone, company), order details (billing and shipping address, items purchased), details of custom projects you send, and basic browsing data collected by cookies. Card payments are handled by our payment processor; we don’t store full card numbers.'),
+      P('use', 'How we use it', 'To process, ship and support your orders and returns, answer questions and prepare custom quotes, send emails you sign up for, and keep the site secure.'),
+      P('share', 'Who we share it with', 'We do not sell your personal information. We share it only with service providers who help us run the store, such as shipping carriers (UPS, FedEx and freight companies), our payment processor and our website and email providers, or when the law requires it.'),
+      P('cookies', 'Cookies and tracking', 'Our store uses cookies to keep items in your cart, remember your login and keep checkout working. You can block or delete cookies in your browser, but parts of the store may stop working.'),
+      P('rights', 'Your choices and rights', 'You can unsubscribe from emails at any time. California residents may ask what personal information we hold about them and ask us to correct or delete it. Email info@hullcases.com or call (833) 236-0699.'),
+      P('security', 'Data security', 'Credit card information is encrypted during transfer, and the site uses secure HTTPS connections. No method of storage or transmission is completely secure.'),
+      P('changes', 'Changes to this policy', 'We may update this policy from time to time. Changes take effect when they are posted on this page.') ] };
+    const dc = { title: 'Disclaimer', url: '/disclaimer/', intro: 'This disclaimer applies to the information on hullcases.com.', factsTitle: '', facts: [], sections: [
+      P('general', 'General information', 'The material on this site is provided for general information only. Prices and product details may change without notice.'),
+      P('specs', 'Product specifications', 'Dimensions and ratings are listed for guidance. Hull Cases guarantees fit only when your physical parts are sent to us for a custom foam insert.'),
+      P('airline', 'Airline travel', 'Airline size and weight rules vary. Please check with your airline before travel.'),
+      P('use', 'Use of our cases', 'You are responsible for choosing a case that suits your equipment and for packing it securely.'),
+      P('links', 'Third-party links', 'Links to other websites are provided for convenience; we don’t control their content.'),
+      P('liability', 'Limitation of liability', 'To the extent permitted by law, Hull Cases is not liable for indirect or consequential losses arising from use of this site or our products.') ] };
+    const m = { returns: ret, terms: tc, privacy: pp, disclaimer: dc }[kind] || ret;
+    return {
+      title: m.title, url: m.url, intro: m.intro,
+      hasFacts: m.facts.length > 0, facts: m.facts, factsTitle: m.factsTitle,
+      sections: m.sections.map((s, i) => ({ id: s[0], h: s[1], p: s[2], items: s[3], hasItems: s[3].length > 0, cls: i === 0 ? 'is-on' : '' }))
+    };
+  }
+}
+</script>
+</body>
+</html>

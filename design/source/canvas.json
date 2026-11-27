@@ -1,0 +1,770 @@
+{
+ "v": 3,
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-11-23T06:45:11Z"
+ },
+ "title": "Hull Cases \u2014 Storefront design",
+ "launch": {
+  "view": "canvas"
+ },
+ "pages": [],
+ "boards": {
+  "DesignSystem.dc.html": {
+   "x": 0,
+   "y": 0,
+   "w": 1440,
+   "h": 6100,
+   "title": "Design system"
+  },
+  "SiteHeader.dc.html": {
+   "x": 1520,
+   "y": 0,
+   "w": 1440,
+   "h": 124,
+   "title": "Component \u00b7 SiteHeader",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "HeaderMegaMenu.dc.html": {
+   "x": 1520,
+   "y": 244,
+   "w": 1440,
+   "h": 560,
+   "title": "State \u00b7 Header with Shop mega-menu open",
+   "is_interactive": true
+  },
+  "SiteFooter.dc.html": {
+   "x": 1520,
+   "y": 924,
+   "w": 1440,
+   "h": 560,
+   "title": "Component \u00b7 SiteFooter",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "ProductCard.dc.html": {
+   "x": 1520,
+   "y": 1604,
+   "w": 320,
+   "h": 560,
+   "title": "Component \u00b7 ProductCard",
+   "is_interactive": true
+  },
+  "ProductCardSale.dc.html": {
+   "x": 1920,
+   "y": 1604,
+   "w": 320,
+   "h": 560,
+   "title": "State \u00b7 ProductCard (sale, low stock)",
+   "is_interactive": true
+  },
+  "MobileMenu.dc.html": {
+   "x": 2320,
+   "y": 1604,
+   "w": 390,
+   "h": 844,
+   "title": "State \u00b7 Mobile nav drawer",
+   "is_interactive": true
+  },
+  "Handoff.dc.html": {
+   "x": 3040,
+   "y": 0,
+   "w": 1440,
+   "h": 4500,
+   "title": "Handoff \u00b7 SEO, routes, components",
+   "is_interactive": true
+  },
+  "Main.dc.html": {
+   "x": 0,
+   "y": 6600,
+   "w": 1440,
+   "h": 7700,
+   "title": "Home \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop.dc.html": {
+   "x": 1520,
+   "y": 6600,
+   "w": 1440,
+   "h": 4140,
+   "title": "Shop / category \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product.dc.html": {
+   "x": 3040,
+   "y": 6600,
+   "w": 1440,
+   "h": 4400,
+   "title": "Product page template (all models) \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "About.dc.html": {
+   "x": 4560,
+   "y": 6600,
+   "w": 1440,
+   "h": 3950,
+   "title": "About \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Contact.dc.html": {
+   "x": 6080,
+   "y": 6600,
+   "w": 1440,
+   "h": 3100,
+   "title": "Contact + FAQ \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "CartDrawer.dc.html": {
+   "x": 7600,
+   "y": 6600,
+   "w": 1440,
+   "h": 900,
+   "title": "Cart drawer \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Policy.dc.html": {
+   "x": 9120,
+   "y": 6600,
+   "w": 1440,
+   "h": 3600,
+   "title": "Return and Refund Policy (policy template) \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "HomeMobile.dc.html": {
+   "x": 0,
+   "y": 15320,
+   "w": 390,
+   "h": 12600,
+   "title": "Home \u00b7 mobile",
+   "is_interactive": true
+  },
+  "ShopMobile.dc.html": {
+   "x": 1520,
+   "y": 15320,
+   "w": 390,
+   "h": 3900,
+   "title": "Shop \u00b7 mobile",
+   "is_interactive": true
+  },
+  "ShopMobileFilters.dc.html": {
+   "x": 1990,
+   "y": 15320,
+   "w": 390,
+   "h": 844,
+   "title": "Shop \u00b7 mobile filter drawer open",
+   "is_interactive": true
+  },
+  "ProductMobile.dc.html": {
+   "x": 3040,
+   "y": 15320,
+   "w": 390,
+   "h": 7500,
+   "title": "Product \u00b7 mobile (sticky add-to-cart)",
+   "is_interactive": true
+  },
+  "AboutMobile.dc.html": {
+   "x": 4560,
+   "y": 15320,
+   "w": 390,
+   "h": 6400,
+   "title": "About \u00b7 mobile",
+   "is_interactive": true
+  },
+  "ContactMobile.dc.html": {
+   "x": 6080,
+   "y": 15320,
+   "w": 390,
+   "h": 5800,
+   "title": "Contact + FAQ \u00b7 mobile",
+   "is_interactive": true
+  },
+  "CartMobile.dc.html": {
+   "x": 7600,
+   "y": 15320,
+   "w": 390,
+   "h": 844,
+   "title": "Cart drawer \u00b7 mobile",
+   "is_interactive": true
+  },
+  "CartEmptyMobile.dc.html": {
+   "x": 8070,
+   "y": 15320,
+   "w": 390,
+   "h": 844,
+   "title": "Cart drawer \u00b7 mobile empty state",
+   "is_interactive": true
+  },
+  "PolicyMobile.dc.html": {
+   "x": 9120,
+   "y": 15320,
+   "w": 390,
+   "h": 6400,
+   "title": "Policy \u00b7 mobile",
+   "is_interactive": true
+  },
+  "ShopMobileEmpty.dc.html": {
+   "x": 2460,
+   "y": 15320,
+   "w": 390,
+   "h": 2000,
+   "title": "Shop \u00b7 mobile empty state",
+   "is_interactive": true
+  },
+  "Blog.dc.html": {
+   "x": 10640,
+   "y": 6600,
+   "w": 1440,
+   "h": 2400,
+   "title": "Blog index \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "BlogPost.dc.html": {
+   "x": 12160,
+   "y": 6600,
+   "w": 1440,
+   "h": 4300,
+   "title": "Blog post \u00b7 camera cases (post template) \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "CustomCases.dc.html": {
+   "x": 13680,
+   "y": 6600,
+   "w": 1440,
+   "h": 4600,
+   "title": "Custom cases \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "BlogMobile.dc.html": {
+   "x": 10640,
+   "y": 15320,
+   "w": 390,
+   "h": 4300,
+   "title": "Blog index \u00b7 mobile",
+   "is_interactive": true
+  },
+  "BlogPostMobile.dc.html": {
+   "x": 12160,
+   "y": 15320,
+   "w": 390,
+   "h": 6400,
+   "title": "Blog post \u00b7 mobile",
+   "is_interactive": true
+  },
+  "CustomCasesMobile.dc.html": {
+   "x": 13680,
+   "y": 15320,
+   "w": 390,
+   "h": 8100,
+   "title": "Custom cases \u00b7 mobile",
+   "is_interactive": true
+  },
+  "Product-D2812.dc.html": {
+   "x": 0,
+   "y": 28560,
+   "w": 1440,
+   "h": 4400,
+   "title": "D2812 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D2816.dc.html": {
+   "x": 1520,
+   "y": 28560,
+   "w": 1440,
+   "h": 4400,
+   "title": "D2816 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3213.dc.html": {
+   "x": 3040,
+   "y": 28560,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3213 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3214.dc.html": {
+   "x": 4560,
+   "y": 28560,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3214 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3215.dc.html": {
+   "x": 6080,
+   "y": 28560,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3215 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3510.dc.html": {
+   "x": 7600,
+   "y": 28560,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3510 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3608.dc.html": {
+   "x": 9120,
+   "y": 28560,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3608 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3617.dc.html": {
+   "x": 0,
+   "y": 33160,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3617 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3708.dc.html": {
+   "x": 1520,
+   "y": 33160,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3708 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3913.dc.html": {
+   "x": 3040,
+   "y": 33160,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3913 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D3915.dc.html": {
+   "x": 4560,
+   "y": 33160,
+   "w": 1440,
+   "h": 4400,
+   "title": "D3915 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D4211.dc.html": {
+   "x": 6080,
+   "y": 33160,
+   "w": 1440,
+   "h": 4400,
+   "title": "D4211 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D4215.dc.html": {
+   "x": 7600,
+   "y": 33160,
+   "w": 1440,
+   "h": 4400,
+   "title": "D4215 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D4218.dc.html": {
+   "x": 9120,
+   "y": 33160,
+   "w": 1440,
+   "h": 4400,
+   "title": "D4218 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D4223.dc.html": {
+   "x": 0,
+   "y": 37760,
+   "w": 1440,
+   "h": 4400,
+   "title": "D4223 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D4817.dc.html": {
+   "x": 1520,
+   "y": 37760,
+   "w": 1440,
+   "h": 4400,
+   "title": "D4817 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D4821.dc.html": {
+   "x": 3040,
+   "y": 37760,
+   "w": 1440,
+   "h": 4400,
+   "title": "D4821 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D5222.dc.html": {
+   "x": 4560,
+   "y": 37760,
+   "w": 1440,
+   "h": 4400,
+   "title": "D5222 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D5524.dc.html": {
+   "x": 6080,
+   "y": 37760,
+   "w": 1440,
+   "h": 4400,
+   "title": "D5524 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D6125.dc.html": {
+   "x": 7600,
+   "y": 37760,
+   "w": 1440,
+   "h": 4400,
+   "title": "D6125 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Product-D6530.dc.html": {
+   "x": 9120,
+   "y": 37760,
+   "w": 1440,
+   "h": 4400,
+   "title": "D6530 \u00b7 product page",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Cart.dc.html": {
+   "x": 0,
+   "y": 42800,
+   "w": 1440,
+   "h": 1500,
+   "title": "Cart page \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Checkout.dc.html": {
+   "x": 1520,
+   "y": 42800,
+   "w": 1440,
+   "h": 2600,
+   "title": "Checkout \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "OrderConfirmed.dc.html": {
+   "x": 3040,
+   "y": 42800,
+   "w": 1440,
+   "h": 1500,
+   "title": "Order confirmed \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Account.dc.html": {
+   "x": 4560,
+   "y": 42800,
+   "w": 1440,
+   "h": 1500,
+   "title": "Account \u00b7 sign in / create account",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "AccountOrders.dc.html": {
+   "x": 6080,
+   "y": 42800,
+   "w": 1440,
+   "h": 1300,
+   "title": "Account \u00b7 my orders",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Policy-Terms.dc.html": {
+   "x": 7600,
+   "y": 42800,
+   "w": 1440,
+   "h": 4300,
+   "title": "Terms and Conditions \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Policy-Privacy.dc.html": {
+   "x": 9120,
+   "y": 42800,
+   "w": 1440,
+   "h": 2800,
+   "title": "Privacy Policy \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Policy-Disclaimer.dc.html": {
+   "x": 0,
+   "y": 47700,
+   "w": 1440,
+   "h": 2600,
+   "title": "Disclaimer \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "BlogPost-Tactical.dc.html": {
+   "x": 1520,
+   "y": 47700,
+   "w": 1440,
+   "h": 4300,
+   "title": "Blog post \u00b7 tactical cases",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "BlogPost-Utility.dc.html": {
+   "x": 3040,
+   "y": 47700,
+   "w": 1440,
+   "h": 4100,
+   "title": "Blog post \u00b7 utility cases",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "FAQ.dc.html": {
+   "x": 4560,
+   "y": 47700,
+   "w": 1440,
+   "h": 2200,
+   "title": "FAQ \u00b7 desktop",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "FAQMobile.dc.html": {
+   "x": 6080,
+   "y": 47700,
+   "w": 390,
+   "h": 3620,
+   "title": "FAQ \u00b7 mobile",
+   "is_interactive": true
+  },
+  "Shop-Small.dc.html": {
+   "x": 0,
+   "y": 52600,
+   "w": 1440,
+   "h": 2800,
+   "title": "Shop \u00b7 Small cases",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop-Medium.dc.html": {
+   "x": 1520,
+   "y": 52600,
+   "w": 1440,
+   "h": 2360,
+   "title": "Shop \u00b7 Medium cases",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop-Large.dc.html": {
+   "x": 3040,
+   "y": 52600,
+   "w": 1440,
+   "h": 1750,
+   "title": "Shop \u00b7 Large cases",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop-Wheeled.dc.html": {
+   "x": 4560,
+   "y": 52600,
+   "w": 1440,
+   "h": 1750,
+   "title": "Shop \u00b7 Wheeled cases",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop-Under12.dc.html": {
+   "x": 6080,
+   "y": 52600,
+   "w": 1440,
+   "h": 1920,
+   "title": "Shop \u00b7 Under 12 in",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop-12-16.dc.html": {
+   "x": 7600,
+   "y": 52600,
+   "w": 1440,
+   "h": 2800,
+   "title": "Shop \u00b7 12\u201316 in",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop-16-20.dc.html": {
+   "x": 9120,
+   "y": 52600,
+   "w": 1440,
+   "h": 1780,
+   "title": "Shop \u00b7 16\u201320 in",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop-Over20.dc.html": {
+   "x": 10640,
+   "y": 52600,
+   "w": 1440,
+   "h": 1780,
+   "title": "Shop \u00b7 Over 20 in",
+   "expand": "fill",
+   "is_interactive": true
+  },
+  "Shop-Travel.dc.html": {
+   "x": 12160,
+   "y": 52600,
+   "w": 1440,
+   "h": 3240,
+   "title": "Shop \u00b7 Travel (carry-on size)",
+   "expand": "fill",
+   "is_interactive": true
+  }
+ },
+ "order": [
+  "Main.dc.html",
+  "DesignSystem.dc.html",
+  "SiteHeader.dc.html",
+  "HeaderMegaMenu.dc.html",
+  "SiteFooter.dc.html",
+  "ProductCard.dc.html",
+  "ProductCardSale.dc.html",
+  "MobileMenu.dc.html",
+  "Handoff.dc.html",
+  "Shop.dc.html",
+  "Product.dc.html",
+  "About.dc.html",
+  "Contact.dc.html",
+  "CartDrawer.dc.html",
+  "Policy.dc.html",
+  "HomeMobile.dc.html",
+  "ShopMobile.dc.html",
+  "ShopMobileFilters.dc.html",
+  "ProductMobile.dc.html",
+  "AboutMobile.dc.html",
+  "ContactMobile.dc.html",
+  "CartMobile.dc.html",
+  "CartEmptyMobile.dc.html",
+  "PolicyMobile.dc.html",
+  "ShopMobileEmpty.dc.html",
+  "Blog.dc.html",
+  "BlogPost.dc.html",
+  "CustomCases.dc.html",
+  "BlogMobile.dc.html",
+  "BlogPostMobile.dc.html",
+  "CustomCasesMobile.dc.html",
+  "Product-D2812.dc.html",
+  "Product-D2816.dc.html",
+  "Product-D3213.dc.html",
+  "Product-D3214.dc.html",
+  "Product-D3215.dc.html",
+  "Product-D3510.dc.html",
+  "Product-D3608.dc.html",
+  "Product-D3617.dc.html",
+  "Product-D3708.dc.html",
+  "Product-D3913.dc.html",
+  "Product-D3915.dc.html",
+  "Product-D4211.dc.html",
+  "Product-D4215.dc.html",
+  "Product-D4218.dc.html",
+  "Product-D4223.dc.html",
+  "Product-D4817.dc.html",
+  "Product-D4821.dc.html",
+  "Product-D5222.dc.html",
+  "Product-D5524.dc.html",
+  "Product-D6125.dc.html",
+  "Product-D6530.dc.html",
+  "Cart.dc.html",
+  "Checkout.dc.html",
+  "OrderConfirmed.dc.html",
+  "Account.dc.html",
+  "AccountOrders.dc.html",
+  "Policy-Terms.dc.html",
+  "Policy-Privacy.dc.html",
+  "Policy-Disclaimer.dc.html",
+  "BlogPost-Tactical.dc.html",
+  "BlogPost-Utility.dc.html",
+  "FAQ.dc.html",
+  "FAQMobile.dc.html",
+  "Shop-Small.dc.html",
+  "Shop-Medium.dc.html",
+  "Shop-Large.dc.html",
+  "Shop-Wheeled.dc.html",
+  "Shop-Under12.dc.html",
+  "Shop-12-16.dc.html",
+  "Shop-16-20.dc.html",
+  "Shop-Over20.dc.html",
+  "Shop-Travel.dc.html"
+ ],
+ "notes": {
+  "t1": {
+   "x": 0,
+   "y": -320,
+   "text": "Hull Cases \u2014 design system & components",
+   "kind": "title1",
+   "maxW": 4480
+  },
+  "t2": {
+   "x": 0,
+   "y": 6280,
+   "text": "Desktop pages (1440)",
+   "kind": "title1",
+   "maxW": 15120
+  },
+  "t3": {
+   "x": 0,
+   "y": 15000,
+   "text": "Mobile pages (390)",
+   "kind": "title1",
+   "maxW": 15120
+  },
+  "t4": {
+   "x": 0,
+   "y": 28240,
+   "text": "Product pages (one per model, 21)",
+   "kind": "title1",
+   "maxW": 10560
+  },
+  "t5": {
+   "x": 0,
+   "y": 42480,
+   "text": "Store flow & extra pages",
+   "kind": "title1",
+   "maxW": 10560
+  },
+  "t6": {
+   "x": 0,
+   "y": 52280,
+   "text": "Shop filter pages (mega menu targets)",
+   "kind": "title1",
+   "maxW": 13680
+  }
+ },
+ "designSystems": []
+}

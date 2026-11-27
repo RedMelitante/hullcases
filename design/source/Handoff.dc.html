@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Developer handoff</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page" style="width: 1440px">
+<section class="tex-plate" style="color: #FFFFFF; padding: 64px 80px 56px">
+<p class="eyebrow">Developer handoff · Astro Medusa Storefront</p>
+<h1 class="h1" style="margin-top: 12px">SEO, routes &amp; component list</h1>
+<p class="lead" style="margin-top: 14px; max-width: 60rem">Restyle the existing Medusa theme with hull.css tokens; keep its page structure, cart and checkout flow. Facts Hull Cases hasn’t supplied yet have been left out of the design; they’re listed in section 03.</p>
+</section>
+
+<div class="stack" style="gap: 56px; padding: 56px 80px 80px">
+
+<section class="stack" style="gap: 16px">
+<h2 class="h2">01 Pages: URL, H1 and SEO</h2>
+<div role="table" aria-label="Pages, URLs, H1 and SEO">
+<div role="row" class="eyebrow" style="display: grid; grid-template-columns: 150px 220px 240px 290px minmax(0,1fr); gap: 16px; padding: 14px 8px; border-bottom: 1px solid #DDE0E4; border-bottom: 2px solid #16181B; color: #4A5159"><span role="columnheader">Page</span><span role="columnheader">URL</span><span role="columnheader">H1 (one per page)</span><span role="columnheader">SEO title</span><span role="columnheader">Meta description</span></div>
+<sc-for list="{{seo}}" as="r" hint-placeholder-count="9">
+<div role="row" style="display: grid; grid-template-columns: 150px 220px 240px 290px minmax(0,1fr); gap: 16px; padding: 14px 8px; border-bottom: 1px solid #DDE0E4"><span role="cell" style="font-weight: 600">{{r.page}}</span><span role="cell"><code style="font-size: 14px; word-break: break-word">{{r.url}}</code></span><span role="cell">{{r.h1}}</span><span role="cell">{{r.title}}</span><span role="cell" class="muted">{{r.meta}}</span></div>
+</sc-for>
+</div>
+</section>
+
+<section class="g2" style="gap: 48px; align-items: start">
+<div class="stack" style="gap: 14px">
+<h2 class="h2">02 Build notes</h2>
+<ul class="stack" style="margin: 0; padding-left: 22px; gap: 10px">
+<sc-for list="{{notes}}" as="n" hint-placeholder-count="8">
+<li class="body">{{n}}</li>
+</sc-for>
+</ul>
+</div>
+<div class="stack" style="gap: 14px">
+<h2 class="h2">03 Still needed from Hull Cases</h2>
+<ul class="stack" style="margin: 0; padding-left: 22px; gap: 10px">
+<sc-for list="{{todo}}" as="n" hint-placeholder-count="10">
+<li class="body">{{n}}</li>
+</sc-for>
+</ul>
+</div>
+</section>
+
+<section class="stack" style="gap: 16px">
+<h2 class="h2">04 Components for Codex</h2>
+<p class="body muted">Each is one Astro component. Styles come from hull.css tokens, mapped to Tailwind in the Design system board.</p>
+<div class="g4" style="gap: 24px">
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="8">
+<div class="stack" style="gap: 8px; border-top: 3px solid #16181B; padding-top: 14px">
+<h3 class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .06em">{{g.name}}</h3>
+<ul style="margin: 0; padding: 0; list-style: none" class="stack">
+<sc-for list="{{g.items}}" as="c" hint-placeholder-count="5">
+<li style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; line-height: 1.8">{{c}}</li>
+</sc-for>
+</ul>
+</div>
+</sc-for>
+</div>
+</section>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3700}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      seo: [
+        { page: 'Home', url: '/ (theme: /us)', h1: 'Rugged protection for your valuable gear.', title: 'Waterproof Hard Cases with Lifetime Warranty | Hull Cases', meta: 'IP67 waterproof polypropylene hard cases for electronics, tools and equipment. Lifetime warranty, custom foam and logos, shipped from Mira Loma, CA.' },
+        { page: 'Shop', url: '/shop/ (theme: /us/store)', h1: 'All cases', title: 'Shop Waterproof Hard Cases | Hull Cases', meta: 'Browse every Hull case. IP67 waterproof, lifetime warranty. Filter by size and price, and compare internal dimensions before you buy.' },
+        { page: 'Category', url: '/product-category/small-box/, /medium-sized-box/, /a-large-box/, /pull-rod-box/', h1: 'Small cases / Medium cases / Large cases / Wheeled cases', title: 'Small Waterproof Hard Cases | Hull Cases (same pattern per category)', meta: 'Small waterproof hard cases from Hull Cases. Compare internal sizes and order online, shipped from Mira Loma, CA.' },
+        { page: 'Product', url: '/product/d2812/ (keep old slugs)', h1: 'D2812 Waterproof Hard Case', title: 'D2812 Waterproof Hard Case, 9.8 × 7.1 × 3.7 in | Hull Cases', meta: 'D2812: 9.8 × 7.1 × 3.7 in interior, IP67 waterproof polypropylene alloy shell, lifetime warranty. Airline check-in friendly. $6.40.' },
+        { page: 'Custom cases', url: '/custom-products/ (live URL)', h1: 'Custom cases built around your gear', title: 'Custom Foam, Panel & Logo Hard Cases | Hull Cases', meta: 'Get any Hull case with custom foam lining, a custom panel or your logo. Send your gear list and get a quote from our Mira Loma, CA team.' },
+        { page: 'About', url: '/waterproof-hard-cases-with-wheel/', h1: 'Durable waterproof hard cases, engineered to protect your gear', title: 'About Hull Cases | Durable Waterproof Hard Cases', meta: 'For more than a decade, Hull Cases has supplied rugged, waterproof protective cases for industry, fieldwork and travel, from Mira Loma, CA.' },
+        { page: 'FAQ', url: '/faq/ (live)', h1: 'Frequently asked questions', title: 'FAQ: Sizing, Shipping, Returns & Warranty | Hull Cases', meta: 'How to pick the right case size, where we ship, how to track an order, returns within 30 days and our lifetime warranty. Call (833) 236-0699.' },
+        { page: 'Contact + FAQ', url: '/contact-us/', h1: 'Contact us', title: 'Contact Hull Cases | (833) 236-0699', meta: 'Questions about sizing, an order or a custom case? Call (833) 236-0699, email info@hullcases.com or visit 3827 Wacker Dr., Mira Loma, CA.' },
+        { page: 'Blog index', url: '/blogs/ (live)', h1: 'Hard case guides & articles', title: 'Hard Case Guides & Articles | Hull Cases Blog', meta: 'How to choose, pack and travel with a protective case: guides for camera gear, tactical equipment and utility cases from Hull Cases.' },
+        { page: 'Blog post', url: '/blogs/hard-case-for-camera-equipment/ (keep all 3 slugs)', h1: 'Why You Need a Hard Case for Camera Equipment in the U.S', title: 'Hard Cases for Camera Equipment | Hull Cases', meta: 'Why camera gear needs a waterproof hard case, what to look for (IP67, foam, size) and how to fly with it. A guide from Hull Cases.' },
+        { page: 'Policies', url: '/terms-and-conditions/, /return-and-refund-policy/, /privacy-policy/, /disclaimer/', h1: 'Return and Refund Policy (etc.)', title: 'Return and Refund Policy | Hull Cases', meta: 'How returns work at Hull Cases: RMA required, 30-day window, 25% restocking fee on non-defective items, and final-sale items.' },
+        { page: 'Cart / Checkout / Order confirmed / Account', url: '/us/cart, /us/checkout, /us/order/confirmed/[id], /us/account, /us/account/orders', h1: 'Your cart / Checkout / Thanks, your order is in / My account / My orders', title: 'Cart | Hull Cases (etc.)', meta: 'noindex, nofollow. Designed as Cart, Checkout, OrderConfirmed, Account and AccountOrders boards; every header, footer and page button links to its target in Play mode.' }
+      ],
+      notes: [
+        'Set the Medusa region to United States, USD, country code "us". Theme routes are country-prefixed (/us/...).',
+        'Keep /terms-and-conditions/ and /return-and-refund-policy/ at the site root, outside the country prefix (Policy.dc.html template). Same for /privacy-policy/. Map the theme’s /privacy and /terms to these with 301s.',
+        'Shop filter boards: Shop-Small/Medium/Large/Wheeled map to the live /product-category/small-box/, /medium-sized-box/, /a-large-box/, /pull-rod-box/ pages. Shop-Under12, -12-16, -16-20, -Over20 and -Travel are the same Shop template with a filter applied (e.g. /shop/?length=12-16, /shop/?use=travel); set those to noindex or canonical to /shop/.',
+        'Keep every live URL: /shop/, /product/d2812/ etc. (incl. -2 duplicates: merge and 301), /contact-us/, /waterproof-hard-cases-with-wheel/ (About), the 3 /blogs/ posts, both policy pages. Also live: /custom-products/ (custom quote form), /blogs/, the 4 /product-category/ pages. New pages (404 on the live site today, footer links point to the home page): /privacy-policy/, /disclaimer/, /faq/ (its own FAQ page, FAQ.dc.html). Cart, checkout and account come from Medusa.',
+        '21 models, one product page each (Product-Dxxxx boards, all from the Product template): Small D2812, D2816, D3213, D3214, D3215, D3510, D3608, D3617, D3708, D3913, D3915; Medium D4211, D4215, D4218, D4223, D4817, D4821, D5222; Large/Wheeled D5524, D6125, D6530. Specs come from the supplier sheet, prices from the live store. The live store lists D5524, D6125 and D6530 twice (-2 copies in Pull rod box); D6530 shows $33.15 in one and $55.20 in the other. Merge each pair and confirm the price.',
+        'Each live model (D2812, D3213…) is its own product. Either keep one Medusa product per model, with the Size (model) pills linking to sibling models, or make sizes variants: confirm before building.',
+        'Spec table fields: weight, length/width/height (exterior) and material are Medusa product fields. Interior dimensions, foam and hardware go in product metadata.',
+        'The theme ships a Category filter only. Size, price and color filters, sort, Quick add on cards and the rating row need product options or extra queries: confirm scope. If out of scope, hide them and keep Category.',
+        'Product URLs use IDs in the theme (/store/prod_…). Product handles are better for SEO if a small routing change is allowed.',
+        'Social icons (footer, Contact): shown as icons only, with no links, because Hull Cases has no social accounts yet. When the client adds profiles, turn each icon into a link to its profile URL. Hide the reviews strip until at least 3 real reviews exist. Mobile: header collapses under 1100px, layouts stack under 768px (container queries in hull.css; use md:/lg: in Tailwind). Filters become a drawer; product page shows a sticky add-to-cart bar.',
+        'Load Barlow Condensed (600/700/800) and IBM Plex Sans (400–700) from Google Fonts or @fontsource. Footer line: © 2026 by Digital Services Master, with “Digital Services Master” linking to https://digitalservicesmaster.com/ (opens in a new tab).'
+      ],
+      todo: [
+        'Logo as SVG for the build (the design uses a PNG traced from the supplied image; black on light, white on dark).',
+        'Photos: every image slot now uses supplier catalog photos from the “Hull Cases Price” sheet (Yuyao Ding Yang / DY Cases) as stand-ins. The “custom logo” image is a mockup (Hull logo added to a supplier photo). Product thumbnails are low-res. Replace with hi-res Hull photos and get written OK to use supplier images; facility and team photos would strengthen About.',
+        'Categories now match the live store: Small (11), Medium (7), Large (3), Wheeled / pull-rod (3). Confirm color options.',
+        'Product descriptions per model; internal capacity, buoyancy and padlock hole size (blank on the live site).',
+        'PRICES: the live site shows the supplier’s factory price list (e.g. D3213 $11.00, D6530 $55.20) as retail. Set real retail prices before launch. Confirm one product per model vs size variants.',
+        'Shipping: processing time, rates or free-shipping threshold, AK/HI/PO box/APO coverage, pickup hours.',
+        'Warranty: what the lifetime warranty covers and how to claim. The return policy also talks about “manufacturer warranty”: align the two.',
+        'Terms: governing-law state (live page still says “INSERT YOUR BUSINESS LOCATION”) and support@ vs info@ contact email.',
+        'Privacy Policy and Disclaimer text (neither exists yet).',
+        'Business hours, message reply time, social URLs (none found online; suggest reserving @hullcases), the certification behind “certified quality”, Years Experience number, founder story (optional).',
+        'Custom service: what a custom panel is, logo method, foam types, minimums, quote turnaround, proof step, lead time, pricing, upload limits.',
+        'Current promos and terms; newsletter frequency; blog article bodies, author and read time; real reviews (live testimonials and blog bodies are lorem ipsum).'
+      ],
+      groups: [
+        { name: 'Global', items: ['AnnouncementBar', 'SiteHeader', 'MegaMenu', 'MobileNavDrawer', 'SearchField', 'CartButton', 'SiteFooter', 'SocialLinks', 'NewsletterForm', 'Breadcrumbs'] },
+        { name: 'Primitives', items: ['Button', 'IconButton', 'Badge', 'Chip', 'FormField', 'Input / Select / Textarea', 'Checkbox / Radio', 'Alert', 'Accordion / AccordionItem', 'Drawer'] },
+        { name: 'Commerce', items: ['ProductCard', 'ProductGrid', 'PriceDisplay', 'RatingStars', 'StockStatus', 'QuantityStepper', 'VariantOptionGroup', 'ColorSwatch', 'Pagination', 'DataTable', 'SpecTable'] },
+        { name: 'Layout & media', items: ['PageHeader', 'DarkHero', 'SectionHeading', 'ImagePlaceholder', 'CornerFrame', 'CTABand', 'EmptyState'] },
+        { name: 'Home', items: ['HomeHero', 'TrustBar', 'CategoryGrid / CategoryTile', 'FeaturedProducts', 'WhyHullGrid / FeatureItem', 'PromoBanner', 'UseCaseGrid / UseCaseCard', 'ReviewsStrip / ReviewCard', 'BlogStrip / PostCard', 'FaqTeaser', 'NewsletterBand'] },
+        { name: 'Blog & custom', items: ['BlogFeatured', 'PostGrid', 'ArticleLayout', 'ArticleMeta', 'ProductCallout', 'ShareLinks', 'RelatedPosts', 'CustomOptionGrid', 'ProcessSteps', 'QuoteForm', 'FileUpload'] },
+        { name: 'Shop & product', items: ['FilterPanel / FilterGroup', 'FilterOptionLink', 'ActiveFilterChip', 'FilterDrawer (mobile)', 'ShopToolbar', 'ActiveFilters', 'SortSelect', 'ProductGallery', 'ProductBuyBox', 'TrustList', 'ProductInfoAccordion', 'KeySpecsGrid', 'ProductDetails', 'CustomServiceStrip', 'RelatedProducts', 'StickyAddToCart'] },
+        { name: 'About & contact', items: ['StorySplit', 'FacilityFacts', 'FacilityPhotoGrid', 'PromiseGrid / PromiseItem', 'ContactForm', 'ContactCard', 'SocialBlock', 'MapEmbed', 'FaqGroups', 'FaqTopicNav', 'FaqHelpCard'] },
+        { name: 'Cart & policy', items: ['CartDrawer', 'CartLineItem', 'CartSummary', 'CartEmpty', 'PolicyLayout', 'TableOfContents', 'TocAccordion (mobile)', 'Prose', 'PolicyContactBox'] },
+        { name: 'Checkout & account', items: ['CartPage', 'CheckoutHeader', 'CheckoutForm (contact, address, delivery, payment)', 'DeliveryOption', 'OrderSummary', 'OrderConfirmation', 'AuthTabs (sign in / create account)', 'AccountNav', 'OrderHistoryTable'] }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

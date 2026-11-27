@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ProductCard — new, low stock</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div style="width: 320px; height: 560px; background: #FFFFFF">
+<dc-import name="ProductCard" product="{{p}}" hint-size="320px,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":320,"height":560}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return { p: { title: 'D3913 Waterproof Hard Case', price: '$12.90', badge: 'New', badgeKind: 'new', stock: 'low', shot: 'product, front ¾ view, white sweep' } };
+  }
+}
+</script>
+</body>
+</html>

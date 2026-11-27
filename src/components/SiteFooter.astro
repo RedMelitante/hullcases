@@ -1,0 +1,66 @@
+---
+// SiteFooter + SocialLinks + NewsletterForm (design/source/SiteFooter.dc.html)
+import Icon from './Icon.astro';
+import { ROUTES, SITE } from '../data/site';
+const icoStyle = 'width: 20px; height: 20px';
+---
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr-grid">
+      <div class="stack" style="gap: 18px">
+        <a class="logo" href={ROUTES.home}><img class="logo-img" src="/images/logo-white.png" alt="Hull Cases home" width="190" height="45" style="height: 45px" loading="lazy" /></a>
+        <p class="body" style="max-width: 22rem">Waterproof polypropylene hard cases with a lifetime warranty, shipped from Mira Loma, California to customers across the US.</p>
+        <!-- Icons only until Hull Cases sets up its social accounts; then turn each into a link. -->
+        <div class="social">
+          <span role="img" aria-label="Facebook"><Icon name="facebook" strokeWidth={1.8} /></span>
+          <span role="img" aria-label="Instagram"><Icon name="instagram" strokeWidth={1.8} /></span>
+          <span role="img" aria-label="YouTube"><Icon name="youtube" strokeWidth={1.8} /></span>
+        </div>
+      </div>
+      <div>
+        <h3>Quick links</h3>
+        <ul>
+          <li><a href={ROUTES.shop}>Shop all cases</a></li>
+          <li><a href={ROUTES.custom}>Custom cases</a></li>
+          <li><a href={ROUTES.about}>About us</a></li>
+          <li><a href={ROUTES.blog}>Blog</a></li>
+          <li><a href={ROUTES.contact}>Contact us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Useful links</h3>
+        <ul>
+          <li><a href={ROUTES.privacy}>Privacy Policy</a></li>
+          <li><a href={ROUTES.terms}>Terms and Conditions</a></li>
+          <li><a href={ROUTES.returns}>Return and Refund Policy</a></li>
+          <li><a href={ROUTES.disclaimer}>Disclaimer</a></li>
+          <li><a href={ROUTES.faq}>FAQ</a></li>
+          <li><a href={ROUTES.contact}>Support</a></li>
+        </ul>
+      </div>
+      <div class="stack" style="gap: 24px">
+        <div>
+          <h3>Contact</h3>
+          <ul style="gap: 4px">
+            <li><a href={SITE.mapsHref} target="_blank" rel="noopener" style="align-items: flex-start; gap: 10px"><Icon name="pin" class="ico" style={`${icoStyle}; margin-top: 7px`} /><span>3827 Wacker Dr.<br />Mira Loma, CA 91752</span></a></li>
+            <li><a href={SITE.phoneHref} style="gap: 10px"><Icon name="phone" class="ico" style={icoStyle} />{SITE.phone}</a></li>
+            <li><a href={SITE.emailHref} style="gap: 10px"><Icon name="mail" class="ico" style={icoStyle} />{SITE.email}</a></li>
+          </ul>
+        </div>
+        <form class="stack" style="gap: 8px" data-form="newsletter" data-form-name="Footer newsletter" novalidate>
+          <label class="label" for="ftr-email" style="color: #FFFFFF">Restock and new-case emails</label>
+          <div class="ftr-news" data-form-fields>
+            <input id="ftr-email" name="email" class="input" type="email" placeholder="you@example.com" autocomplete="email" required />
+            <button class="btn btn-primary btn-sm" type="submit">Subscribe</button>
+          </div>
+          <p class="body" style="margin: 0; color: #FFFFFF" role="status" data-form-success hidden>Thanks, you’re on the list.</p>
+          <p class="err" data-form-error hidden></p>
+        </form>
+      </div>
+    </div>
+    <div class="ftr-base">
+      <span>© 2026 by <a href="https://digitalservicesmaster.com/" target="_blank" rel="noopener" style="text-decoration: underline; text-underline-offset: 3px">Digital Services Master</a></span>
+      <span>Prices in USD · Ships within the US</span>
+    </div>
+  </div>
+</footer>

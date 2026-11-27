@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Blog post</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page">
+<dc-import name="SiteHeader" cart-count="2" active="blog" hint-size="100%,124px"></dc-import>
+<main>
+<article>
+<header class="wrap" style="max-width: 960px">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="Main.dc.html">Home</a><span aria-hidden="true">/</span><a href="Blog.dc.html">Blog</a><span aria-hidden="true">/</span><span aria-current="page">{{a.crumb}}</span></nav>
+<div class="stack" style="gap: 16px; padding: 16px 0 40px">
+<span class="eyebrow">{{a.eyebrow}}</span>
+<h1 class="h1" style="text-transform: none">{{a.title}}</h1>
+<div class="row" style="gap: 12px; flex-wrap: wrap; color: #4A5159">
+<span>December 2, 2025</span><span aria-hidden="true">·</span><span>Hull Cases</span><span aria-hidden="true">·</span><span>{{a.read}}</span>
+</div>
+</div>
+</header>
+<div class="wrap" style="max-width: 1120px">
+<div class="corners"><img src="{{a.hero}}" alt="{{a.heroAlt}}" style="display: block; width: 100%; aspect-ratio: 21/9; object-fit: {{a.fit}}; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4; box-sizing: border-box"></div>
+</div>
+
+<div class="wrap" style="max-width: 800px; padding-top: 56px; padding-bottom: 72px">
+<div class="prose">
+<p class="lead" style="font-size: 20px; margin-bottom: 28px">{{a.lead}}</p>
+<p>{{a.intro}}</p>
+<sc-for list="{{a.sections}}" as="sec" hint-placeholder-count="4">
+<h2 id="{{sec.id}}">{{sec.h}}</h2>
+<sc-if value="{{sec.p}}" hint-placeholder-val="{{ true }}"><p>{{sec.p}}</p></sc-if>
+<sc-if value="{{sec.hasList}}" hint-placeholder-val="{{ false }}"><ul><sc-for list="{{sec.list}}" as="li" hint-placeholder-count="3"><li>{{li}}</li></sc-for></ul></sc-if>
+<sc-if value="{{sec.callout}}" hint-placeholder-val="{{ false }}">
+<aside class="row" style="gap: 20px; align-items: center; padding: 20px; margin: 32px 0; border: 1.5px solid #16181B; border-radius: 8px; flex-wrap: wrap">
+<img src="/_blob/8bbebc0769d55ffe8249643ef2e4c7c4" alt="Open case with custom-cut foam" style="width: 120px; height: 120px; object-fit: cover; border-radius: 4px; flex: none">
+<div class="stack" style="gap: 4px; flex: 1 1 220px">
+<span class="eyebrow" style="font-size: 14px">Custom foam interiors</span>
+<strong style="font-size: 19px">{{a.calloutTitle}}</strong>
+<span class="muted" style="font-size: 16px">IP67 · polypropylene alloy · lifetime warranty</span>
+</div>
+<a class="btn btn-primary btn-sm" href="CustomCases.dc.html">Request a quote</a>
+</aside>
+</sc-if>
+</sc-for>
+<h2 id="summary">The bottom line</h2>
+<p>{{a.bottom}} <a class="link" href="Shop.dc.html">Browse Hull cases</a> by size, or <a class="link" href="Contact.dc.html">ask us</a> which model fits your gear.</p>
+</div>
+
+<div class="row" style="gap: 12px; flex-wrap: wrap; align-items: center; padding-top: 32px; margin-top: 40px; border-top: 1px solid #DDE0E4">
+<span style="font-weight: 600">Share this article</span>
+<a class="icon-btn" style="border: 1.5px solid #8A919A" href="{{shareFb}}" aria-label="Share on Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg></a>
+<a class="icon-btn" style="border: 1.5px solid #8A919A" href="{{shareX}}" aria-label="Share on X"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l16 16M20 4 4 20"/></svg></a>
+<a class="icon-btn" style="border: 1.5px solid #8A919A" href="{{shareMail}}" aria-label="Share by email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg></a>
+<button class="btn btn-ghost btn-sm" type="button" onClick="{{copy}}">{{copyLabel}}</button>
+</div>
+</div>
+</article>
+
+<section class="section bg-steel">
+<div class="wrap stack" style="gap: 32px">
+<div class="row" style="justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-end">
+<h2 class="h2">Shop waterproof cases</h2>
+<a class="link" href="Shop.dc.html">Shop all cases</a>
+</div>
+<div class="g4">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="4">
+<dc-import name="ProductCard" product="{{p}}" hint-size="100%,430px"></dc-import>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap stack" style="gap: 28px">
+<h2 class="h2">Keep reading</h2>
+<div class="g2" style="gap: 28px">
+<sc-for list="{{related}}" as="b" hint-placeholder-count="2">
+<a href="{{b.href}}" class="row" style="gap: 20px; text-decoration: none; border: 1px solid #DDE0E4; border-radius: 8px; padding: 16px; align-items: center">
+<img src="{{b.img}}" alt="" style="width: 120px; aspect-ratio: 4/3; object-fit: contain; border-radius: 4px; flex: none; background: #FFFFFF; border: 1px solid #DDE0E4">
+<div class="stack" style="gap: 6px; min-width: 0">
+<span class="t-sm muted">December 2, 2025</span>
+<h3 class="h4" style="font-size: 19px; line-height: 1.3">{{b.title}}</h3>
+<span class="link" style="font-size: 16px">Read article</span>
+</div>
+</a>
+</sc-for>
+</div>
+</div>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"post":{"editor":"enum","options":["camera","tactical","utility"],"default":"camera"},"$preview":{"width":1440,"height":4300}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { copied: false }; }
+  renderVals() {
+    const POSTS = {
+      camera: { slug: 'hard-case-for-camera-equipment', href: 'BlogPost.dc.html', crumb: 'Hard case for camera equipment', eyebrow: 'Photo & video', read: '4 min read',
+        title: 'Why You Need a Hard Case for Camera Equipment in the U.S', hero: '/_blob/ae4c9cfe4c807c4fde9897395465501a', fit: 'contain', heroAlt: 'Open hard case with foam interior, ready for a camera kit', thumb: '/_blob/ae4c9cfe4c807c4fde9897395465501a',
+        lead: 'Hard cases are purpose-built to protect cameras, lenses and accessories, making transport simpler and stress-free.',
+        intro: 'A soft camera bag is fine for a walk around town. But once your gear goes in a car trunk, a truck bed, a plane’s cargo hold or a muddy location, a hard case is the safer choice. Here’s what it protects against and how to choose one.',
+        sections: [
+          { id: 'why', h: 'Why camera gear needs a hard case', p: 'Most damage happens in transit, not during a shoot. Bags get dropped, stacked under heavier luggage, left in the rain or set down in dust and sand. A rigid shell takes those knocks instead of your camera, and a sealed lid keeps water and grit away from sensors and lens elements.' },
+          { id: 'look', h: 'What to look for', list: ['Waterproof sealing: look for an IP67 rating, which means dust-tight and protected against temporary immersion. Hull cases are rated IP67.', 'A tough shell that handles heat and cold: Hull cases use a polypropylene alloy rated from −40 °F to 210 °F.', 'Foam that holds each body and lens in place, so nothing knocks together. Custom foam interiors are available.', 'A size that works for how you travel, whether that’s airline check-in, carry-on or the back of a vehicle.'], callout: true },
+          { id: 'size', h: 'Choosing the right size', p: 'Lay out everything you carry on a shoot: bodies with lenses attached, spare lenses, batteries, chargers and cards. Measure the arrangement (length × width × height), then compare it with the internal size listed on each Hull product page. Each page also shows the lid and base depths, so you can check that your tallest item fits.' },
+          { id: 'travel', h: 'Flying with camera gear', p: 'Hull cases are suitable for airline check-in, and the smaller sizes fit common carry-on limits. Airline size and weight rules vary, and spare lithium batteries usually have to travel in the cabin, so always check your airline’s rules before you fly.' }
+        ],
+        calloutTitle: 'Get foam cut around your camera kit',
+        bottom: 'If your camera gear travels, a waterproof hard case is cheap insurance for an expensive kit.',
+        products: ['D3213', 'D3913', 'D4223', 'D4821'] },
+      tactical: { slug: 'tacical-equipment-cases', href: 'BlogPost-Tactical.dc.html', crumb: 'Tactical equipment cases', eyebrow: 'Tactical & field work', read: '4 min read',
+        title: 'Why Tactical Equipment Cases Are Essential for Professionals in the Field', hero: '/_blob/121058b863c76eb858caa4999c42a6c2', fit: 'cover', heroAlt: 'Two tall black hard cases standing outdoors', thumb: '/_blob/acd1358e14ad3ea879957da803ae6f18',
+        lead: 'The right protective case helps prevent costly damage, streamline operations and give professionals peace of mind in the field.',
+        intro: 'Field equipment lives a hard life: truck beds, wet ground, dust, heat and constant loading and unloading. A case that can’t keep up turns every trip into a risk. Here’s what to look for in a case built for field work.',
+        sections: [
+          { id: 'field', h: 'What field work does to equipment', p: 'Vibration on rough roads loosens and scuffs gear. Rain, spray and wet ground get into soft bags. Heat in a parked vehicle and cold at dawn stress materials. And every load-in and load-out is another chance for a drop.' },
+          { id: 'ready', h: 'What makes a case field-ready', list: ['Sealed against water and dust: Hull cases are rated IP67.', 'A shell that handles temperature swings: polypropylene alloy rated from −40 °F to 210 °F.', 'Foam that locks each item in place, so nothing rattles loose. Custom foam interiors are available.', 'Wheels and a pull handle on the larger cases (D5524, D6125 and D6530) for heavy kits.'], callout: true },
+          { id: 'organize', h: 'Organize the kit, not just protect it', p: 'A custom foam layout gives every tool or device its own cutout. That makes it obvious when something is missing before you leave, and quicker to find what you need on site. Hull Cases offers custom foam, custom panels and logo printing on its cases.' },
+          { id: 'size', h: 'Choosing a size', p: 'List everything that goes in the case and measure it laid out together. Compare that with the internal size on each product page, and check the lid and base depths for your tallest item. Hull’s range runs from compact cases about 10 inches long inside to wheeled cases with more than 23 inches of interior length.' }
+        ],
+        calloutTitle: 'Get foam cut around your field kit',
+        bottom: 'In the field, a case is part of the equipment. Choose one that’s sealed, tough and laid out for the job.',
+        products: ['D4821', 'D5222', 'D5524', 'D6530'] },
+      utility: { slug: 'hard-utility-case-in-u-s', href: 'BlogPost-Utility.dc.html', crumb: 'Waterproof utility cases', eyebrow: 'Tools & trades', read: '3 min read',
+        title: 'Waterproof Hard Utility Cases in the U.S: Why They’re Worth the Investment', hero: '/_blob/e8cbfef15e59a4b07b10e4ecc9374943', fit: 'contain', heroAlt: 'Yellow and black Hull hard cases stacked', thumb: '/_blob/e8cbfef15e59a4b07b10e4ecc9374943',
+        lead: 'What makes a waterproof utility case worth the money, and how to pick one for your tools and gear.',
+        intro: 'A utility case is the box you throw in the truck every day: tools, meters, parts, chargers. It doesn’t need to be fancy, but it does need to keep water out and survive being knocked around.',
+        sections: [
+          { id: 'cost', h: 'What it costs when a case fails', p: 'Water in a toolbox means rusted tools and dead batteries. A cracked lid can mean a lost part or a damaged meter. Replacing even one piece of equipment usually costs more than a good case.' },
+          { id: 'look', h: 'What to look for', list: ['A real waterproof rating: Hull cases are rated IP67, dust-tight and protected against temporary immersion.', 'A tough polypropylene alloy shell rated from −40 °F to 210 °F.', 'Interior space that matches your kit, with dimensions listed for every model.', 'A size you can carry comfortably, or wheels for heavier loads.'], callout: true },
+          { id: 'which', h: 'Small, medium or wheeled?', p: 'Hull’s small cases suit meters, hand tools and small parts. Medium cases fit power tools and larger kits. The large wheeled cases (D5524, D6125 and D6530) are for heavy gear you’d rather roll than carry.' }
+        ],
+        calloutTitle: 'Get foam cut around your tools',
+        bottom: 'A waterproof utility case pays for itself the first time it keeps your tools dry.',
+        products: ['D3608', 'D4215', 'D4218', 'D6125'] }
+    };
+    const key = this.props.post ?? 'camera';
+    const a = POSTS[key] || POSTS.camera;
+    a.sections = a.sections.map((s) => ({ ...s, hasList: !!(s.list && s.list.length), p: s.p || '', callout: !!s.callout }));
+    const url = 'https://hullcases.com/blogs/' + a.slug + '/';
+    const enc = encodeURIComponent;
+    const PRICE = { D3213: '$11.00', D3913: '$12.90', D4223: '$18.90', D4821: '$21.10', D5222: '$23.40', D5524: '$33.20', D6530: '$55.20', D3608: '$9.80', D4215: '$16.40', D4218: '$19.90', D6125: '$41.70' };
+    return {
+      a: a,
+      shareFb: 'https://www.facebook.com/sharer/sharer.php?u=' + enc(url),
+      shareX: 'https://twitter.com/intent/tweet?url=' + enc(url) + '&text=' + enc(a.title),
+      shareMail: 'mailto:?subject=' + enc(a.title) + '&body=' + enc(url),
+      copy: () => this.setState({ copied: true }),
+      copyLabel: this.state.copied ? 'Link copied' : 'Copy link',
+      products: a.products.map((m) => ({ title: m + ' Waterproof Hard Case', price: PRICE[m], code: m, shot: m })),
+      related: Object.keys(POSTS).filter((k) => k !== key).map((k) => ({ title: POSTS[k].title, href: POSTS[k].href, img: POSTS[k].thumb }))
+    };
+  }
+}
+</script>
+</body>
+</html>

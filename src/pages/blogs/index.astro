@@ -1,0 +1,79 @@
+---
+// Blog index (design/source/Blog.dc.html) at the live URL /blogs/
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { POST_BY_KEY, postUrl } from '../../data/posts';
+import { ROUTES } from '../../data/site';
+
+const feat = POST_BY_KEY.camera;
+const rest = [POST_BY_KEY.tactical, POST_BY_KEY.utility];
+---
+<BaseLayout
+  title="Hard Case Guides & Articles | Hull Cases Blog"
+  description="How to choose, pack and travel with a protective case: guides for camera gear, tactical equipment and utility cases from Hull Cases."
+  active="blog"
+  image="/images/open-case-foam.jpg"
+>
+  <main id="main">
+    <section class="bg-steel" style="border-bottom: 1px solid #DDE0E4">
+      <div class="wrap" style="padding-bottom: 40px">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href={ROUTES.home}>Home</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span></nav>
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <h1 class="h1">Hard case guides &amp; articles</h1>
+          <p class="lead">How to choose, pack and travel with a protective case, from the team at Hull Cases in Mira Loma, California.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap stack" style="gap: 56px">
+        <!-- FEATURED -->
+        <a href={postUrl(feat)} class="g2" style="gap: 40px; align-items: center; text-decoration: none">
+          <div class="corners"><img src={feat.hero} alt={feat.heroAlt} style="display: block; width: 100%; aspect-ratio: 16/10; object-fit: contain; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4; padding: 4%; box-sizing: border-box" /></div>
+          <div class="stack" style="gap: 14px">
+            <span class="badge badge-new" style="align-self: flex-start">Latest</span>
+            <span class="t-sm muted"><time datetime={feat.isoDate}>{feat.date}</time> · Hull Cases</span>
+            <h2 class="h2" style="text-transform: none; font-size: 40px">{feat.title}</h2>
+            <p class="lead">{feat.lead}</p>
+            <span class="btn btn-primary" style="align-self: flex-start">Read article</span>
+          </div>
+        </a>
+
+        <!-- GRID -->
+        <div class="stack" style="gap: 24px">
+          <h2 class="h3" style="text-transform: uppercase">More articles</h2>
+          <div class="g3" style="gap: 28px">
+            {rest.map((b) => (
+              <a href={postUrl(b)} class="stack" style="gap: 14px; text-decoration: none; border: 1px solid #DDE0E4; border-radius: 8px; overflow: hidden">
+                <img src={b.thumb} alt="" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #FFFFFF; border-bottom: 1px solid #DDE0E4" />
+                <div class="stack" style="gap: 10px; padding: 4px 24px 26px">
+                  <span class="t-sm muted"><time datetime={b.isoDate}>{b.date}</time></span>
+                  <h3 class="h4" style="font-size: 21px; line-height: 1.3">{b.title}</h3>
+                  <p class="body muted">{b.excerpt}</p>
+                  <span class="link" style="font-size: 16px">Read article</span>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-sm tex-plate" style="color: #FFFFFF">
+      <div class="wrap g2" style="gap: 40px; align-items: center">
+        <div class="stack" style="gap: 10px">
+          <h2 class="h2">New guides in your inbox</h2>
+          <p class="lead">Packing tips, sizing help and new cases from Hull Cases.</p>
+        </div>
+        <form class="stack" style="gap: 10px" data-form="newsletter" data-form-name="Blog newsletter" novalidate>
+          <label class="label" for="blog-email" style="color: #FFFFFF">Email address</label>
+          <div class="row" style="gap: 10px; flex-wrap: wrap">
+            <input id="blog-email" name="email" class="input" type="email" placeholder="you@example.com" autocomplete="email" required style="flex: 1 1 240px" />
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </div>
+          <p class="body" style="margin: 0; font-weight: 600; color: #FFFFFF" role="status" data-form-success hidden>Thanks, you’re on the list.</p>
+          <p class="err" data-form-error hidden></p>
+        </form>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

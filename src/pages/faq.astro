@@ -1,0 +1,49 @@
+---
+// FAQ (design/source/FAQ.dc.html), new page at /faq/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Acc from '../components/Acc.astro';
+import { FAQ_GROUPS } from '../data/faq';
+import { ROUTES, SITE } from '../data/site';
+---
+<BaseLayout
+  title="FAQ: Sizing, Shipping, Returns & Warranty | Hull Cases"
+  description="How to pick the right case size, where we ship, how to track an order, returns within 30 days and our lifetime warranty. Call (833) 236-0699."
+>
+  <main id="main">
+    <section class="bg-steel" style="border-bottom: 1px solid #DDE0E4">
+      <div class="wrap" style="padding-bottom: 40px">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href={ROUTES.home}>Home</a><span aria-hidden="true">/</span><span aria-current="page">FAQ</span></nav>
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <h1 class="h1">Frequently asked questions</h1>
+          <p class="lead">Answers about sizing, shipping, returns and warranty. Can’t find what you need? Our team is happy to help.</p>
+        </div>
+        <nav class="row" aria-label="FAQ topics" style="gap: 10px; flex-wrap: wrap; margin-top: 24px">
+          {FAQ_GROUPS.map((g) => <a class="btn btn-ghost btn-sm" href={`#${g.id}`}>{g.title}</a>)}
+        </nav>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap g2 g2-l" style="gap: 64px; align-items: start">
+        <div class="stack" style="gap: 48px">
+          {FAQ_GROUPS.map((g, gi) => (
+            <section id={g.id} class="stack" style="gap: 8px; scroll-margin-top: 24px">
+              <h2 class="h3" style="margin-bottom: 8px">{g.title}</h2>
+              <div class="stack">
+                {g.items.map((it, i) => <Acc q={it.q} html={it.a} open={gi === 0 && i === 0} />)}
+              </div>
+            </section>
+          ))}
+        </div>
+        <aside class="stack sticky-d tex-plate" style="color: #FFFFFF; gap: 16px; padding: 32px; border-radius: 8px">
+          <p class="eyebrow">Still have questions?</p>
+          <h2 class="h3">Talk to the Hull Cases team</h2>
+          <p style="margin: 0; color: #B8BEC6">Send us your gear measurements and we’ll help you pick the right case.</p>
+          <a class="btn btn-primary btn-block" href={ROUTES.contact}>Contact us</a>
+          <a class="btn btn-ghost-light btn-block" href={SITE.phoneHref}>Call {SITE.phone}</a>
+          <a class="link" href={SITE.emailHref} style="color: #FFFFFF">{SITE.email}</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

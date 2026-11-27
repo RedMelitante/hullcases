@@ -1,0 +1,46 @@
+---
+// OrderConfirmation (design/source/OrderConfirmed.dc.html)
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { ROUTES, SITE } from '../../../data/site';
+---
+<BaseLayout title="Thanks, your order is in | Hull Cases" description="Your Hull Cases order confirmation." noindex>
+  <main id="main" class="wrap" style="padding-top: 64px; padding-bottom: 96px; max-width: 880px" data-order-page>
+    <div class="stack" style="gap: 16px; align-items: flex-start">
+      <span class="badge badge-stock"><span class="dot"></span>Order placed</span>
+      <h1 class="h1">Thanks, your order is in</h1>
+      <p class="lead">We’ve emailed your order confirmation. Your cases ship from our Mira Loma, California facility, and you’ll get a tracking link by email when your order ships.</p>
+    </div>
+    <div class="stack" style="gap: 14px; margin-top: 40px; padding: 28px; border: 1px solid #DDE0E4; border-radius: 8px" data-order-box hidden>
+      <div class="row" style="justify-content: space-between; flex-wrap: wrap; gap: 8px"><h2 class="h3" data-order-id></h2><span class="muted" data-order-date></span></div>
+      <div class="stack" style="gap: 14px" data-order-lines></div>
+      <div class="row" style="justify-content: space-between; border-top: 2px solid #16181B; padding-top: 14px"><span style="font-weight: 700">Total (USD)</span><span class="price" data-order-total></span></div>
+    </div>
+    <div class="row" style="gap: 12px; flex-wrap: wrap; margin-top: 32px">
+      <a class="btn btn-primary" href={ROUTES.shop}>Continue shopping</a>
+      <a class="btn btn-ghost" href={ROUTES.accountOrders}>View my orders</a>
+    </div>
+    <p class="body muted" style="margin-top: 24px">Questions about your order? Call <a class="link" href={SITE.phoneHref}>{SITE.phone}</a> or email <a class="link" href={SITE.emailHref}>{SITE.email}</a>.</p>
+  </main>
+</BaseLayout>
+
+<script>
+  import { getOrders, money } from '../../../scripts/cart';
+  import { BY_MODEL, productTitle, productUrl } from '../../../data/products';
+  import { esc } from '../../../scripts/ui';
+
+  const root = document.querySelector<HTMLElement>('[data-order-page]')!;
+  const id = new URLSearchParams(location.search).get('order');
+  const order = getOrders().find((o) => o.id === id) ?? null;
+  if (order) {
+    root.querySelector<HTMLElement>('[data-order-box]')!.hidden = false;
+    root.querySelector('[data-order-id]')!.textContent = `Order #${order.id}`;
+    root.querySelector('[data-order-date]')!.textContent = new Date(order.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    root.querySelector('[data-order-lines]')!.innerHTML = order.lines
+      .filter((l) => BY_MODEL[l.m])
+      .map(
+        (l) => `<div class="row" style="gap: 14px"><img src="${BY_MODEL[l.m].img}" alt="" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain; padding: 4px; box-sizing: border-box; border: 1px solid #DDE0E4; border-radius: 4px"><a href="${productUrl(l.m)}" style="flex: 1; font-weight: 600; text-decoration: none">${esc(productTitle(l.m))} · Qty ${l.qty}</a><span class="num">${money(l.unit * l.qty)}</span></div>`,
+      )
+      .join('');
+    root.querySelector('[data-order-total]')!.textContent = money(order.subtotal);
+  }
+</script>

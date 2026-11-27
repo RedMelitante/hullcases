@@ -1,0 +1,246 @@
+---
+// Product page template, one per model at the live slugs /product/d2812/ … (design/source/Product.dc.html)
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Icon from '../../components/Icon.astro';
+import Acc from '../../components/Acc.astro';
+import { PRODUCTS, BEST_SELLER, card, cents, productTitle, productUrl, type Product } from '../../data/products';
+import { CATEGORY_HREF, CATEGORY_NAME, ROUTES, SITE } from '../../data/site';
+
+export const getStaticPaths = (() =>
+  PRODUCTS.map((p) => ({ params: { slug: p.m.toLowerCase() }, props: { p } }))) satisfies GetStaticPaths;
+
+const { p } = Astro.props as { p: Product };
+const same = PRODUCTS.filter((d) => d.cat === p.cat);
+const byClose = same.slice().sort((a, b) => Math.abs(a.vol - p.vol) - Math.abs(b.vol - p.vol));
+const sizes = byClose
+  .slice(0, 6)
+  .sort((a, b) => (a.m < b.m ? -1 : 1))
+  .map((d) => ({ m: d.m, href: productUrl(d.m), on: d.m === p.m }));
+let rel = byClose.filter((d) => d.m !== p.m);
+if (rel.length < 4)
+  rel = rel.concat(PRODUCTS.filter((d) => d.cat !== p.cat).sort((a, b) => Math.abs(a.vol - p.vol) - Math.abs(b.vol - p.vol))).slice(0, 4);
+const related = rel.slice(0, 4).map((d) => card(d.m));
+
+const word = p.cat === 'small' ? 'compact' : p.cat === 'medium' ? 'mid-size' : 'large';
+const title = productTitle(p.m);
+const catName = CATEGORY_NAME[p.cat];
+const catHref = CATEGORY_HREF[p.cat];
+const isBest = p.m === BEST_SELLER;
+const summary = `A ${word} waterproof case with a ${p.inside} interior. Polypropylene alloy shell, IP67 rated and backed by a lifetime warranty${p.wheels ? ', with a pull handle and wheels.' : '.'}`;
+const about = `The ${p.m} gives you ${p.inside} of interior space, split between a ${p.base} in deep base and a ${p.lid} in deep lid. It weighs ${p.lb} lb empty${p.wheels ? ' and rolls on built-in wheels with a pull handle.' : '.'}`;
+const airlineLine = p.carry
+  ? 'Sized for airline check-in or carry-on (check your airline first)'
+  : 'Suitable for airline check-in (check your airline first)';
+const airlineSpec = p.carry ? 'Check-in: yes · Carry-on: fits 22 × 14 × 9 in*' : 'Check-in: yes · Carry-on: too large for most airlines*';
+
+const seoTitle = `${title}, ${p.inside} | Hull Cases`;
+const meta = `${p.m}: ${p.inside} interior, IP67 waterproof polypropylene alloy shell, lifetime warranty. Airline check-in friendly. ${p.price}.`;
+
+const url = new URL(productUrl(p.m), Astro.site).href;
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: title,
+    sku: p.m,
+    mpn: p.m,
+    image: new URL(p.img, Astro.site).href,
+    description: summary,
+    brand: { '@type': 'Brand', name: 'Hull Cases' },
+    category: catName,
+    material: 'Polypropylene alloy',
+    weight: { '@type': 'QuantitativeValue', value: p.lb, unitCode: 'LBR' },
+    offers: {
+      '@type': 'Offer',
+      url,
+      priceCurrency: 'USD',
+      price: (cents(p) / 100).toFixed(2),
+      availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
+      seller: { '@type': 'Organization', name: 'Hull Cases' },
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
+      { '@type': 'ListItem', position: 2, name: 'Shop', item: new URL(ROUTES.shop, Astro.site).href },
+      { '@type': 'ListItem', position: 3, name: catName, item: new URL(catHref, Astro.site).href },
+      { '@type': 'ListItem', position: 4, name: p.m, item: url },
+    ],
+  },
+];
+const specCell = 'padding: 12px 14px; background: #F5F6F7; border-radius: 4px';
+---
+<BaseLayout title={seoTitle} description={meta} active="shop" image={p.img} ogType="product" jsonLd={jsonLd}>
+  <main id="main" data-product={p.m}>
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb"><a href={ROUTES.home}>Home</a><span aria-hidden="true">/</span><a href={ROUTES.shop}>Shop</a><span aria-hidden="true">/</span><a href={catHref}>{catName}</a><span aria-hidden="true">/</span><span aria-current="page">{p.m}</span></nav>
+
+      <section class="g2 g2-l" style="gap: 64px; align-items: start; padding-bottom: 72px">
+        <!-- GALLERY -->
+        <div class="stack sticky-d" style="gap: 12px">
+          <div style="aspect-ratio: 1/1; border-radius: 8px; border: 1px solid #DDE0E4; background: #FFFFFF; display: flex; align-items: center; justify-content: center; position: relative">
+            <img src={p.img} alt={`${title}, front three-quarter view`} fetchpriority="high" style="width: 72%; height: auto; max-height: 80%; object-fit: contain; display: block" />
+          </div>
+        </div>
+
+        <!-- BUY BOX -->
+        <div class="stack" style="gap: 22px">
+          <div class="stack" style="gap: 12px">
+            <div class="row" style="gap: 8px; flex-wrap: wrap">
+              {isBest && <span class="badge badge-new">Best seller</span>}
+              {p.wheels && <span class="badge badge-new">Wheels + pull handle</span>}
+              <span class="badge badge-stock"><span class="dot"></span>IP67</span>
+            </div>
+            <h1 class="h1">{title}</h1>
+            <div class="row" style="gap: 12px; align-items: baseline"><span class="price" style="font-size: 34px">{p.price}</span></div>
+            <p class="body muted" style="font-size: 17px">{summary}</p>
+            <dl class="g3" style="gap: 10px; margin: 0">
+              <div class="stack" style={`gap: 2px; ${specCell}`}><dt class="t-sm muted">Internal</dt><dd class="num" style="margin: 0; font-weight: 600">{p.inside}</dd></div>
+              <div class="stack" style={`gap: 2px; ${specCell}`}><dt class="t-sm muted">Overall</dt><dd class="num" style="margin: 0; font-weight: 600">{p.overall}</dd></div>
+              <div class="stack" style={`gap: 2px; ${specCell}`}><dt class="t-sm muted">Weight</dt><dd class="num" style="margin: 0; font-weight: 600">{p.lb} lb</dd></div>
+            </dl>
+          </div>
+
+          <div class="stack" style="gap: 10px">
+            <div class="row" style="justify-content: space-between"><span class="label" id="sizes-label">Similar sizes in {catName}</span><a class="link" href={ROUTES.contact} style="font-size: 15px">Sizing help</a></div>
+            <div class="opts" role="group" aria-labelledby="sizes-label">
+              {sizes.map((s) => <a class={s.on ? 'opt is-on' : 'opt'} href={s.href} aria-current={s.on ? 'page' : undefined}>{s.m}</a>)}
+            </div>
+            <span class="help">Each size is its own model with its own internal dimensions.</span>
+          </div>
+
+          <div class="row" style="gap: 10px"><span class="badge badge-stock"><span class="dot"></span>In stock</span><span class="t-sm muted">Ships from Mira Loma, CA</span></div>
+
+          <div class="row" style="gap: 12px">
+            <div class="qty" role="group" aria-label="Quantity">
+              <button type="button" aria-label="Decrease quantity" data-pqty-dec><Icon name="minus" strokeWidth={2.2} /></button>
+              <output aria-live="polite" data-pqty>1</output>
+              <button type="button" aria-label="Increase quantity" data-pqty-inc><Icon name="plus" strokeWidth={2.2} /></button>
+            </div>
+            <button class="btn btn-primary" type="button" style="flex: 1" data-padd>Add to cart<span class="only-d">&nbsp;· {p.price}</span></button>
+          </div>
+
+          <ul class="stack" style="list-style: none; margin: 0; padding: 18px 20px; gap: 12px; background: #F5F6F7; border-radius: 8px">
+            <li class="row" style="gap: 12px"><Icon name="truck" class="ico" stroke="#B4470E" /><span>In stock and ready to ship from Mira Loma, CA</span></li>
+            <li class="row" style="gap: 12px"><Icon name="returnArrow" class="ico" stroke="#B4470E" /><span>30-day returns with RMA · 100% secure checkout</span></li>
+            <li class="row" style="gap: 12px"><Icon name="shieldCheck" class="ico" stroke="#B4470E" /><span>Lifetime warranty</span></li>
+          </ul>
+
+          <div class="stack">
+            <Acc q="Shipping" open>Ships from our Mira Loma, CA facility via UPS, FedEx or freight, or pick it up locally. We guarantee on-time dispatch; transit times are set by the carrier. Need insurance or a signature on delivery? Contact us before your order ships.</Acc>
+            <Acc q="Returns and refunds">Unused stock items can be returned within 30 days of purchase in original packaging, with an RMA number (email info@hullcases.com). Non-defective returns have a 25% restocking fee, and shipping isn’t refundable. Custom cases and foam are final sale. <a class="link" href={ROUTES.returns}>Read the full Return and Refund Policy</a>.</Acc>
+            <Acc q="Warranty">Every Hull case comes with a lifetime warranty. For warranty questions, email <a class="link" href={SITE.emailHref}>{SITE.email}</a> with your order number.</Acc>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- DETAILS + SPECS -->
+    <section class="section bg-steel">
+      <div class="wrap g2" style="gap: 64px; align-items: start">
+        <div class="stack" style="gap: 16px">
+          <p class="eyebrow">Details</p>
+          <h2 class="h2">About this case</h2>
+          <p class="body" style="font-size: 17px">{about}</p>
+          <ul class="stack" style="margin: 0; padding-left: 20px; gap: 8px">
+            <li>IP67 rated: dust-tight and protected against temporary immersion</li>
+            <li>Polypropylene alloy shell, rated −40 °F to 210 °F</li>
+            {p.wheels && <li>Pull handle and wheels for moving heavy kit</li>}
+            <li>{airlineLine}</li>
+            <li>Custom foam, panel and logo printing available</li>
+          </ul>
+        </div>
+        <div class="stack" style="gap: 16px">
+          <p class="eyebrow">Key specs</p>
+          <h2 class="h2">Dimensions &amp; build</h2>
+          <table class="table table-specs" style="background: #FFFFFF">
+            <tbody>
+              <tr><th scope="row">Internal size (L × W × H)</th><td class="num">{p.inside}<br /><span class="t-sm muted">{p.insidemm}</span></td></tr>
+              <tr><th scope="row">Lid / base depth</th><td class="num">{p.depth}<br /><span class="t-sm muted">{p.depthmm}</span></td></tr>
+              <tr><th scope="row">Overall size (L × W × H)</th><td class="num">{p.overall}<br /><span class="t-sm muted">{p.overallmm}</span></td></tr>
+              <tr><th scope="row">Weight (empty)</th><td class="num">{p.lb} lb ({p.kg} kg)</td></tr>
+              <tr><th scope="row">Material</th><td class="num">Polypropylene alloy</td></tr>
+              <tr><th scope="row">Waterproof rating</th><td class="num">IP67</td></tr>
+              <tr><th scope="row">Temperature range</th><td class="num">−40 °F to 210 °F (−40 °C to 99 °C)</td></tr>
+              <tr><th scope="row">Wheels &amp; pull handle</th><td class="num">{p.wheels ? 'Yes' : 'No'}</td></tr>
+              <tr><th scope="row">Airline</th><td class="num">{airlineSpec}</td></tr>
+              <tr><th scope="row">Warranty</th><td class="num">Lifetime</td></tr>
+            </tbody>
+          </table>
+          <p class="t-sm muted" style="margin: 0">*Please check with your airline before travel.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOM SERVICE -->
+    <section class="section">
+      <div class="wrap stack" style="gap: 32px">
+        <div class="row" style="justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-end">
+          <div class="stack" style="gap: 10px; max-width: 40rem">
+            <p class="eyebrow">Custom service</p>
+            <h2 class="h2">Make this case yours</h2>
+            <p class="body muted">Order the {p.m} with custom foam, a custom panel or your logo.</p>
+          </div>
+          <a class="btn btn-ghost btn-sm" href={ROUTES.custom}>Request a custom quote</a>
+        </div>
+        <div class="g3" style="gap: 24px">
+          <div class="stack" style="gap: 12px"><img src="/images/custom-foam-tools.jpg" alt="Open case with custom-cut foam holding a tool set" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px" /><h3 class="h4">Custom foam lining</h3><p class="body muted">Foam cut to the shape of your gear so nothing shifts.</p></div>
+          <div class="stack" style="gap: 12px"><img src="/images/custom-panel.jpg" alt="Case fitted with a custom control panel" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; background: #FFFFFF" /><h3 class="h4">Custom panel</h3><p class="body muted">A panel fitted inside the case to suit your equipment. Tell us what you need it for.</p></div>
+          <div class="stack" style="gap: 12px"><img src="/images/custom-logo-mockup.jpg" alt="Black hard case with a printed logo (mockup)" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: contain; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4" /><h3 class="h4">Custom logo</h3><p class="body muted">Have your company or team logo printed on the case.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RELATED -->
+    <section class="section bg-steel">
+      <div class="wrap stack" style="gap: 32px">
+        <h2 class="h2">More {catName}</h2>
+        <div class="g4">
+          {related.map((r) => <ProductCard product={r} />)}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="sticky-atc" role="region" aria-label="Add to cart" slot="after">
+    <div class="stack" style="gap: 2px; min-width: 0; flex: 1">
+      <span style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{title}</span>
+      <span class="t-sm muted"><strong style="color: #16181B">{p.price}</strong></span>
+    </div>
+    <button class="btn btn-primary btn-sm" type="button" style="flex: none" data-padd>Add to cart</button>
+  </div>
+</BaseLayout>
+
+<script>
+  import { addToCart } from '../../scripts/cart';
+  import { openCart } from '../../scripts/drawers';
+
+  const main = document.querySelector<HTMLElement>('[data-product]');
+  if (main) {
+    const m = main.dataset.product!;
+    const out = main.querySelector<HTMLOutputElement>('[data-pqty]')!;
+    let qty = 1;
+    const render = () => (out.textContent = String(qty));
+    main.querySelector('[data-pqty-inc]')!.addEventListener('click', () => {
+      qty = Math.min(99, qty + 1);
+      render();
+    });
+    main.querySelector('[data-pqty-dec]')!.addEventListener('click', () => {
+      qty = Math.max(1, qty - 1);
+      render();
+    });
+    document.querySelectorAll('[data-padd]').forEach((b) =>
+      b.addEventListener('click', () => {
+        addToCart(m, qty);
+        qty = 1;
+        render();
+        openCart();
+      }),
+    );
+  }
+</script>

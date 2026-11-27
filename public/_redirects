@@ -1,0 +1,12 @@
+# 301s for Netlify / Cloudflare Pages (Astro also emits meta-refresh pages for other hosts)
+/privacy              /privacy-policy/           301
+/terms                /terms-and-conditions/     301
+/product/d5524-2/     /product/d5524/            301
+/product/d6125-2/     /product/d6125/            301
+/product/d6530-2/     /product/d6530/            301
+/us/store             /shop/                     301
+/us/cart              /cart/                     301
+/us/checkout          /checkout/                 301
+/us/account/orders    /account/orders/           301
+/us/account           /account/                  301
+/us                   /                          301
