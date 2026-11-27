@@ -1,0 +1,15 @@
+---
+// Accordion / AccordionItem on native <details> (hull.css .acc)
+import Icon from './Icon.astro';
+interface Props {
+  q: string;
+  open?: boolean;
+  /** trusted HTML answer; otherwise use the default slot */
+  html?: string;
+}
+const { q, open = false, html } = Astro.props;
+---
+<details class="acc" open={open}>
+  <summary>{q}<Icon name="plus" class="acc-ico" /></summary>
+  {html ? <div class="acc-body" set:html={html} /> : <div class="acc-body"><slot /></div>}
+</details>

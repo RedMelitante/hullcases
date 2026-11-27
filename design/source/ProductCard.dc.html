@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ProductCard</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-cmp" style="background: transparent; height: 100%">
+<article class="pc">
+<a class="pc-img" href="{{href}}" aria-label="{{p.title}}">
+<sc-if value="{{p.badge}}" hint-placeholder-val="{{ false }}">
+<div class="pc-badges"><span class="{{badgeClass}}">{{p.badge}}</span></div>
+</sc-if>
+<sc-if value="{{hasImg}}" hint-placeholder-val="{{ false }}"><img src="{{img}}" alt="{{p.title}}" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 12%; box-sizing: border-box; background: #FFFFFF; border: 1px solid #DDE0E4; border-radius: 8px"></sc-if>
+<sc-if value="{{noImg}}" hint-placeholder-val="{{ true }}"><div class="ph"><span>Photo needed: {{p.shot}}</span></div></sc-if>
+</a>
+<div class="stack" style="gap: 8px">
+<a class="pc-name" href="{{href}}">{{p.title}}</a>
+
+<div class="pc-meta">
+<span class="price">{{p.price}}</span>
+<sc-if value="{{p.was}}" hint-placeholder-val="{{ false }}">
+<span class="price-was"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Was </span>{{p.was}}</span>
+</sc-if>
+</div>
+<sc-if value="{{isLow}}" hint-placeholder-val="{{ false }}">
+<span class="badge badge-low" style="align-self: flex-start"><span class="dot"></span>Low stock</span>
+</sc-if>
+</div>
+<a class="btn btn-ghost btn-sm btn-block" href="CartDrawer.dc.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Quick add</a>
+</article>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"product":{"editor":null},"$preview":{"width":320,"height":560}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const p = this.props.product ?? { title: 'D2812 Waterproof Hard Case', price: '$6.40', badge: 'Best seller', badgeKind: 'new', shot: 'D2812, front ¾ view, white sweep' };
+    const IMG = {D3510: '/_blob/cde7fbe90f5a5e11187fdff258a00e9e', D3617: '/_blob/fb95effd2f6a41ef67ce8ff4b4988e29', D3915: '/_blob/3b5acf5bd3628c26d9044a37c96a7ba6', D4211: '/_blob/99176fb88a40db88cd470907c0dfebcc', D4218: '/_blob/c9231339ba62f985b60ba9fdc0dddcd4', D4817: '/_blob/a82a5725b4c9fa13b39a70d1fe866f67', D5222: '/_blob/842faa0aa927bac07a081ce6459119ea', D2812: '/_blob/e4577bb53e99f0ac6d20a5e91280d797', D2816: '/_blob/41b4935b553a96233d46c1f63722e5c3', D3608: '/_blob/74c269975e2e72f0189a7332460a3b88', D3708: '/_blob/936ffd52859cb726a0dc50d2b5860e20', D3213: '/_blob/6a391c6be8533c217cfd29c131e136c8', D3214: '/_blob/5f7eaa6fe62bd37b252eddf268237cb4', D3215: '/_blob/809b421be5d6fe2aba1991a91a17815e', D3913: '/_blob/601f20d5c4c8d8506c241a1420006fea', D4215: '/_blob/a6fb698536a2d88235a48d57c90b7bf4', D4223: '/_blob/a9c2d25a3c7bf7724fc7c2c83bf39ffb', D4821: '/_blob/0f28c9b2a03c89ff00ab7e3b11b69bbf', D5524: '/_blob/51b76031e519c879134356b253c3bb5e', D6125: '/_blob/1125b1a5585b09a1a7494db998ac2f91', D6530: '/_blob/b81c422094adc50c5f0a400e26cbbca1'};
+    const code = p.code || (p.title || '').split(' ')[0];
+    const img = p.img || IMG[code] || '';
+    const href = p.href || (IMG[code] ? 'Product-' + code + '.dc.html' : 'Product.dc.html');
+    return {
+      p: p, img: img, href: href, hasImg: !!img, noImg: !img,
+      badgeClass: 'badge badge-' + (p.badgeKind || 'new'),
+      isLow: p.stock === 'low'
+    };
+  }
+}
+</script>
+</body>
+</html>

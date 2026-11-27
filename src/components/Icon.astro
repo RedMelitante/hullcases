@@ -1,0 +1,27 @@
+---
+// Inline stroke icons used across the design (24×24 grid). Paths copied from the design files.
+import { ICONS, type IconName } from '../scripts/icons';
+
+interface Props {
+  name: IconName;
+  class?: string;
+  style?: string;
+  strokeWidth?: number | string;
+  stroke?: string;
+  width?: number;
+  height?: number;
+}
+const { name, class: cls, style, strokeWidth = 2, stroke = 'currentColor', width, height } = Astro.props;
+---
+<svg
+  class={cls}
+  style={style}
+  viewBox="0 0 24 24"
+  width={width}
+  height={height}
+  fill="none"
+  stroke={stroke}
+  stroke-width={strokeWidth}
+  aria-hidden="true"
+  set:html={ICONS[name]}
+/>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Checkout</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page">
+<header style="border-bottom: 1px solid #DDE0E4">
+<div class="wrap row" style="justify-content: space-between; gap: 16px; height: 76px">
+<a class="logo" href="Main.dc.html"><img class="logo-img" src="/_blob/1521cd64c09b68d20a798088007122ab" alt="Hull Cases home" width="170" height="40"></a>
+<div class="row" style="gap: 16px"><span class="t-sm muted only-d">Secure checkout</span><a class="link" href="Cart.dc.html" style="font-size: 15px">Back to cart</a></div>
+</div>
+</header>
+<main class="wrap" style="padding-top: 40px; padding-bottom: 96px">
+<div class="g2 g2-l" style="gap: 56px; align-items: start">
+<form class="stack" style="gap: 32px" aria-labelledby="co-title">
+<h1 id="co-title" class="h1" style="font-size: 44px">Checkout</h1>
+<fieldset class="stack" style="gap: 16px; border: 0; padding: 0; margin: 0">
+<legend class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; margin-bottom: 8px">1. Contact</legend>
+<div class="field"><label class="label" for="co-email">Email address</label><input id="co-email" class="input" type="email" autocomplete="email"></div>
+<label class="check"><input type="checkbox">Email me restock alerts and new cases</label>
+<p class="t-sm muted" style="margin: 0">Have an account? <a class="link" href="Account.dc.html">Sign in</a></p>
+</fieldset>
+<fieldset class="stack" style="gap: 16px; border: 0; padding: 0; margin: 0">
+<legend class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; margin-bottom: 8px">2. Shipping address</legend>
+<div class="g2" style="gap: 16px">
+<div class="field"><label class="label" for="co-first">First name</label><input id="co-first" class="input" autocomplete="given-name"></div>
+<div class="field"><label class="label" for="co-last">Last name</label><input id="co-last" class="input" autocomplete="family-name"></div>
+</div>
+<div class="field"><label class="label" for="co-company">Company <span class="opt">(optional)</span></label><input id="co-company" class="input" autocomplete="organization"></div>
+<div class="field"><label class="label" for="co-addr">Address</label><input id="co-addr" class="input" autocomplete="address-line1"></div>
+<div class="field"><label class="label" for="co-addr2">Apartment, suite, etc. <span class="opt">(optional)</span></label><input id="co-addr2" class="input" autocomplete="address-line2"></div>
+<div class="g3" style="gap: 16px">
+<div class="field"><label class="label" for="co-city">City</label><input id="co-city" class="input" autocomplete="address-level2"></div>
+<div class="field"><label class="label" for="co-state">State</label><select id="co-state" class="input" autocomplete="address-level1"><option>California</option><option>Arizona</option><option>Nevada</option><option>Oregon</option><option>Texas</option><option>Washington</option></select></div>
+<div class="field"><label class="label" for="co-zip">ZIP code</label><input id="co-zip" class="input" inputmode="numeric" autocomplete="postal-code"></div>
+</div>
+<div class="field"><label class="label" for="co-phone">Phone <span class="opt">(for delivery questions)</span></label><input id="co-phone" class="input" type="tel" autocomplete="tel"></div>
+<div class="field"><label class="label" for="co-country">Country</label><input id="co-country" class="input" value="United States" disabled=""><span class="help">We ship within the United States.</span></div>
+</fieldset>
+<fieldset class="stack" style="gap: 10px; border: 0; padding: 0; margin: 0">
+<legend class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; margin-bottom: 8px">3. Delivery</legend>
+<label class="check" style="padding: 14px 16px; border: 1.5px solid #8A919A; border-radius: 4px"><input type="radio" name="ship" checked="{{ups}}" onClick="{{pickUps}}"><span class="stack"><strong>Ship to my address</strong><span class="t-sm muted">UPS, FedEx or freight, depending on size · rate calculated by carrier</span></span></label>
+<label class="check" style="padding: 14px 16px; border: 1.5px solid #8A919A; border-radius: 4px"><input type="radio" name="ship" checked="{{pickup}}" onClick="{{pickPickup}}"><span class="stack"><strong>Local pickup</strong><span class="t-sm muted">3827 Wacker Dr., Mira Loma, CA 91752</span></span></label>
+</fieldset>
+<fieldset class="stack" style="gap: 16px; border: 0; padding: 0; margin: 0">
+<legend class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; margin-bottom: 8px">4. Payment</legend>
+<div class="field"><label class="label" for="co-card">Card number</label><input id="co-card" class="input" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234"></div>
+<div class="g2" style="gap: 16px">
+<div class="field"><label class="label" for="co-exp">Expiry</label><input id="co-exp" class="input" autocomplete="cc-exp" placeholder="MM / YY"></div>
+<div class="field"><label class="label" for="co-cvc">Security code</label><input id="co-cvc" class="input" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC"></div>
+</div>
+<label class="check"><input type="checkbox" checked="">Billing address is the same as shipping</label>
+<p class="t-sm muted" style="margin: 0">Card details are encrypted. By placing your order you agree to our <a class="link" href="Policy-Terms.dc.html">Terms and Conditions</a> and <a class="link" href="Policy.dc.html">Return and Refund Policy</a>.</p>
+</fieldset>
+<a class="btn btn-primary btn-block" href="OrderConfirmed.dc.html">Place order · $19.30</a>
+</form>
+
+<aside class="stack sticky-d" style="gap: 16px; padding: 28px; background: #F5F6F7; border-radius: 8px">
+<h2 class="h3">Order summary</h2>
+<sc-for list="{{items}}" as="it" hint-placeholder-count="2">
+<div class="row" style="gap: 14px"><img src="{{it.img}}" alt="" style="width: 64px; height: 64px; object-fit: contain; padding: 4px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #DDE0E4; border-radius: 4px; flex: none"><span style="flex: 1; font-weight: 600">{{it.title}}<br><span class="t-sm muted" style="font-weight: 400">Qty {{it.qty}}</span></span><span class="num" style="font-weight: 600">{{it.line}}</span></div>
+</sc-for>
+<div class="row" style="justify-content: space-between; border-top: 1px solid #DDE0E4; padding-top: 14px"><span class="muted">Subtotal</span><span class="num">$19.30</span></div>
+<div class="row" style="justify-content: space-between"><span class="muted">Shipping</span><span>{{shipCost}}</span></div>
+<div class="row" style="justify-content: space-between"><span class="muted">Tax</span><span>Calculated at payment</span></div>
+<div class="row" style="justify-content: space-between; border-top: 2px solid #16181B; padding-top: 14px"><span style="font-weight: 700">Total (USD)</span><span class="price">$19.30</span></div>
+<p class="t-sm muted" style="margin: 0">Questions? Call <a class="link" href="tel:+18332360699">(833) 236-0699</a></p>
+</aside>
+</div>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { ship: 'ups' }; }
+  renderVals() {
+    const ship = this.state.ship;
+    return {
+      ups: ship === 'ups', pickup: ship === 'pickup',
+      pickUps: () => this.setState({ ship: 'ups' }), pickPickup: () => this.setState({ ship: 'pickup' }),
+      shipCost: ship === 'pickup' ? 'Free (local pickup)' : 'Calculated by carrier',
+      items: [
+        { title: 'D2812 Waterproof Hard Case', qty: 1, line: '$6.40', img: '/_blob/e4577bb53e99f0ac6d20a5e91280d797' },
+        { title: 'D3913 Waterproof Hard Case', qty: 1, line: '$12.90', img: '/_blob/601f20d5c4c8d8506c241a1420006fea' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

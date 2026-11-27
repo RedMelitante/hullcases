@@ -1,0 +1,141 @@
+---
+// Custom cases (design/source/CustomCases.dc.html) at the live URL /custom-products/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import Acc from '../components/Acc.astro';
+import { PRODUCTS } from '../data/products';
+import { SITE } from '../data/site';
+
+const stepNum = 'font-size: 52px; color: #D9560B';
+const stepLi = 'gap: 10px; border-top: 3px solid #16181B; padding-top: 18px';
+---
+<BaseLayout
+  title="Custom Foam, Panel & Logo Hard Cases | Hull Cases"
+  description="Get any Hull case with custom foam lining, a custom panel or your logo. Send your gear list and get a quote from our Mira Loma, CA team."
+  active="custom"
+  image="/images/custom-foam-tools.jpg"
+>
+  <main id="main">
+    <section class="tex-plate" style="color: #FFFFFF">
+      <div class="wrap g2" style="align-items: center; gap: 56px; padding-top: 80px; padding-bottom: 88px">
+        <div class="stack" style="gap: 22px">
+          <p class="eyebrow">Custom service</p>
+          <h1 class="display">Custom cases built around your gear</h1>
+          <p class="lead" style="max-width: 34rem">Start with any Hull case and add custom foam lining, a custom panel or your logo. Tell us what you carry and we'll send you a quote.</p>
+          <div class="row" style="gap: 20px; flex-wrap: wrap">
+            <a class="btn btn-primary" href="#quote">Request a quote</a>
+            <a class="link" href={SITE.phoneHref} style="font-size: 17px">Or call {SITE.phone}</a>
+          </div>
+        </div>
+        <div class="corners"><img src="/images/custom-foam-tools.jpg" alt="Open Hull case with custom-cut foam holding a full tool set" fetchpriority="high" style="display: block; width: 100%; aspect-ratio: 5/4; object-fit: cover; border-radius: 8px; background: #FFFFFF" /></div>
+      </div>
+    </section>
+
+    <!-- OPTIONS -->
+    <section class="section">
+      <div class="wrap stack" style="gap: 40px">
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <p class="eyebrow">What we customize</p>
+          <h2 class="h2">Three ways to make it yours</h2>
+        </div>
+        <div class="g3" style="gap: 28px">
+          <div class="stack" style="gap: 14px">
+            <img src="/images/open-case-foam.jpg" alt="Open hard case with convoluted foam lining" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: contain; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4" />
+            <h3 class="h3">Custom foam lining</h3>
+            <p class="body muted">Foam cut to the exact shape of your equipment, so every piece has its place and nothing shifts in transit.</p>
+          </div>
+          <div class="stack" style="gap: 14px">
+            <img src="/images/custom-panel.jpg" alt="Case fitted with a custom control panel and keyboard" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 8px; background: #FFFFFF" />
+            <h3 class="h3">Custom panel</h3>
+            <p class="body muted">A panel fitted inside the case to suit your equipment, such as instruments or controls. Tell us what it needs to hold.</p>
+          </div>
+          <div class="stack" style="gap: 14px">
+            <img src="/images/custom-logo-mockup.jpg" alt="Black hard case with a printed logo (mockup)" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: contain; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4" />
+            <h3 class="h3">Custom logo</h3>
+            <p class="body muted">Have your company, team or brand logo printed on the case.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section bg-steel">
+      <div class="wrap stack" style="gap: 40px">
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <p class="eyebrow">How it works</p>
+          <h2 class="h2">From your gear to a finished case</h2>
+        </div>
+        <ol class="g4" style="gap: 32px; list-style: none; margin: 0; padding: 0">
+          <li class="stack" style={stepLi}><span class="display" style={stepNum} aria-hidden="true">01</span><h3 class="h4">Tell us what you carry</h3><p class="body muted">Send the gear list, measurements and any logo or drawing using the form below.</p></li>
+          <li class="stack" style={stepLi}><span class="display" style={stepNum} aria-hidden="true">02</span><h3 class="h4">Get a quote</h3><p class="body muted">We recommend a case model and layout and send a price.</p></li>
+          <li class="stack" style={stepLi}><span class="display" style={stepNum} aria-hidden="true">03</span><h3 class="h4">Approve the layout</h3><p class="body muted">Check the case model, layout and printing details before production. Custom orders are final sale.</p></li>
+          <li class="stack" style={stepLi}><span class="display" style={stepNum} aria-hidden="true">04</span><h3 class="h4">We build and ship</h3><p class="body muted">Your case ships from Mira Loma, CA.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- QUOTE FORM -->
+    <section id="quote" class="section" style="scroll-margin-top: 16px">
+      <div class="wrap g2 g2-l" style="gap: 64px; align-items: start">
+        <form class="stack" style="gap: 20px" aria-labelledby="quote-title" data-form="quote" data-form-name="Custom quote request" enctype="multipart/form-data" novalidate>
+          <div class="stack" style="gap: 8px">
+            <h2 id="quote-title" class="h2">Request a custom quote</h2>
+            <p class="body muted">The more detail you give us, the faster we can quote.</p>
+          </div>
+          <div class="g2" style="gap: 20px">
+            <div class="field"><label class="label" for="q-first">First name</label><input id="q-first" name="first_name" class="input" autocomplete="given-name" required /></div>
+            <div class="field"><label class="label" for="q-last">Last name</label><input id="q-last" name="last_name" class="input" autocomplete="family-name" required /></div>
+            <div class="field"><label class="label" for="q-email">Email address</label><input id="q-email" name="email" class="input" type="email" autocomplete="email" required /></div>
+            <div class="field"><label class="label" for="q-phone">Phone <span class="opt">(optional)</span></label><input id="q-phone" name="phone" class="input" type="tel" autocomplete="tel" /></div>
+            <div class="field"><label class="label" for="q-company">Company <span class="opt">(optional)</span></label><input id="q-company" name="company" class="input" autocomplete="organization" /></div>
+            <div class="field"><label class="label" for="q-qty">Quantity</label><input id="q-qty" name="quantity" class="input" inputmode="numeric" placeholder="e.g. 1, 10, 50" /></div>
+            <div class="field"><label class="label" for="q-model">Case model</label><select id="q-model" name="case_model" class="input"><option>Not sure, recommend one</option>{PRODUCTS.map((p) => <option>{p.m}</option>)}</select></div>
+            <div class="field"><label class="label" for="q-dims">Gear dimensions <span class="opt">(L × W × H)</span></label><input id="q-dims" name="gear_dimensions" class="input" placeholder="e.g. 12 × 8 × 4 in" /></div>
+          </div>
+          <fieldset class="stack" style="gap: 2px; border: 0; padding: 0; margin: 0">
+            <legend class="label" style="margin-bottom: 4px">What do you need?</legend>
+            <label class="check"><input type="checkbox" name="needs" value="Foam interior" checked />Foam interior (custom-cut or bubble foam)</label>
+            <label class="check"><input type="checkbox" name="needs" value="Custom panel" />Custom panel</label>
+            <label class="check"><input type="checkbox" name="needs" value="Case printing / logo" />Case printing / logo</label>
+            <label class="check"><input type="checkbox" name="needs" value="Other" />Other</label>
+          </fieldset>
+          <div class="field"><label class="label" for="q-file">Logo, drawing or photos <span class="opt">(optional)</span></label><input id="q-file" name="files" class="input" type="file" multiple accept="image/*,.pdf,.ai,.eps,.svg,.dxf,.dwg" style="padding: 10px" /></div>
+          <div class="field"><label class="label" for="q-msg">Describe your custom project</label><textarea id="q-msg" name="message" class="input" placeholder="What goes in the case, how it travels, and any deadline."></textarea></div>
+          <div class="row" style="gap: 16px; flex-wrap: wrap">
+            <button class="btn btn-primary btn-block-m" type="submit">Send quote request</button>
+            <span class="t-sm muted">We’ll get back to you as soon as possible.</span>
+          </div>
+          <div class="alert alert-ok" role="status" data-form-success hidden><Icon name="check" class="ico" /><span>Thanks, your quote request is in. We’ll reply to the email you gave us.</span></div>
+          <div class="alert alert-err" role="alert" data-form-error hidden></div>
+        </form>
+        <aside class="stack" style="gap: 20px; padding: 32px; background: #F5F6F7; border-radius: 8px">
+          <h3 class="h3">Prefer to talk it through?</h3>
+          <p class="body muted">Call or email us with your gear list and we'll help you pick a case and layout.</p>
+          <a class="row" href={SITE.phoneHref} style="gap: 12px; text-decoration: none; font-weight: 600; font-size: 18px; min-height: 44px"><Icon name="phone" class="ico" stroke="#B4470E" />{SITE.phone}</a>
+          <a class="row" href={SITE.emailHref} style="gap: 12px; text-decoration: none; font-weight: 600; font-size: 18px; min-height: 44px"><Icon name="mail" class="ico" stroke="#B4470E" />{SITE.email}</a>
+          <div class="stack" style="gap: 8px; border-top: 1px solid #DDE0E4; padding-top: 20px">
+            <strong>Every custom case includes</strong>
+            <span class="body muted">IP67 waterproof sealing</span>
+            <span class="body muted">Polypropylene alloy shell</span>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section bg-steel">
+      <div class="wrap g2 g2-r" style="gap: 56px; align-items: start">
+        <div class="stack" style="gap: 12px">
+          <p class="eyebrow">Custom FAQ</p>
+          <h2 class="h2">Custom order questions</h2>
+        </div>
+        <div class="stack">
+          <Acc q="What can you customize?" open>Foam interiors (custom-cut or bubble foam), custom panels and case printing or logos. If you need something else, choose “Other” in the form and describe it.</Acc>
+          <Acc q="How much does a custom case cost?">Every custom job is quoted on its own, based on the case model, the work involved and the quantity. Send the form and we’ll reply with a quote.</Acc>
+          <Acc q="Do I need to send you my equipment?">Measurements and photos are enough for a quote. We only guarantee a perfect fit when you send the physical parts to our facility to be fitted into the custom foam.</Acc>
+          <Acc q="Can I return a custom case?">No. Custom cases, modified or printed cases, and cases with glued-in foam are made to order and final sale, so please check every detail before you approve.</Acc>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

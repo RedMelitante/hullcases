@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Shop</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page">
+<dc-import name="SiteHeader" cart-count="2" active="shop" hint-size="100%,124px"></dc-import>
+<main>
+<section class="bg-steel" style="border-bottom: 1px solid #DDE0E4">
+<div class="wrap" style="padding-bottom: 40px">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="Main.dc.html">Home</a><span aria-hidden="true">/</span><sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><a href="Shop.dc.html">Shop</a><span aria-hidden="true">/</span></sc-if><span aria-current="page">{{title}}</span></nav>
+<div class="stack" style="gap: 12px; max-width: 48rem">
+<h1 class="h1">{{title}}</h1>
+<p class="lead">{{lead}}</p>
+</div>
+</div>
+</section>
+
+<section class="wrap" style="padding-top: 32px; padding-bottom: 96px">
+<div class="shop-layout">
+
+<aside class="{{filtersClass}}" aria-label="Filters">
+<div class="filters-hd">
+<span class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase">Filters</span>
+<button class="icon-btn" aria-label="Close filters" onClick="{{closeFilters}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+</div>
+<div class="filters-bd">
+<div class="row only-d" style="justify-content: space-between; padding-bottom: 14px">
+<span class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase">Filters</span>
+<a class="link" href="Shop.dc.html" style="font-size: 15px">Clear all</a>
+</div>
+<fieldset class="fgroup" style="border-left: 0; border-right: 0; border-bottom: 0; margin: 0; padding-left: 0; padding-right: 0">
+<legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Category</legend>
+<h3>Category</h3>
+<sc-for list="{{cats}}" as="c" hint-placeholder-count="4">
+<a class="check fopt" href="{{c.href}}" role="checkbox" aria-checked="{{c.onStr}}"><span class="{{c.box}}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>{{c.label}}<span class="fcount">({{c.n}})</span></a>
+</sc-for>
+</fieldset>
+<fieldset class="fgroup" style="border-left: 0; border-right: 0; border-bottom: 0; margin: 0; padding-left: 0; padding-right: 0">
+<legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Size</legend>
+<h3>Inside length</h3>
+<sc-for list="{{lens}}" as="l" hint-placeholder-count="4">
+<a class="check fopt" href="{{l.href}}" role="checkbox" aria-checked="{{l.onStr}}"><span class="{{l.box}}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>{{l.label}}<span class="fcount">({{l.n}})</span></a>
+</sc-for>
+</fieldset>
+<fieldset class="fgroup" style="border-left: 0; border-right: 0; border-bottom: 0; margin: 0; padding-left: 0; padding-right: 0">
+<legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Use</legend>
+<h3>Use</h3>
+<sc-for list="{{uses}}" as="u" hint-placeholder-count="1">
+<a class="check fopt" href="{{u.href}}" role="checkbox" aria-checked="{{u.onStr}}"><span class="{{u.box}}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg></span>{{u.label}}<span class="fcount">({{u.n}})</span></a>
+</sc-for>
+</fieldset>
+<fieldset class="fgroup" style="border-left: 0; border-right: 0; border-bottom: 0; margin: 0; padding-left: 0; padding-right: 0">
+<legend style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Price</legend>
+<h3>Price (USD)</h3>
+<div class="row" style="gap: 10px; padding-top: 6px">
+<div class="field" style="flex: 1"><label class="label" for="pmin">Min</label><input id="pmin" class="input" inputmode="numeric" placeholder="$0"></div>
+<span style="padding-top: 28px" aria-hidden="true">–</span>
+<div class="field" style="flex: 1"><label class="label" for="pmax">Max</label><input id="pmax" class="input" inputmode="numeric" placeholder="$500"></div>
+</div>
+</fieldset>
+</div>
+<div class="filters-ft">
+<a class="btn btn-ghost btn-sm" href="Shop.dc.html" style="flex: 1; padding: 0 12px">Clear all</a>
+<button class="btn btn-primary btn-sm" type="button" style="flex: 1.4; padding: 0 12px" onClick="{{closeFilters}}">Show results</button>
+</div>
+</aside>
+
+<div>
+<div class="toolbar">
+<button class="btn btn-ghost btn-sm only-m-flex" type="button" onClick="{{openFilters}}" aria-label="Open filters"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M4 6h16M7 12h10M10 18h4"/></svg>Filters</button>
+<span class="only-d" style="font-weight: 600">{{count}}</span>
+<sc-if value="{{filtered}}" hint-placeholder-val="{{ false }}"><a class="chip" href="Shop.dc.html" aria-label="Remove filter {{title}}" style="text-decoration: none">{{title}}<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></a></sc-if>
+<div class="sort">
+<label class="label" for="sort">Sort by</label>
+<select id="sort" class="input"><option>Featured</option><option>Newest</option><option>Price: low to high</option><option>Price: high to low</option></select>
+</div>
+</div>
+
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div class="stack" style="align-items: center; text-align: center; gap: 16px; padding: 72px 24px; border: 1.5px dashed #8A919A; border-radius: 8px; background: #F5F6F7">
+<svg style="width: 56px; height: 56px" viewBox="0 0 24 24" fill="none" stroke="#4A5159" stroke-width="1.5" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="1"/><path d="M9 7V4h6v3M3 12h18M10 12v2h4v-2"/></svg>
+<h2 class="h3">No cases match those filters</h2>
+<p class="body muted" style="max-width: 30rem">Try removing a filter or widening the price range. If you need a size we don't list, call <a class="link" href="tel:+18332360699">(833) 236-0699</a> and we'll tell you what fits.</p>
+<div class="row" style="gap: 12px; flex-wrap: wrap; justify-content: center">
+<a class="btn btn-primary" href="Shop.dc.html">Clear all filters</a>
+<a class="btn btn-ghost" href="Contact.dc.html">Contact us</a>
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{notEmpty}}" hint-placeholder-val="{{ true }}">
+<div class="pgrid">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="9">
+<dc-import name="ProductCard" product="{{p}}" hint-size="100%,470px"></dc-import>
+</sc-for>
+</div>
+</sc-if>
+</div>
+
+</div>
+</section>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"filter":{"editor":"enum","options":["all","small","medium","large","wheeled","under12","12-16","16-20","over20","travel"],"default":"all"},"empty":{"editor":"boolean","default":false},"filtersOpen":{"editor":"boolean","default":false},"$preview":{"width":1440,"height":4140}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { open: null }; }
+  renderVals() {
+    const open = this.state.open ?? (this.props.filtersOpen ?? false);
+    const empty = this.props.empty ?? false;
+    const shots = 'front ¾ view, white sweep';
+    const ROWS = [["D2812", "small", false, 9.8, true, "$6.40"], ["D2816", "small", false, 9.8, true, "$7.70"], ["D3213", "small", false, 11.4, true, "$11.00"], ["D3214", "small", false, 11.4, true, "$12.60"], ["D3215", "small", false, 11.4, true, "$11.22"], ["D3510", "small", false, 12.9, true, "$11.20"], ["D3608", "small", false, 13.3, true, "$9.80"], ["D3617", "small", false, 12.9, true, "$17.90"], ["D3708", "small", false, 13.7, true, "$8.20"], ["D3913", "small", false, 14.3, true, "$12.90"], ["D3915", "small", false, 14.3, true, "$15.00"], ["D4211", "medium", false, 15.6, true, "$13.30"], ["D4215", "medium", false, 15.5, true, "$16.40"], ["D4218", "medium", false, 15.5, true, "$19.90"], ["D4223", "medium", false, 15.5, false, "$18.90"], ["D4817", "medium", false, 17.3, false, "$19.60"], ["D4821", "medium", false, 17.1, false, "$21.10"], ["D5222", "medium", false, 18.9, false, "$23.40"], ["D5524", "large", true, 20.8, false, "$33.20"], ["D6125", "large", true, 21.2, false, "$41.70"], ["D6530", "large", true, 23.1, false, "$55.20"]];
+    const F = {
+      all: { name: 'All cases', file: 'Shop.dc.html', lead: 'Every Hull case in one place: IP67 waterproof, polypropylene alloy, lifetime warranty. Filter by category, inside length and price, and check the internal size on each product page before you order.', test: () => true },
+      small: { name: 'Small cases', file: 'Shop-Small.dc.html', lead: 'Compact waterproof cases for cameras, drones, tools, electronics and documents. Check the internal size on each product page before you order.', test: (r) => r[1] === 'small' },
+      medium: { name: 'Medium cases', file: 'Shop-Medium.dc.html', lead: 'Mid-size waterproof cases for camera kits, test equipment and tool sets. Check the internal size on each product page before you order.', test: (r) => r[1] === 'medium' },
+      large: { name: 'Large cases', file: 'Shop-Large.dc.html', lead: 'Our biggest waterproof cases, each with a pull handle and wheels, for heavy or bulky kit.', test: (r) => r[1] === 'large' },
+      wheeled: { name: 'Wheeled cases', file: 'Shop-Wheeled.dc.html', lead: 'Cases with a pull handle and wheels, so heavy kit rolls instead of being carried.', test: (r) => r[2] },
+      under12: { name: 'Under 12 in', file: 'Shop-Under12.dc.html', lead: 'Cases with an inside length under 12 inches. Compare the full internal size on each product page.', test: (r) => r[3] < 12 },
+      '12-16': { name: '12–16 in', file: 'Shop-12-16.dc.html', lead: 'Cases with an inside length from 12 to 16 inches. Compare the full internal size on each product page.', test: (r) => r[3] >= 12 && r[3] < 16 },
+      '16-20': { name: '16–20 in', file: 'Shop-16-20.dc.html', lead: 'Cases with an inside length from 16 to 20 inches. Compare the full internal size on each product page.', test: (r) => r[3] >= 16 && r[3] < 20 },
+      over20: { name: 'Over 20 in', file: 'Shop-Over20.dc.html', lead: 'Cases with an inside length over 20 inches. Compare the full internal size on each product page.', test: (r) => r[3] >= 20 },
+      travel: { name: 'Travel cases', file: 'Shop-Travel.dc.html', lead: 'Cases whose outside size fits within the common 22 × 14 × 9 in carry-on limit. Airline rules vary, so check yours before you fly.', test: (r) => r[4] }
+    };
+    const key = F[this.props.filter] ? this.props.filter : 'all';
+    const cur = F[key];
+    const list = ROWS.filter(cur.test);
+    const products = list.map((r) => ({ title: r[0] + ' Waterproof Hard Case', price: r[5], shot: r[0], badge: r[0] === 'D2812' ? 'Best seller' : undefined, badgeKind: r[0] === 'D2812' ? 'new' : undefined }));
+    const opt = (k) => ({ label: F[k].name, n: String(ROWS.filter(F[k].test).length), on: k === key, href: k === key ? 'Shop.dc.html' : F[k].file, box: k === key ? 'fbox is-on' : 'fbox', onStr: k === key ? 'true' : 'false' });
+    return {
+      filtersClass: open ? 'filters is-open' : 'filters',
+      openFilters: () => this.setState({ open: true }),
+      closeFilters: () => this.setState({ open: false }),
+      empty: empty,
+      notEmpty: !empty,
+      products: products,
+      title: cur.name,
+      lead: cur.lead,
+      filtered: key !== 'all',
+      count: list.length + (list.length === 1 ? ' case' : ' cases'),
+      cats: ['small', 'medium', 'large', 'wheeled'].map(opt),
+      lens: ['under12', '12-16', '16-20', 'over20'].map(opt),
+      uses: ['travel'].map(opt)
+    };
+  }
+}
+</script>
+</body>
+</html>

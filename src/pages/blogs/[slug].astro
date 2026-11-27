@@ -1,0 +1,130 @@
+---
+// Blog post / ArticleLayout (design/source/BlogPost.dc.html). Keeps the three live slugs.
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import Icon from '../../components/Icon.astro';
+import { POSTS, postUrl, type Post } from '../../data/posts';
+import { card } from '../../data/products';
+import { ROUTES } from '../../data/site';
+
+export const getStaticPaths = (() => POSTS.map((a) => ({ params: { slug: a.slug }, props: { a } }))) satisfies GetStaticPaths;
+
+const { a } = Astro.props as { a: Post };
+const url = new URL(postUrl(a), Astro.site).href;
+const enc = encodeURIComponent;
+const shareFb = 'https://www.facebook.com/sharer/sharer.php?u=' + enc(url);
+const shareX = 'https://twitter.com/intent/tweet?url=' + enc(url) + '&text=' + enc(a.title);
+const shareMail = 'mailto:?subject=' + enc(a.title) + '&body=' + enc(url);
+const products = a.products.map((m) => card(m));
+const related = POSTS.filter((p) => p.key !== a.key);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: a.title,
+  description: a.meta,
+  image: new URL(a.hero, Astro.site).href,
+  datePublished: a.isoDate,
+  author: { '@type': 'Organization', name: 'Hull Cases' },
+  publisher: { '@type': 'Organization', name: 'Hull Cases', logo: { '@type': 'ImageObject', url: new URL('/images/logo-dark.png', Astro.site).href } },
+  mainEntityOfPage: url,
+};
+const iconBtn = 'border: 1.5px solid #8A919A';
+---
+<BaseLayout title={a.seoTitle} description={a.meta} active="blog" image={a.hero} ogType="article" jsonLd={jsonLd}>
+  <main id="main">
+    <article>
+      <header class="wrap" style="max-width: 960px">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href={ROUTES.home}>Home</a><span aria-hidden="true">/</span><a href={ROUTES.blog}>Blog</a><span aria-hidden="true">/</span><span aria-current="page">{a.crumb}</span></nav>
+        <div class="stack" style="gap: 16px; padding: 16px 0 40px">
+          <span class="eyebrow">{a.eyebrow}</span>
+          <h1 class="h1" style="text-transform: none">{a.title}</h1>
+          <div class="row" style="gap: 12px; flex-wrap: wrap; color: #4A5159">
+            <time datetime={a.isoDate}>{a.date}</time><span aria-hidden="true">·</span><span>Hull Cases</span><span aria-hidden="true">·</span><span>{a.read}</span>
+          </div>
+        </div>
+      </header>
+      <div class="wrap" style="max-width: 1120px">
+        <div class="corners"><img src={a.hero} alt={a.heroAlt} fetchpriority="high" style={`display: block; width: 100%; aspect-ratio: 21/9; object-fit: ${a.fit}; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4; box-sizing: border-box`} /></div>
+      </div>
+
+      <div class="wrap" style="max-width: 800px; padding-top: 56px; padding-bottom: 72px">
+        <div class="prose">
+          <p class="lead" style="font-size: 20px; margin-bottom: 28px">{a.lead}</p>
+          <p>{a.intro}</p>
+          {a.sections.map((sec) => (
+            <>
+              <h2 id={sec.id}>{sec.h}</h2>
+              {sec.p && <p>{sec.p}</p>}
+              {sec.list && sec.list.length > 0 && <ul>{sec.list.map((li) => <li>{li}</li>)}</ul>}
+              {sec.callout && (
+                <aside class="row" style="gap: 20px; align-items: center; padding: 20px; margin: 32px 0; border: 1.5px solid #16181B; border-radius: 8px; flex-wrap: wrap">
+                  <img src="/images/custom-foam-tools.jpg" alt="Open case with custom-cut foam" loading="lazy" decoding="async" style="width: 120px; height: 120px; object-fit: cover; border-radius: 4px; flex: none" />
+                  <div class="stack" style="gap: 4px; flex: 1 1 220px">
+                    <span class="eyebrow" style="font-size: 14px">Custom foam interiors</span>
+                    <strong style="font-size: 19px">{a.calloutTitle}</strong>
+                    <span class="muted" style="font-size: 16px">IP67 · polypropylene alloy · lifetime warranty</span>
+                  </div>
+                  <a class="btn btn-primary btn-sm" href={ROUTES.custom}>Request a quote</a>
+                </aside>
+              )}
+            </>
+          ))}
+          <h2 id="summary">The bottom line</h2>
+          <p>{a.bottom} <a class="link" href={ROUTES.shop}>Browse Hull cases</a> by size, or <a class="link" href={ROUTES.contact}>ask us</a> which model fits your gear.</p>
+        </div>
+
+        <div class="row" style="gap: 12px; flex-wrap: wrap; align-items: center; padding-top: 32px; margin-top: 40px; border-top: 1px solid #DDE0E4">
+          <span style="font-weight: 600">Share this article</span>
+          <a class="icon-btn" style={iconBtn} href={shareFb} target="_blank" rel="noopener" aria-label="Share on Facebook"><Icon name="facebook" strokeWidth={1.8} /></a>
+          <a class="icon-btn" style={iconBtn} href={shareX} target="_blank" rel="noopener" aria-label="Share on X"><Icon name="x" strokeWidth={1.8} /></a>
+          <a class="icon-btn" style={iconBtn} href={shareMail} aria-label="Share by email"><Icon name="mail" /></a>
+          <button class="btn btn-ghost btn-sm" type="button" data-copy-link={url} aria-live="polite">Copy link</button>
+        </div>
+      </div>
+    </article>
+
+    <section class="section bg-steel">
+      <div class="wrap stack" style="gap: 32px">
+        <div class="row" style="justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-end">
+          <h2 class="h2">Shop waterproof cases</h2>
+          <a class="link" href={ROUTES.shop}>Shop all cases</a>
+        </div>
+        <div class="g4">
+          {products.map((p) => <ProductCard product={p} />)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap stack" style="gap: 28px">
+        <h2 class="h2">Keep reading</h2>
+        <div class="g2" style="gap: 28px">
+          {related.map((b) => (
+            <a href={postUrl(b)} class="row" style="gap: 20px; text-decoration: none; border: 1px solid #DDE0E4; border-radius: 8px; padding: 16px; align-items: center">
+              <img src={b.thumb} alt="" loading="lazy" decoding="async" style="width: 120px; aspect-ratio: 4/3; object-fit: contain; border-radius: 4px; flex: none; background: #FFFFFF; border: 1px solid #DDE0E4" />
+              <div class="stack" style="gap: 6px; min-width: 0">
+                <span class="t-sm muted"><time datetime={b.isoDate}>{b.date}</time></span>
+                <h3 class="h4" style="font-size: 19px; line-height: 1.3">{b.title}</h3>
+                <span class="link" style="font-size: 16px">Read article</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-link]').forEach((btn) =>
+    btn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(btn.dataset.copyLink!);
+        btn.textContent = 'Link copied';
+      } catch {
+        window.prompt('Copy this link:', btn.dataset.copyLink!);
+      }
+    }),
+  );
+</script>

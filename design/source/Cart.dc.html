@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Hull Cases — Cart</title>
+<script src="./support.js"></script>
+<link rel="stylesheet" href="./hull.css">
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<div class="hc-page">
+<dc-import name="SiteHeader" cart-count="2" active="none" hint-size="100%,124px"></dc-import>
+<main class="wrap" style="padding-bottom: 96px">
+<nav class="crumbs" aria-label="Breadcrumb"><a href="Main.dc.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Cart</span></nav>
+<h1 class="h1" style="margin: 8px 0 32px">Your cart</h1>
+<sc-if value="{{empty}}" hint-placeholder-val="{{ false }}">
+<div class="stack" style="align-items: center; text-align: center; gap: 16px; padding: 72px 24px; border: 1px solid #DDE0E4; border-radius: 8px">
+<h2 class="h3">Your cart is empty</h2>
+<p class="body muted">Find a case that fits your gear, then come back here to check out.</p>
+<a class="btn btn-primary" href="Shop.dc.html">Continue shopping</a>
+</div>
+</sc-if>
+<sc-if value="{{notEmpty}}" hint-placeholder-val="{{ true }}">
+<div class="g2 g2-l" style="gap: 48px; align-items: start">
+<div>
+<ul class="stack" style="list-style: none; margin: 0; padding: 0; gap: 0; border-top: 2px solid #16181B">
+<sc-for list="{{items}}" as="it" hint-placeholder-count="2">
+<li class="row" style="gap: 16px; align-items: flex-start; padding: 20px 0; border-bottom: 1px solid #DDE0E4">
+<img src="{{it.img}}" alt="" style="width: 96px; height: 96px; object-fit: contain; padding: 6px; box-sizing: border-box; border: 1px solid #DDE0E4; border-radius: 4px; background: #FFFFFF; flex: none">
+<div class="stack" style="gap: 10px; flex: 1; min-width: 0">
+<div class="row" style="justify-content: space-between; align-items: flex-start; gap: 12px">
+<div class="stack" style="gap: 4px; min-width: 0"><a href="{{it.href}}" style="font-weight: 600; text-decoration: none">{{it.title}}</a><span class="t-sm muted">{{it.variant}}</span><span class="t-sm muted">{{it.price}} each</span></div>
+<span class="num" style="font-weight: 600; white-space: nowrap">{{it.line}}</span>
+</div>
+<div class="row" style="gap: 12px">
+<div class="qty qty-sm" role="group" aria-label="Quantity"><button aria-label="Decrease quantity" onClick="{{it.dec}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14"/></svg></button><output>{{it.qty}}</output><button aria-label="Increase quantity" onClick="{{it.inc}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg></button></div>
+<button class="icon-btn" aria-label="Remove {{it.title}}" onClick="{{it.remove}}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button>
+</div>
+</div>
+</li>
+</sc-for>
+</ul>
+<a class="link" href="Shop.dc.html" style="display: inline-flex; margin-top: 20px">Continue shopping</a>
+</div>
+<aside class="stack" style="gap: 14px; padding: 28px; background: #F5F6F7; border-radius: 8px">
+<h2 class="h3">Order summary</h2>
+<div class="row" style="justify-content: space-between"><span class="muted">Subtotal ({{count}} items)</span><span class="num" style="font-weight: 600">{{subtotal}}</span></div>
+<div class="row" style="justify-content: space-between"><span class="muted">Shipping</span><span>Calculated at checkout</span></div>
+<div class="row" style="justify-content: space-between"><span class="muted">Tax</span><span>Calculated at checkout</span></div>
+<div class="row" style="justify-content: space-between; border-top: 2px solid #16181B; padding-top: 14px"><span style="font-weight: 700">Total (USD)</span><span class="price">{{subtotal}}</span></div>
+<a class="btn btn-primary btn-block" href="Checkout.dc.html">Go to checkout</a>
+<ul class="stack" style="list-style: none; margin: 0; padding: 0; gap: 8px">
+<li class="t-sm muted">Ships from Mira Loma, CA via UPS, FedEx or freight</li>
+<li class="t-sm muted">30-day returns with RMA · Lifetime warranty</li>
+</ul>
+</aside>
+</div>
+</sc-if>
+</main>
+<dc-import name="SiteFooter" hint-size="100%,560px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { qty: [1, 1], removed: [false, false] }; }
+  renderVals() {
+    const base = [
+      { title: 'D2812 Waterproof Hard Case', href: 'Product-D2812.dc.html', variant: 'Internal 9.8 × 7.1 × 3.7 in', unit: 6.40, img: '/_blob/e4577bb53e99f0ac6d20a5e91280d797' },
+      { title: 'D3913 Waterproof Hard Case', href: 'Product-D3913.dc.html', variant: 'Internal 14.3 × 9.5 × 4.3 in', unit: 12.90, img: '/_blob/601f20d5c4c8d8506c241a1420006fea' }
+    ];
+    const st = this.state;
+    const set = (i, key, val) => { const a = st[key].slice(); a[i] = val; this.setState({ [key]: a }); };
+    const items = base.map((b, i) => ({ ...b, i: i, qty: st.qty[i], price: '$' + b.unit.toFixed(2), line: '$' + (b.unit * st.qty[i]).toFixed(2),
+      inc: () => set(i, 'qty', st.qty[i] + 1), dec: () => set(i, 'qty', Math.max(1, st.qty[i] - 1)), remove: () => set(i, 'removed', true) }))
+      .filter((it) => !st.removed[it.i]);
+    const sub = items.reduce((n, it) => n + it.unit * it.qty, 0);
+    const count = items.reduce((n, it) => n + it.qty, 0);
+    return { items: items, empty: items.length === 0, notEmpty: items.length > 0, count: count, subtotal: '$' + sub.toFixed(2) };
+  }
+}
+</script>
+</body>
+</html>

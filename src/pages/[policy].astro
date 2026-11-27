@@ -1,0 +1,91 @@
+---
+// PolicyLayout + TableOfContents + TocAccordion + Prose + PolicyContactBox (design/source/Policy.dc.html)
+// Root-level URLs: /return-and-refund-policy/, /terms-and-conditions/, /privacy-policy/, /disclaimer/
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import { POLICIES, type Policy } from '../data/policies';
+import { ROUTES, SITE } from '../data/site';
+
+export const getStaticPaths = (() =>
+  POLICIES.map((m) => ({ params: { policy: m.path.replaceAll('/', '') }, props: { m } }))) satisfies GetStaticPaths;
+
+const { m } = Astro.props as { m: Policy };
+---
+<BaseLayout title={m.seoTitle} description={m.meta}>
+  <main id="main">
+    <section class="bg-steel" style="border-bottom: 1px solid #DDE0E4">
+      <div class="wrap" style="padding-bottom: 40px">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href={ROUTES.home}>Home</a><span aria-hidden="true">/</span><span aria-current="page">{m.title}</span></nav>
+        <div class="stack" style="gap: 10px">
+          <h1 class="h1">{m.title}</h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" style="padding-top: 56px; padding-bottom: 96px">
+      <div class="policy-grid">
+        <nav class="only-d" aria-label="On this page">
+          <div class="toc" data-toc>
+            <span class="eyebrow" style="color: #4A5159; margin-bottom: 6px">On this page</span>
+            {m.sections.map((s, i) => <a href={`#${s.id}`} class={i === 0 ? 'is-on' : undefined}>{s.h}</a>)}
+          </div>
+        </nav>
+
+        <div class="stack" style="gap: 24px">
+          <details class="acc only-m" style="border-top: 1px solid #DDE0E4">
+            <summary>On this page<Icon name="plus" class="acc-ico" /></summary>
+            <div class="stack acc-body">
+              {m.sections.map((s) => <a href={`#${s.id}`} style="display: flex; align-items: center; min-height: 44px; text-decoration: none">{s.h}</a>)}
+            </div>
+          </details>
+
+          {m.facts && m.facts.length > 0 && (
+            <aside class="stack" style="gap: 12px; padding: 24px 28px; border: 2px solid #16181B; border-radius: 8px; max-width: 72ch">
+              <h2 class="h4" style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; letter-spacing: .04em">{m.factsTitle}</h2>
+              <ul class="stack" style="margin: 0; padding: 0; list-style: none; gap: 10px">
+                {m.facts.map((f) => (
+                  <li class="row" style="gap: 12px; align-items: flex-start"><Icon name="check" class="ico" style="width: 20px; height: 20px; margin-top: 3px" stroke="#B4470E" strokeWidth={2.4} /><span><strong>{f.k}:</strong> {f.v}</span></li>
+                ))}
+              </ul>
+            </aside>
+          )}
+
+          <article class="prose">
+            <p class="lead" style="margin-bottom: 32px">{m.intro}</p>
+            {m.sections.map((s) => (
+              <>
+                <h2 id={s.id}>{s.h}</h2>
+                <p>{s.p}</p>
+                {s.items && s.items.length > 0 && <ul>{s.items.map((it) => <li>{it}</li>)}</ul>}
+              </>
+            ))}
+          </article>
+
+          <div class="stack" style="gap: 10px; padding: 24px; background: #F5F6F7; border-radius: 8px; max-width: 72ch">
+            <h2 class="h4">Questions about this policy?</h2>
+            <p class="body">Call <a class="link" href={SITE.phoneHref}>{SITE.phone}</a>, email <a class="link" href={SITE.emailHref}>{SITE.email}</a>, or write to Hull Cases, 3827 Wacker Dr., Mira Loma, CA 91752.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  // Highlight the section in view in the table of contents.
+  const toc = document.querySelector<HTMLElement>('[data-toc]');
+  if (toc && 'IntersectionObserver' in window) {
+    const links = [...toc.querySelectorAll<HTMLAnchorElement>('a')];
+    const heads = links.map((a) => document.getElementById(a.hash.slice(1))).filter((h): h is HTMLElement => !!h);
+    const setOn = (id: string) => links.forEach((a) => a.classList.toggle('is-on', a.hash === `#${id}`));
+    const io = new IntersectionObserver(
+      (entries) => {
+        const vis = entries.filter((e) => e.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (vis[0]) setOn(vis[0].target.id);
+      },
+      { rootMargin: '0px 0px -70% 0px' },
+    );
+    heads.forEach((h) => io.observe(h));
+  }
+</script>

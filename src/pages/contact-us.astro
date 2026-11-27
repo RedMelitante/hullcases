@@ -1,0 +1,118 @@
+---
+// Contact + FAQ (design/source/Contact.dc.html) at the live URL /contact-us/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon from '../components/Icon.astro';
+import Acc from '../components/Acc.astro';
+import { FAQ_GROUPS } from '../data/faq';
+import { ROUTES, SITE } from '../data/site';
+
+const tile = 'width: 48px; height: 48px; border-radius: 4px; background: #16181B; color: #F26B1D; display: inline-flex; align-items: center; justify-content: center; flex: none';
+const card = 'gap: 16px; padding: 20px; border: 1px solid #DDE0E4; border-radius: 8px; text-decoration: none';
+const groupH = "font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px";
+const social = 'border: 1.5px solid #8A919A; cursor: default';
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Hull Cases',
+  url: new URL(ROUTES.contact, Astro.site).href,
+  mainEntity: {
+    '@type': 'Store',
+    name: SITE.name,
+    telephone: '+1-833-236-0699',
+    email: SITE.email,
+    address: { '@type': 'PostalAddress', streetAddress: '3827 Wacker Dr.', addressLocality: 'Mira Loma', addressRegion: 'CA', postalCode: '91752', addressCountry: 'US' },
+  },
+};
+---
+<BaseLayout
+  title="Contact Hull Cases | (833) 236-0699"
+  description="Questions about sizing, an order or a custom case? Call (833) 236-0699, email info@hullcases.com or visit 3827 Wacker Dr., Mira Loma, CA."
+  active="contact"
+  jsonLd={jsonLd}
+>
+  <main id="main">
+    <section class="bg-steel" style="border-bottom: 1px solid #DDE0E4">
+      <div class="wrap" style="padding-bottom: 40px">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href={ROUTES.home}>Home</a><span aria-hidden="true">/</span><span aria-current="page">Contact</span></nav>
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <h1 class="h1">Contact us</h1>
+          <p class="lead">Have a question, need help choosing a case, or want to know more about our products? Reach out below and we'll get back to you as soon as we can.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap g2 g2-l" style="gap: 64px; align-items: start">
+        <form class="stack" style="gap: 20px" aria-labelledby="form-title" data-form="contact" data-form-name="Contact form" novalidate>
+          <h2 id="form-title" class="h3">Send a message</h2>
+          <div class="g2" style="gap: 20px">
+            <div class="field"><label class="label" for="c-first">First name</label><input id="c-first" name="first_name" class="input" autocomplete="given-name" required /></div>
+            <div class="field"><label class="label" for="c-last">Last name</label><input id="c-last" name="last_name" class="input" autocomplete="family-name" required /></div>
+            <div class="field"><label class="label" for="c-email">Email address</label><input id="c-email" name="email" class="input" type="email" autocomplete="email" placeholder="user@website.com" required /></div>
+            <div class="field"><label class="label" for="c-phone">Phone <span class="opt">(optional)</span></label><input id="c-phone" name="phone" class="input" type="tel" autocomplete="tel" /></div>
+            <div class="field"><label class="label" for="c-subject">Subject</label><select id="c-subject" name="subject" class="input" required><option>Help choosing a case</option><option>An existing order</option><option>Custom case or bulk quote</option><option>Warranty or return</option><option>Something else</option></select></div>
+            <div class="field"><label class="label" for="c-order">Order # <span class="opt">(optional)</span></label><input id="c-order" name="order_number" class="input" placeholder="If this is about an order" /></div>
+          </div>
+          <div class="field"><label class="label" for="c-msg">Comments / questions</label><textarea id="c-msg" name="message" class="input" placeholder="Tell us what you need to protect, with measurements if you have them." required></textarea></div>
+          <div class="row" style="gap: 16px; flex-wrap: wrap">
+            <button class="btn btn-primary btn-block-m" type="submit">Send message</button>
+            <span class="t-sm muted">We’ll get back to you as soon as possible.</span>
+          </div>
+          <div class="alert alert-ok" role="status" data-form-success hidden><Icon name="check" class="ico" /><span>Thanks, your message is in. We'll reply to the email you gave us.</span></div>
+          <div class="alert alert-err" role="alert" data-form-error hidden></div>
+        </form>
+
+        <aside class="stack" style="gap: 16px">
+          <a href={SITE.phoneHref} class="row" style={card}>
+            <span style={tile}><Icon name="phone" class="ico" /></span>
+            <span class="stack"><span class="eyebrow" style="color: #4A5159">Call</span><span style="font-weight: 600; font-size: 18px">{SITE.phone}</span></span>
+          </a>
+          <a href={SITE.emailHref} class="row" style={card}>
+            <span style={tile}><Icon name="mail" class="ico" /></span>
+            <span class="stack"><span class="eyebrow" style="color: #4A5159">Email</span><span style="font-weight: 600; font-size: 18px">{SITE.email}</span></span>
+          </a>
+          <div class="stack" style="border: 1px solid #DDE0E4; border-radius: 8px; overflow: hidden">
+            <div class="row" style="gap: 16px; padding: 20px">
+              <span style={tile}><Icon name="pin" class="ico" /></span>
+              <span class="stack"><span class="eyebrow" style="color: #4A5159">Address</span><span style="font-weight: 600; font-size: 18px">3827 Wacker Dr., Mira Loma, CA 91752</span><a class="link" href={SITE.mapsHref} target="_blank" rel="noopener" style="font-size: 15px">Get directions</a></span>
+            </div>
+            <a href={SITE.mapsHref} target="_blank" rel="noopener" class="tex-plate stack" style="color: #FFFFFF; aspect-ratio: 16/9; align-items: center; justify-content: center; gap: 12px; text-decoration: none; text-align: center; padding: 24px">
+              <Icon name="pin" style="width: 44px; height: 44px" stroke="#F26B1D" strokeWidth={1.8} />
+              <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; letter-spacing: .04em">Mira Loma, CA 91752</span>
+              <span class="btn btn-primary btn-sm">Open in Google Maps</span>
+            </a>
+          </div>
+          <div class="stack" style="gap: 10px; padding: 20px; border: 1px solid #DDE0E4; border-radius: 8px">
+            <span class="eyebrow" style="color: #4A5159">Our social media</span>
+            <div class="row" style="gap: 8px">
+              <span class="icon-btn" role="img" style={social} aria-label="Facebook"><Icon name="facebook" strokeWidth={1.8} /></span>
+              <span class="icon-btn" role="img" style={social} aria-label="Instagram"><Icon name="instagram" strokeWidth={1.8} /></span>
+              <span class="icon-btn" role="img" style={social} aria-label="YouTube"><Icon name="youtube" strokeWidth={1.8} /></span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="section bg-steel">
+      <div class="wrap stack" style="gap: 40px">
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2">Frequently asked questions</h2>
+          <a class="link" href={ROUTES.faq} style="align-self: flex-start">See all FAQs</a>
+        </div>
+        <div class="g3" style="gap: 40px; align-items: start">
+          {FAQ_GROUPS.map((g, gi) => (
+            <div class="stack" style="gap: 8px">
+              <h3 class="h4" style={groupH}>{g.title}</h3>
+              <div class="stack">
+                {g.items.map((it, i) => <Acc q={it.q} html={it.a} open={gi === 0 && i === 0} />)}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

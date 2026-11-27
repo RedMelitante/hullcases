@@ -1,0 +1,131 @@
+---
+// Shop / category template: FilterPanel, FilterDrawer, ShopToolbar, ProductGrid, EmptyState
+// (design/source/Shop.dc.html). Sorting, price range, search and the /shop/?length= & ?use= filters run in src/scripts/shop.ts.
+import ProductCard from './ProductCard.astro';
+import Icon from './Icon.astro';
+import { PRODUCTS, card, cents, insideLength } from '../data/products';
+import { matchesFilter } from '../data/filters';
+import { CATEGORY_FILTERS, LENGTH_FILTERS, USE_FILTERS, ROUTES, SITE, SHOP_FILTERS, type ShopFilterKey } from '../data/site';
+
+interface Props {
+  filter: ShopFilterKey;
+}
+const { filter } = Astro.props;
+const cur = SHOP_FILTERS[filter];
+const filtered = filter !== 'all';
+const list = PRODUCTS.filter((p) => matchesFilter(filter, p));
+const count = (n: number) => `${n} ${n === 1 ? 'case' : 'cases'}`;
+const opt = (k: ShopFilterKey) => {
+  const on = k === filter;
+  return {
+    key: k,
+    label: SHOP_FILTERS[k].name,
+    n: PRODUCTS.filter((p) => matchesFilter(k, p)).length,
+    href: on ? ROUTES.shop : SHOP_FILTERS[k].href,
+    on,
+  };
+};
+const groups = [
+  { legend: 'Category', title: 'Category', opts: CATEGORY_FILTERS.map(opt) },
+  { legend: 'Size', title: 'Inside length', opts: LENGTH_FILTERS.map(opt) },
+  { legend: 'Use', title: 'Use', opts: USE_FILTERS.map(opt) },
+];
+const fieldsetStyle = 'border-left: 0; border-right: 0; border-bottom: 0; margin: 0; padding-left: 0; padding-right: 0';
+const filtersTitle = "font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase";
+---
+<main id="main" data-shop={filter}>
+  <section class="bg-steel" style="border-bottom: 1px solid #DDE0E4">
+    <div class="wrap" style="padding-bottom: 40px">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href={ROUTES.home}>Home</a><span aria-hidden="true">/</span>
+        <span data-crumb-shop hidden={!filtered}><a href={ROUTES.shop}>Shop</a><span aria-hidden="true" style="margin-left: 8px">/</span></span>
+        <span aria-current="page" data-shop-title>{cur.name}</span>
+      </nav>
+      <div class="stack" style="gap: 12px; max-width: 48rem">
+        <h1 class="h1" data-shop-title>{cur.name}</h1>
+        <p class="lead" data-shop-lead>{cur.lead}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-top: 32px; padding-bottom: 96px">
+    <div class="shop-layout">
+      <aside class="filters" aria-label="Filters" id="shop-filters" data-filters>
+        <div class="filters-hd">
+          <span class="h4" style={filtersTitle}>Filters</span>
+          <button class="icon-btn" type="button" aria-label="Close filters" data-close-filters><Icon name="close" /></button>
+        </div>
+        <div class="filters-bd">
+          <div class="row only-d" style="justify-content: space-between; padding-bottom: 14px">
+            <span class="h4" style={filtersTitle}>Filters</span>
+            <a class="link" href={ROUTES.shop} style="font-size: 15px">Clear all</a>
+          </div>
+          {groups.map((g) => (
+            <fieldset class="fgroup" style={fieldsetStyle}>
+              <legend class="sr-only">{g.legend}</legend>
+              <h3 aria-hidden="true">{g.title}</h3>
+              {g.opts.map((o) => (
+                <a class="check fopt" href={o.href} role="checkbox" aria-checked={o.on ? 'true' : 'false'} data-fopt={o.key}>
+                  <span class={o.on ? 'fbox is-on' : 'fbox'} aria-hidden="true"><Icon name="checkbox" strokeWidth={3} /></span>
+                  {o.label}<span class="fcount">({o.n})</span>
+                </a>
+              ))}
+            </fieldset>
+          ))}
+          <fieldset class="fgroup" style={fieldsetStyle}>
+            <legend class="sr-only">Price</legend>
+            <h3 aria-hidden="true">Price (USD)</h3>
+            <div class="row" style="gap: 10px; padding-top: 6px">
+              <div class="field" style="flex: 1"><label class="label" for="pmin">Min</label><input id="pmin" class="input" inputmode="decimal" placeholder="$0" autocomplete="off" data-price-min /></div>
+              <span style="padding-top: 28px" aria-hidden="true">–</span>
+              <div class="field" style="flex: 1"><label class="label" for="pmax">Max</label><input id="pmax" class="input" inputmode="decimal" placeholder="$500" autocomplete="off" data-price-max /></div>
+            </div>
+          </fieldset>
+        </div>
+        <div class="filters-ft">
+          <a class="btn btn-ghost btn-sm" href={ROUTES.shop} style="flex: 1; padding: 0 12px">Clear all</a>
+          <button class="btn btn-primary btn-sm" type="button" style="flex: 1.4; padding: 0 12px" data-close-filters>Show results</button>
+        </div>
+      </aside>
+
+      <div>
+        <div class="toolbar">
+          <button class="btn btn-ghost btn-sm only-m-flex" type="button" aria-label="Open filters" aria-controls="shop-filters" aria-expanded="false" data-open-filters><Icon name="filters" strokeWidth={2.2} />Filters</button>
+          <span class="only-d" style="font-weight: 600" data-shop-count aria-live="polite">{count(list.length)}</span>
+          <a class="chip" href={ROUTES.shop} aria-label={`Remove filter ${cur.name}`} style="text-decoration: none" data-shop-chip hidden={!filtered}><span data-shop-chip-label>{cur.name}</span><Icon name="close" /></a>
+          <div class="sort">
+            <label class="label" for="sort">Sort by</label>
+            <select id="sort" class="input" data-sort>
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price: low to high</option>
+              <option value="price-desc">Price: high to low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="stack" style="align-items: center; text-align: center; gap: 16px; padding: 72px 24px; border: 1.5px dashed #8A919A; border-radius: 8px; background: #F5F6F7" data-shop-empty hidden>
+          <Icon name="toolbox" style="width: 56px; height: 56px" stroke="#4A5159" strokeWidth={1.5} />
+          <h2 class="h3">No cases match those filters</h2>
+          <p class="body muted" style="max-width: 30rem">Try removing a filter or widening the price range. If you need a size we don't list, call <a class="link" href={SITE.phoneHref}>{SITE.phone}</a> and we'll tell you what fits.</p>
+          <div class="row" style="gap: 12px; flex-wrap: wrap; justify-content: center">
+            <a class="btn btn-primary" href={ROUTES.shop}>Clear all filters</a>
+            <a class="btn btn-ghost" href={ROUTES.contact}>Contact us</a>
+          </div>
+        </div>
+
+        <div class="pgrid" data-shop-grid>
+          {list.map((p, i) => (
+            <ProductCard
+              product={card(p.m)}
+              data={{ m: p.m, order: i, price: cents(p), len: insideLength(p), cat: p.cat, wheels: p.wheels, carry: p.carry, q: `${p.m} ${p.inside} ${p.insidemm} ${p.overall}`.toLowerCase() }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  import '../scripts/shop';
+</script>

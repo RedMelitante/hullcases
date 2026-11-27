@@ -1,0 +1,88 @@
+---
+// About (design/source/About.dc.html) at the live URL /waterproof-hard-cases-with-wheel/
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ROUTES, SITE } from '../data/site';
+const num = 'font-size: 56px; color: #D9560B';
+const fact = 'gap: 2px; border-top: 2px solid #16181B; padding-top: 12px';
+const facImg = 'display: block; width: 100%; aspect-ratio: 4/3; object-fit: contain; border-radius: 8px; background: #FFFFFF; border: 1px solid #DDE0E4; padding: 6%; box-sizing: border-box';
+---
+<BaseLayout
+  title="About Hull Cases | Durable Waterproof Hard Cases"
+  description="For more than a decade, Hull Cases has supplied rugged, waterproof protective cases for industry, fieldwork and travel, from Mira Loma, CA."
+  active="about"
+  image="/images/stacked-black-yellow.jpg"
+>
+  <main id="main">
+    <section class="tex-plate" style="color: #FFFFFF">
+      <div class="wrap stack" style="gap: 20px; padding-top: 80px; padding-bottom: 88px; max-width: 1280px">
+        <p class="eyebrow">About Hull Cases</p>
+        <h1 class="display" style="max-width: 16ch">Durable waterproof hard cases, engineered to protect your gear</h1>
+        <p class="lead" style="max-width: 40rem">Hull Cases was founded with one mission: to protect your equipment with uncompromising durability.</p>
+      </div>
+    </section>
+
+    <!-- STORY -->
+    <section class="section">
+      <div class="wrap g2" style="gap: 72px; align-items: center">
+        <div class="stack" style="gap: 18px">
+          <p class="eyebrow">Our story</p>
+          <h2 class="h2">Rugged protection you can trust</h2>
+          <p class="body" style="font-size: 17px">For more than a decade, we've supplied high-performance protective cases built to withstand extreme conditions, whether for industry, fieldwork, travel or everyday use.</p>
+          <p class="body" style="font-size: 17px">From tactical-grade safety boxes to everyday storage, our cases are made for reliability, strength and long-term protection: polypropylene alloy shells, IP67 sealing and a lifetime warranty.</p>
+        </div>
+        <div class="corners"><img src="/images/stacked-black-yellow.jpg" alt="Yellow and black Hull hard cases stacked" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 8px; background: #FFFFFF" /></div>
+      </div>
+    </section>
+
+    <!-- FACILITY -->
+    <section class="section bg-steel">
+      <div class="wrap stack" style="gap: 40px">
+        <div class="g2" style="gap: 56px; align-items: end">
+          <div class="stack" style="gap: 14px">
+            <p class="eyebrow">Our facility</p>
+            <h2 class="h2">Every order ships from Mira Loma</h2>
+            <p class="body" style="font-size: 17px">Orders are picked, packed and shipped from 3827 Wacker Dr. in Mira Loma, California. You can also arrange to pick up your order locally.</p>
+          </div>
+          <dl class="g2" style="gap: 20px 32px; margin: 0">
+            <div class="stack" style={fact}><dt class="eyebrow" style="color: #4A5159">Address</dt><dd style="margin: 0; font-weight: 600">3827 Wacker Dr.<br />Mira Loma, CA 91752</dd></div>
+            <div class="stack" style={fact}><dt class="eyebrow" style="color: #4A5159">Ships to</dt><dd style="margin: 0; font-weight: 600">US addresses</dd></div>
+            <div class="stack" style={fact}><dt class="eyebrow" style="color: #4A5159">Ships via</dt><dd style="margin: 0; font-weight: 600">UPS, FedEx or freight</dd></div>
+            <div class="stack" style={fact}><dt class="eyebrow" style="color: #4A5159">Local pickup</dt><dd style="margin: 0; font-weight: 600">Available</dd></div>
+          </dl>
+        </div>
+        <div class="g3" style="gap: 20px">
+          <img src="/images/category-small.jpg" alt="Small yellow Hull hard case" loading="lazy" decoding="async" style={facImg} />
+          <img src="/images/open-case-foam.jpg" alt="Open Hull case with foam interior" loading="lazy" decoding="async" style={facImg} />
+          <img src="/images/category-wheeled.jpg" alt="Large wheeled Hull hard case" loading="lazy" decoding="async" style={facImg} />
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMISE -->
+    <section class="section">
+      <div class="wrap stack" style="gap: 48px">
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <p class="eyebrow">Quality promise</p>
+          <h2 class="h2">Built on standards that never compromise</h2>
+        </div>
+        <div class="g4 g-1m" style="gap: 36px">
+          <div class="stack" style="gap: 12px"><span class="display" style={num} aria-hidden="true">01</span><h3 class="h3">Honest specs</h3><p class="body muted">Every product page lists interior and exterior dimensions, weight and material, so you can measure your gear before you buy.</p></div>
+          <div class="stack" style="gap: 12px"><span class="display" style={num} aria-hidden="true">02</span><h3 class="h3">Tested before it ships</h3><p class="body muted">Each product goes through testing and quality control.</p></div>
+          <div class="stack" style="gap: 12px"><span class="display" style={num} aria-hidden="true">03</span><h3 class="h3">Lifetime warranty</h3><p class="body muted">Every Hull case is covered by a lifetime warranty.</p></div>
+          <div class="stack" style="gap: 12px"><span class="display" style={num} aria-hidden="true">04</span><h3 class="h3">A person on the phone</h3><p class="body muted">Questions about fit or an order? Call <a class="link" href={SITE.phoneHref}>{SITE.phone}</a> or email <a class="link" href={SITE.emailHref}>{SITE.email}</a>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="tex-plate" style="color: #FFFFFF">
+      <div class="wrap row" style="justify-content: space-between; gap: 24px; flex-wrap: wrap; padding-top: 56px; padding-bottom: 56px">
+        <h2 class="h2">Find the right case for your gear</h2>
+        <div class="row" style="gap: 12px; flex-wrap: wrap">
+          <a class="btn btn-primary" href={ROUTES.shop}>Shop cases</a>
+          <a class="btn btn-ghost-light" href={ROUTES.contact}>Ask about sizing</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ROUTES, SITE } from '../data/site';
+---
+<BaseLayout title="Page not found | Hull Cases" description="The page you were looking for isn’t here." noindex>
+  <main id="main">
+    <section class="tex-plate" style="color: #FFFFFF">
+      <div class="wrap stack" style="gap: 20px; padding-top: 88px; padding-bottom: 96px">
+        <p class="eyebrow">Error 404</p>
+        <h1 class="display" style="max-width: 16ch">We can’t find that page</h1>
+        <p class="lead" style="max-width: 40rem">It may have moved. Try the shop, or call <a class="link" href={SITE.phoneHref}>{SITE.phone}</a> and we’ll help you find the right case.</p>
+        <div class="row" style="gap: 12px; flex-wrap: wrap; margin-top: 8px">
+          <a class="btn btn-primary" href={ROUTES.shop}>Shop cases</a>
+          <a class="btn btn-ghost-light" href={ROUTES.home}>Back to home</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

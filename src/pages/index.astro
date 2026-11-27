@@ -1,0 +1,286 @@
+---
+// Home (design/source/Main.dc.html)
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Icon from '../components/Icon.astro';
+import Acc from '../components/Acc.astro';
+import { card } from '../data/products';
+import { ROUTES, SITE, SHOP_FILTERS } from '../data/site';
+import { POST_BY_KEY, postUrl } from '../data/posts';
+import type { IconName } from '../scripts/icons';
+
+const trust: { title: string; body: string; icon: IconName }[] = [
+  { title: 'IP67 waterproof', body: 'Dust-tight and water-sealed', icon: 'drop' },
+  { title: 'Lifetime warranty', body: 'On every Hull case', icon: 'shield' },
+  { title: 'Custom fit', body: 'Foam, panels and logos', icon: 'layers' },
+  { title: 'Secure checkout', body: 'Ships from Mira Loma, CA', icon: 'lock' },
+];
+const categories = [
+  { title: 'Small cases', href: SHOP_FILTERS.small.href, img: '/images/category-small.jpg' },
+  { title: 'Medium cases', href: SHOP_FILTERS.medium.href, img: '/images/open-case-foam.jpg' },
+  { title: 'Large cases', href: SHOP_FILTERS.large.href, img: '/images/category-large.jpg' },
+  { title: 'Wheeled cases', href: SHOP_FILTERS.wheeled.href, img: '/images/category-wheeled.jpg' },
+];
+const bestSellers = ['D2812', 'D3213', 'D3215', 'D3608', 'D3708', 'D3913', 'D2816', 'D3214'].map((m) => card(m));
+const larger = ['D4223', 'D4821', 'D5524', 'D6530'].map((m) => card(m));
+const uses = [
+  { title: 'Photo & video', body: 'Cameras, lenses and accessories between shoots, held in place with custom foam.', img: '/images/open-case-foam.jpg' },
+  { title: 'Tactical & field work', body: 'Equipment that has to arrive working, in waterproof cases built for rough handling.', img: '/images/tactical-cases.jpg' },
+  { title: 'Tools & trades', body: 'Power tools, meters and parts kept organized and dry on the job site.', img: '/images/custom-foam-tools.jpg' },
+  { title: 'Travel', body: 'Airline check-in and carry-on sizes. Check your airline’s limits before you fly.', img: '/images/use-travel.jpg' },
+];
+const posts = [POST_BY_KEY.tactical, POST_BY_KEY.camera, POST_BY_KEY.utility].map((p) => ({
+  title: p.title,
+  href: postUrl(p),
+  date: p.date,
+  excerpt: p.excerpt,
+  img: p.key === 'tactical' ? '/images/long-case.jpg' : p.thumb,
+}));
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Store',
+  name: SITE.name,
+  url: SITE.url,
+  logo: `${SITE.url}/images/logo-dark.png`,
+  image: `${SITE.url}/images/hero-wheeled-case.jpg`,
+  telephone: '+1-833-236-0699',
+  email: SITE.email,
+  priceRange: '$',
+  address: { '@type': 'PostalAddress', streetAddress: '3827 Wacker Dr.', addressLocality: 'Mira Loma', addressRegion: 'CA', postalCode: '91752', addressCountry: 'US' },
+};
+const sectionHead = 'justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: flex-end';
+---
+<BaseLayout
+  title="Waterproof Hard Cases with Lifetime Warranty | Hull Cases"
+  description="IP67 waterproof polypropylene hard cases for electronics, tools and equipment. Lifetime warranty, custom foam and logos, shipped from Mira Loma, CA."
+  active="home"
+  jsonLd={jsonLd}
+>
+  <main id="main">
+    <!-- HERO -->
+    <section class="tex-plate" style="color: #FFFFFF">
+      <div class="wrap g2" style="align-items: center; gap: 56px; padding-top: 88px; padding-bottom: 88px">
+        <div class="stack" style="gap: 24px">
+          <p class="eyebrow">Waterproof hard cases · Mira Loma, CA</p>
+          <h1 class="display">Rugged protection for your valuable gear.</h1>
+          <p class="lead" style="max-width: 34rem">Polypropylene hard cases for electronics, tools and equipment. IP67 waterproof, backed by a lifetime warranty, and shipped from Mira Loma, California to customers across the US.</p>
+          <div class="row" style="gap: 20px; flex-wrap: wrap; margin-top: 8px">
+            <a class="btn btn-primary" href={ROUTES.shop}>Shop cases <Icon name="arrow" strokeWidth={2.2} /></a>
+            <a class="link" href={ROUTES.custom} style="font-size: 17px">Need a custom fit? See custom cases</a>
+          </div>
+        </div>
+        <div class="corners">
+          <img src="/images/hero-wheeled-case.jpg" alt="Black Hull wheeled hard case with extended pull handle" fetchpriority="high" style="display: block; width: 100%; aspect-ratio: 5/4; object-fit: contain; background: #FFFFFF; border-radius: 8px; padding: 4%; box-sizing: border-box" />
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST BAR -->
+    <section style="border-bottom: 1px solid #DDE0E4" aria-label="Why buy from Hull Cases">
+      <div class="wrap g4 g-1m" style="gap: 0; padding-top: 8px; padding-bottom: 8px">
+        {trust.map((t) => (
+          <div class="row" style="gap: 14px; padding: 22px 20px 22px 0">
+            <span style="width: 48px; height: 48px; border-radius: 4px; background: #16181B; color: #F26B1D; display: inline-flex; align-items: center; justify-content: center; flex: none"><Icon name={t.icon} class="ico" /></span>
+            <span class="stack"><strong style="font-size: 17px">{t.title}</strong><span class="t-sm muted">{t.body}</span></span>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="section">
+      <div class="wrap stack" style="gap: 36px">
+        <div class="row" style={sectionHead}>
+          <div class="stack" style="gap: 10px">
+            <p class="eyebrow">Categories</p>
+            <h2 class="h2">Shop by category</h2>
+          </div>
+          <a class="link" href={ROUTES.shop}>View all cases</a>
+        </div>
+        <div class="g4">
+          {categories.map((c) => (
+            <a href={c.href} class="stack" style="gap: 0; text-decoration: none; border: 1px solid #DDE0E4; border-radius: 8px; overflow: hidden; background: #FFFFFF">
+              <img src={c.img} alt={c.title} loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/3; object-fit: contain; padding: 8%; box-sizing: border-box; background: #FFFFFF; border-bottom: 1px solid #DDE0E4" />
+              <div class="row" style="justify-content: space-between; gap: 12px; padding: 18px 20px; min-height: 64px">
+                <span style="font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 22px; text-transform: uppercase; letter-spacing: .04em">{c.title}</span>
+                <Icon name="arrow" class="ico" stroke="#B4470E" strokeWidth={2.2} />
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- BEST SELLERS -->
+    <section class="section bg-steel">
+      <div class="wrap stack" style="gap: 36px">
+        <div class="row" style={sectionHead}>
+          <div class="stack" style="gap: 10px">
+            <p class="eyebrow">Best sellers</p>
+            <h2 class="h2">Cases customers reach for</h2>
+          </div>
+          <a class="btn btn-ghost btn-sm only-d" href={ROUTES.shop}>Shop all cases</a>
+        </div>
+        <div class="g4" style="row-gap: 48px">
+          {bestSellers.map((p) => <ProductCard product={p} />)}
+        </div>
+        <a class="btn btn-ghost btn-block only-m-flex" href={ROUTES.shop}>Shop all cases</a>
+      </div>
+    </section>
+
+    <!-- WHY HULL -->
+    <section class="section">
+      <div class="wrap stack" style="gap: 48px">
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <p class="eyebrow">Why Hull Cases</p>
+          <h2 class="h2">Professional-grade, built to last</h2>
+          <p class="lead">For more than a decade, Hull Cases has supplied protective cases for industry, fieldwork, travel and everyday use.</p>
+        </div>
+        <div class="g4 g-1m" style="gap: 40px">
+          <div class="stack" style="gap: 14px; border-top: 3px solid #16181B; padding-top: 22px">
+            <Icon name="toolbox" class="ico" style="width: 36px; height: 36px" stroke="#B4470E" strokeWidth={1.8} />
+            <h3 class="h3">Built for hard use</h3>
+            <p class="body muted">Polypropylene alloy shells rated from −40 °F to 210 °F, made for fieldwork, travel and daily transport.</p>
+          </div>
+          <div class="stack" style="gap: 14px; border-top: 3px solid #16181B; padding-top: 22px">
+            <Icon name="drop" class="ico" style="width: 36px; height: 36px" stroke="#B4470E" strokeWidth={1.8} />
+            <h3 class="h3">IP67 waterproof</h3>
+            <p class="body muted">Sealed against dust and rated for temporary immersion in water, so rain, spray and wet ground stay outside.</p>
+          </div>
+          <div class="stack" style="gap: 14px; border-top: 3px solid #16181B; padding-top: 22px">
+            <Icon name="shieldCheck" class="ico" style="width: 36px; height: 36px" stroke="#B4470E" strokeWidth={1.8} />
+            <h3 class="h3">Lifetime warranty</h3>
+            <p class="body muted">Every case is covered by a lifetime warranty.</p>
+          </div>
+          <div class="stack" style="gap: 14px; border-top: 3px solid #16181B; padding-top: 22px">
+            <Icon name="layers2" class="ico" style="width: 36px; height: 36px" stroke="#B4470E" strokeWidth={1.8} />
+            <h3 class="h3">Made to fit your gear</h3>
+            <p class="body muted">Custom foam lining, custom panels and custom logos are available. Interior dimensions are listed on every product page.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURE BANNERS -->
+    <section class="wrap g2" style="gap: 24px; padding-bottom: 96px">
+      <a href={ROUTES.custom} class="banner tex-plate" style="color: #FFFFFF">
+        <span class="stack" style="gap: 12px">
+          <span class="eyebrow">Custom products</span>
+          <span class="h2">Need a custom fit?</span>
+          <span class="body" style="color: #B8BEC6">Foam interiors, custom panels and case printing, built around your gear.</span>
+          <span class="link" style="color: #F26B1D">Request a quote</span>
+        </span>
+        <img src="/images/custom-foam-tools.jpg" alt="Open case with custom-cut foam holding a tool set" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 6px; background: #FFFFFF" />
+      </a>
+      <a href={SHOP_FILTERS.wheeled.href} class="banner" style="background: #F26B1D; color: #16181B">
+        <span class="stack" style="gap: 12px">
+          <span class="eyebrow" style="color: #16181B">Wheeled cases</span>
+          <span class="h2">Heavy kit? Roll it.</span>
+          <span class="body">Larger cases with a pull handle and wheels, sized for airline check-in.</span>
+          <span style="font-weight: 600; text-decoration: underline; text-underline-offset: 3px">Shop wheeled cases</span>
+        </span>
+        <img src="/images/category-wheeled.jpg" alt="Black wheeled hard case" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 1/1; object-fit: contain; border-radius: 6px; background: #FFFFFF; padding: 8%; box-sizing: border-box" />
+      </a>
+    </section>
+
+    <!-- LARGER CASES -->
+    <section class="section bg-steel">
+      <div class="wrap stack" style="gap: 36px">
+        <div class="row" style={sectionHead}>
+          <div class="stack" style="gap: 10px">
+            <p class="eyebrow">More sizes</p>
+            <h2 class="h2">Larger cases for bigger kits</h2>
+          </div>
+          <a class="link" href={ROUTES.shop}>See every size</a>
+        </div>
+        <div class="g4">
+          {larger.map((p) => <ProductCard product={p} />)}
+        </div>
+      </div>
+    </section>
+
+    <!-- WHO IT'S FOR -->
+    <section class="section tex-plate" style="color: #FFFFFF">
+      <div class="wrap stack" style="gap: 40px">
+        <div class="stack" style="gap: 12px; max-width: 46rem">
+          <p class="eyebrow">Who it's for</p>
+          <h2 class="h2">For people whose gear goes places</h2>
+        </div>
+        <div class="g4" style="gap: 24px">
+          {uses.map((u) => (
+            <div class="stack" style="gap: 16px">
+              <img src={u.img} alt={u.title} loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 8px; background: #FFFFFF" />
+              <h3 style="margin: 0; font-size: 22px; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .04em">{u.title}</h3>
+              <p class="body" style="color: #B8BEC6">{u.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- BLOG STRIP -->
+    <section class="section bg-steel">
+      <div class="wrap stack" style="gap: 36px">
+        <div class="row" style={sectionHead}>
+          <div class="stack" style="gap: 10px">
+            <p class="eyebrow">From the blog</p>
+            <h2 class="h2">Guides &amp; articles</h2>
+          </div>
+          <a class="link" href={ROUTES.blog}>All articles</a>
+        </div>
+        <div class="g3" style="gap: 28px">
+          {posts.map((b) => (
+            <a href={b.href} class="stack" style="gap: 14px; text-decoration: none; background: #FFFFFF; border: 1px solid #DDE0E4; border-radius: 8px; overflow: hidden">
+              <img src={b.img} alt="" loading="lazy" decoding="async" style="display: block; width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #FFFFFF; border-bottom: 1px solid #DDE0E4" />
+              <div class="stack" style="gap: 10px; padding: 4px 24px 26px">
+                <span class="t-sm muted">{b.date}</span>
+                <h3 class="h4" style="font-size: 21px; line-height: 1.3">{b.title}</h3>
+                <p class="body muted">{b.excerpt}</p>
+                <span class="link" style="font-size: 16px">Read article</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ TEASER -->
+    <section class="section">
+      <div class="wrap g2 g2-r" style="gap: 56px; align-items: start">
+        <div class="stack" style="gap: 16px">
+          <p class="eyebrow">FAQ</p>
+          <h2 class="h2">Questions before you buy</h2>
+          <p class="lead">Can't find your answer? Call <a class="link" href={SITE.phoneHref}>{SITE.phone}</a> or email <a class="link" href={SITE.emailHref}>{SITE.email}</a>.</p>
+          <a class="btn btn-ghost btn-sm" href={ROUTES.faq} style="align-self: flex-start; margin-top: 8px">See all FAQs</a>
+        </div>
+        <div class="stack">
+          <Acc q="How do I pick the right size?" open>Measure your gear (length × width × height), then compare it with the internal size on the product page. Each model lists its internal size, overall dimensions and lid and base depths.</Acc>
+          <Acc q="Are the cases waterproof?">Yes. Hull cases are rated IP67: dust-tight and protected against temporary immersion in water.</Acc>
+          <Acc q="Can I take a Hull case on a plane?">Our cases are suitable for airline check-in, and many sizes work as carry-on. Check your airline's size and weight limits before you travel.</Acc>
+          <Acc q="Do you offer custom foam or logos?">Yes. We offer custom foam lining, custom panels and custom logos. <a class="link" href={ROUTES.custom}>Request a custom case quote</a>.</Acc>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER -->
+    <section style="background: #F26B1D; color: #16181B">
+      <div class="wrap g2" style="align-items: center; gap: 40px; padding-top: 56px; padding-bottom: 56px">
+        <div class="stack" style="gap: 10px">
+          <h2 class="h2">Restocks and new cases, first</h2>
+          <p class="body" style="font-size: 18px">Get an email when popular sizes come back in stock, a new case lands or a sale starts.</p>
+        </div>
+        <form class="stack" style="gap: 10px" data-form="newsletter" data-form-name="Home newsletter" novalidate>
+          <label class="label" for="nl-email" style="color: #16181B">Email address</label>
+          <div class="row" style="gap: 10px; flex-wrap: wrap">
+            <input id="nl-email" name="email" class="input" type="email" placeholder="you@example.com" autocomplete="email" required style="flex: 1 1 240px; border-color: #16181B" />
+            <button class="btn btn-secondary" type="submit" style="flex: 0 0 auto">Subscribe</button>
+          </div>
+          <p class="body" style="margin: 0; font-weight: 600" role="status" data-form-success hidden>Thanks, you’re on the list.</p>
+          <p class="err" style="color: #16181B" data-form-error hidden></p>
+          <p class="t-sm" style="margin: 0">Unsubscribe anytime. See our <a href={ROUTES.privacy} style="color: inherit">Privacy Policy</a>.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

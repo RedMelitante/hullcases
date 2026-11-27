@@ -1,0 +1,34 @@
+---
+// ProductCard (design/source/ProductCard.dc.html)
+import Icon from './Icon.astro';
+import type { CardProduct } from '../data/products';
+
+interface Props {
+  product: CardProduct;
+  /** extra data-* attributes for client-side filtering / sorting */
+  data?: Record<string, string | number | boolean>;
+}
+const { product: p, data = {} } = Astro.props;
+const dataAttrs = Object.fromEntries(Object.entries(data).map(([k, v]) => [`data-${k}`, String(v)]));
+---
+<article class="pc" {...dataAttrs}>
+  <a class="pc-img" href={p.href} aria-label={p.title}>
+    {p.badge && <div class="pc-badges"><span class={`badge badge-${p.badgeKind ?? 'new'}`}>{p.badge}</span></div>}
+    {p.img ? (
+      <img src={p.img} alt={p.title} loading="lazy" decoding="async" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 12%; box-sizing: border-box; background: #FFFFFF; border: 1px solid #DDE0E4; border-radius: 8px" />
+    ) : (
+      <div class="ph"><span>Photo needed: {p.m}, front ¾ view, white sweep</span></div>
+    )}
+  </a>
+  <div class="stack" style="gap: 8px">
+    <a class="pc-name" href={p.href}>{p.title}</a>
+    <div class="pc-meta">
+      <span class="price">{p.price}</span>
+      {p.was && <span class="price-was"><span class="sr-only">Was </span>{p.was}</span>}
+    </div>
+    {p.stock === 'low' && <span class="badge badge-low" style="align-self: flex-start"><span class="dot"></span>Low stock</span>}
+  </div>
+  <button class="btn btn-ghost btn-sm btn-block" type="button" data-add-to-cart={p.m} aria-label={`Quick add ${p.title} to cart`}>
+    <Icon name="plus" strokeWidth={2.2} />Quick add
+  </button>
+</article>

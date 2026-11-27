@@ -1,0 +1,162 @@
+---
+// CheckoutHeader + CheckoutForm + DeliveryOption + OrderSummary (design/source/Checkout.dc.html)
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { ROUTES, SITE } from '../../data/site';
+import { US_STATES } from '../../data/states';
+const legend = "font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 24px; text-transform: uppercase; margin-bottom: 8px";
+const fs = 'gap: 16px; border: 0; padding: 0; margin: 0';
+const radio = 'padding: 14px 16px; border: 1.5px solid #8A919A; border-radius: 4px';
+---
+<BaseLayout title="Checkout | Hull Cases" description="Secure checkout for your Hull Cases order." noindex checkout>
+  <main id="main" class="wrap" style="padding-top: 40px; padding-bottom: 96px" data-checkout>
+    <div class="g2 g2-l" style="gap: 56px; align-items: start">
+      <form class="stack" style="gap: 32px" aria-labelledby="co-title" novalidate data-checkout-form>
+        <h1 id="co-title" class="h1" style="font-size: 44px">Checkout</h1>
+        <fieldset class="stack" style={fs}>
+          <legend class="h4" style={legend}>1. Contact</legend>
+          <div class="field"><label class="label" for="co-email">Email address</label><input id="co-email" name="email" class="input" type="email" autocomplete="email" required /></div>
+          <label class="check"><input type="checkbox" name="marketing" />Email me restock alerts and new cases</label>
+          <p class="t-sm muted" style="margin: 0">Have an account? <a class="link" href={ROUTES.account}>Sign in</a></p>
+        </fieldset>
+        <fieldset class="stack" style={fs} data-ship-fields>
+          <legend class="h4" style={legend}>2. Shipping address</legend>
+          <div class="g2" style="gap: 16px">
+            <div class="field"><label class="label" for="co-first">First name</label><input id="co-first" name="first_name" class="input" autocomplete="given-name" required /></div>
+            <div class="field"><label class="label" for="co-last">Last name</label><input id="co-last" name="last_name" class="input" autocomplete="family-name" required /></div>
+          </div>
+          <div class="field"><label class="label" for="co-company">Company <span class="opt">(optional)</span></label><input id="co-company" name="company" class="input" autocomplete="organization" /></div>
+          <div class="field"><label class="label" for="co-addr">Address</label><input id="co-addr" name="address_1" class="input" autocomplete="address-line1" required data-ship-required /></div>
+          <div class="field"><label class="label" for="co-addr2">Apartment, suite, etc. <span class="opt">(optional)</span></label><input id="co-addr2" name="address_2" class="input" autocomplete="address-line2" /></div>
+          <div class="g3" style="gap: 16px">
+            <div class="field"><label class="label" for="co-city">City</label><input id="co-city" name="city" class="input" autocomplete="address-level2" required data-ship-required /></div>
+            <div class="field"><label class="label" for="co-state">State</label><select id="co-state" name="state" class="input" autocomplete="address-level1">{US_STATES.map((s) => <option>{s}</option>)}</select></div>
+            <div class="field"><label class="label" for="co-zip">ZIP code</label><input id="co-zip" name="postal_code" class="input" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" required data-ship-required /></div>
+          </div>
+          <div class="field"><label class="label" for="co-phone">Phone <span class="opt">(for delivery questions)</span></label><input id="co-phone" name="phone" class="input" type="tel" autocomplete="tel" /></div>
+          <div class="field"><label class="label" for="co-country">Country</label><input id="co-country" class="input" value="United States" disabled /><span class="help">We ship within the United States.</span></div>
+        </fieldset>
+        <fieldset class="stack" style="gap: 10px; border: 0; padding: 0; margin: 0">
+          <legend class="h4" style={legend}>3. Delivery</legend>
+          <label class="check" style={radio}><input type="radio" name="delivery" value="ship" checked /><span class="stack"><strong>Ship to my address</strong><span class="t-sm muted">UPS, FedEx or freight, depending on size · rate calculated by carrier</span></span></label>
+          <label class="check" style={radio}><input type="radio" name="delivery" value="pickup" /><span class="stack"><strong>Local pickup</strong><span class="t-sm muted">3827 Wacker Dr., Mira Loma, CA 91752</span></span></label>
+        </fieldset>
+        <!--
+          PAYMENT: these card inputs have no name attribute, so they are never stored or sent anywhere.
+          Before taking real orders, replace this fieldset with the payment provider's hosted fields
+          (Medusa payment session / Stripe Payment Element) so card data never touches this site.
+        -->
+        <fieldset class="stack" style={fs}>
+          <legend class="h4" style={legend}>4. Payment</legend>
+          <div class="field"><label class="label" for="co-card">Card number</label><input id="co-card" class="input" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" /></div>
+          <div class="g2" style="gap: 16px">
+            <div class="field"><label class="label" for="co-exp">Expiry</label><input id="co-exp" class="input" autocomplete="cc-exp" placeholder="MM / YY" /></div>
+            <div class="field"><label class="label" for="co-cvc">Security code</label><input id="co-cvc" class="input" inputmode="numeric" autocomplete="cc-csc" placeholder="CVC" /></div>
+          </div>
+          <label class="check"><input type="checkbox" checked />Billing address is the same as shipping</label>
+          <p class="t-sm muted" style="margin: 0">Card details are encrypted. By placing your order you agree to our <a class="link" href={ROUTES.terms}>Terms and Conditions</a> and <a class="link" href={ROUTES.returns}>Return and Refund Policy</a>.</p>
+        </fieldset>
+        <div class="alert alert-err" role="alert" data-checkout-error hidden></div>
+        <button class="btn btn-primary btn-block" type="submit" data-place-order>Place order · <span data-co-total>$0.00</span></button>
+      </form>
+
+      <aside class="stack sticky-d" style="gap: 16px; padding: 28px; background: #F5F6F7; border-radius: 8px" aria-label="Order summary">
+        <h2 class="h3">Order summary</h2>
+        <div class="stack" style="gap: 16px" data-co-lines></div>
+        <p class="body muted" style="margin: 0" data-co-empty hidden>Your cart is empty. <a class="link" href={ROUTES.shop}>Continue shopping</a></p>
+        <div class="row" style="justify-content: space-between; border-top: 1px solid #DDE0E4; padding-top: 14px"><span class="muted">Subtotal</span><span class="num" data-co-subtotal>$0.00</span></div>
+        <div class="row" style="justify-content: space-between"><span class="muted">Shipping</span><span data-co-ship>Calculated by carrier</span></div>
+        <div class="row" style="justify-content: space-between"><span class="muted">Tax</span><span>Calculated at payment</span></div>
+        <div class="row" style="justify-content: space-between; border-top: 2px solid #16181B; padding-top: 14px"><span style="font-weight: 700">Total (USD)</span><span class="price" data-co-total>$0.00</span></div>
+        <p class="t-sm muted" style="margin: 0">Questions? Call <a class="link" href={SITE.phoneHref}>{SITE.phone}</a></p>
+      </aside>
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  import { clearCart, detailed, money, nextOrderId, saveOrder, type Order } from '../../scripts/cart';
+  import { esc } from '../../scripts/ui';
+  import { ROUTES } from '../../data/site';
+
+  const ENDPOINT: string = import.meta.env.PUBLIC_FORMS_ENDPOINT ?? '';
+  const root = document.querySelector<HTMLElement>('[data-checkout]')!;
+  const form = root.querySelector<HTMLFormElement>('[data-checkout-form]')!;
+  const q = <T extends HTMLElement = HTMLElement>(s: string) => root.querySelector<T>(s)!;
+  const err = q('[data-checkout-error]');
+  const placeBtn = q<HTMLButtonElement>('[data-place-order]');
+  const delivery = () => (form.querySelector<HTMLInputElement>('input[name="delivery"]:checked')?.value === 'pickup' ? 'pickup' : 'ship');
+
+  function render() {
+    const { items, subtotal } = detailed();
+    q('[data-co-lines]').innerHTML = items
+      .map(
+        (it) => `<div class="row" style="gap: 14px"><img src="${it.img}" alt="" width="64" height="64" style="width: 64px; height: 64px; object-fit: contain; padding: 4px; box-sizing: border-box; background: #FFFFFF; border: 1px solid #DDE0E4; border-radius: 4px; flex: none"><span style="flex: 1; font-weight: 600">${esc(it.title)}<br><span class="t-sm muted" style="font-weight: 400">Qty ${it.qty}</span></span><span class="num" style="font-weight: 600">${money(it.line)}</span></div>`,
+      )
+      .join('');
+    q('[data-co-empty]').hidden = items.length > 0;
+    q('[data-co-subtotal]').textContent = money(subtotal);
+    root.querySelectorAll('[data-co-total]').forEach((el) => (el.textContent = money(subtotal)));
+    q('[data-co-ship]').textContent = delivery() === 'pickup' ? 'Free (local pickup)' : 'Calculated by carrier';
+    placeBtn.disabled = items.length === 0;
+    // Local pickup needs no street address
+    root.querySelectorAll<HTMLInputElement>('[data-ship-required]').forEach((el) => (el.required = delivery() === 'ship'));
+  }
+  form.addEventListener('change', (e) => {
+    if ((e.target as HTMLInputElement).name === 'delivery') render();
+  });
+  window.addEventListener('cart:change', render);
+  render();
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    err.hidden = true;
+    const { items, subtotal } = detailed();
+    if (!items.length) return;
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    const fd = new FormData(form); // card inputs have no name, so they are never included
+    const val = (k: string) => String(fd.get(k) ?? '').trim();
+    const order: Order = {
+      id: nextOrderId(),
+      date: new Date().toISOString(),
+      email: val('email'),
+      delivery: delivery(),
+      lines: items.map((it) => ({ m: it.m, qty: it.qty, unit: it.unit })),
+      subtotal,
+    };
+    const summary = [
+      `Order #${order.id}`,
+      ...items.map((it) => `${it.qty} × ${it.title} (${money(it.unit)}) = ${money(it.line)}`),
+      `Subtotal: ${money(subtotal)}`,
+      `Delivery: ${order.delivery === 'pickup' ? 'Local pickup, Mira Loma' : 'Ship to address'}`,
+      '',
+      `${val('first_name')} ${val('last_name')}${val('company') ? ', ' + val('company') : ''}`,
+      `${val('email')} · ${val('phone')}`,
+      order.delivery === 'ship' ? `${val('address_1')} ${val('address_2')}, ${val('city')}, ${val('state')} ${val('postal_code')}, United States` : '',
+      `Restock emails: ${fd.get('marketing') ? 'yes' : 'no'}`,
+    ].join('\n');
+
+    placeBtn.disabled = true;
+    try {
+      if (ENDPOINT) {
+        fd.append('_form', 'Order');
+        fd.append('order_id', order.id);
+        fd.append('order_summary', summary);
+        const res = await fetch(ENDPOINT, { method: 'POST', body: fd, headers: { Accept: 'application/json' } });
+        if (!res.ok) throw new Error(String(res.status));
+      } else {
+        location.href = `mailto:info@hullcases.com?subject=${encodeURIComponent(`Order #${order.id} – hullcases.com`)}&body=${encodeURIComponent(summary)}`;
+        await new Promise((r) => setTimeout(r, 800));
+      }
+      saveOrder(order);
+      clearCart();
+      location.href = `${ROUTES.orderConfirmed}?order=${encodeURIComponent(order.id)}`;
+    } catch {
+      err.textContent = 'Sorry, we couldn’t place your order. Please try again, or call (833) 236-0699.';
+      err.hidden = false;
+      placeBtn.disabled = false;
+    }
+  });
+</script>
