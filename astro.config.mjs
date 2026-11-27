@@ -13,19 +13,7 @@ export default defineConfig({
       filter: (page) => !NOINDEX.some((p) => new URL(page).pathname.startsWith(p)),
     }),
   ],
-  // Live-site and Medusa-theme URLs kept working (see design/source/Handoff.dc.html, build notes).
-  // Static hosts get meta-refresh pages; public/_redirects gives real 301s on Netlify / Cloudflare Pages.
-  redirects: {
-    '/privacy': '/privacy-policy/',
-    '/terms': '/terms-and-conditions/',
-    '/product/d5524-2': '/product/d5524/',
-    '/product/d6125-2': '/product/d6125/',
-    '/product/d6530-2': '/product/d6530/',
-    '/us': '/',
-    '/us/store': '/shop/',
-    '/us/cart': '/cart/',
-    '/us/checkout': '/checkout/',
-    '/us/account': '/account/',
-    '/us/account/orders': '/account/orders/',
-  },
+  // Redirects for old live-site and Medusa-theme URLs live in public/_redirects only (real 301s
+  // on Cloudflare). Don't add an Astro `redirects` block as well: the same paths would be written
+  // to dist/_redirects twice and Cloudflare rejects the deploy ("Duplicate rule for path").
 });
